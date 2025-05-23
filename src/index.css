@@ -1,0 +1,52 @@
+@import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Inter:wght@400;500&display=swap");
+:root {
+  /* font-family: system-ui, Avenir, Helvetica, Arial, sans-serif; */
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  /* background-color: #242424; */
+  overflow-x: hidden;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.courgette-regular {
+  font-family: "Ancizar Serif", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Ancizar Serif", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+span {
+  font-family: "Ancizar Serif", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+p {
+  font-family: "Ancizar Serif", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+a {
+  font-family: "Ancizar Serif", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+div {
+  font-family: "Ancizar Serif", serif;
+  font-weight: 700;
+  font-style: normal;
+}

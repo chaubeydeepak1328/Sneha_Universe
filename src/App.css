@@ -1,0 +1,45 @@
+#walletAddress {
+  font-size: 7px;
+}
+
+@media (min-width: 390px) {
+  #walletAddress {
+    font-size: 7.7px;
+  }
+}
+
+@media (min-width: 390px) {
+  #walletAddress {
+    font-size: 8.2px;
+  }
+}
+
+@media (min-width: 412px) {
+  #walletAddress {
+    font-size: 9.2px;
+  }
+}
+
+@media (min-width: 430px) {
+  #walletAddress {
+    font-size: 10px;
+  }
+}
+
+@media (min-width: 481px) {
+  #walletAddress {
+    font-size: 8px;
+  }
+}
+
+@media (min-width: 540px) {
+  #walletAddress {
+    font-size: 13.3px;
+  }
+}
+
+@media (min-width: 768px) {
+  #walletAddress {
+    font-size: 13.5px;
+  }
+}
