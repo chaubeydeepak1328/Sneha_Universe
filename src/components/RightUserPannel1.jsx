@@ -247,30 +247,25 @@ const RightUserPannel1 = () => {
   grid grid-cols-1 
   mt-10
   border-2 border-green-400
-  bg-cyan-300/10
-  text-white
+ text-cyan-400
   p-6
   text-center
   w-full
   px-6 py-8
   rounded-xl
-  shadow-xl shadow-cyan-400/20
+  shadow-xl
   max-w-md
   mx-auto
   h-fit
   backdrop-blur-[8px]
   backdrop-brightness-110
   transition-all
-  duration-300
-  hover:shadow-cyan-400/30"
-      // style={{
-      //     background:
-      //         "linear-gradient(100deg, rgba(5, 53, 102, 1) 0%, rgba(169, 190, 10, 1) 100%)",
-      // }}
+  duration-300"
+
     >
-      {showModal && (
+      {!showModal && (
         <div className="absolute">
-          <TransactionModal
+          <TransactionModal className="text-cyan-400"
             isOpen={showModal}
             hash={hash}
             userWallet={address}
@@ -306,20 +301,20 @@ const RightUserPannel1 = () => {
               setMessage("");
             }}
             placeholder="Enter referral address"
-            className="w-full h-13 px-4 py-2 border  border 
-    w-full
-    rounded-xl
+            className="w-full h-13 px-4 py-2    
+  
     mt-5
-    bg-cyan-400/10
-    h-10
+    
+   
     flex
     items-center
     justify-center
     mx-auto
+    border-2
     border-cyan-400
     overflow-hidden
     backdrop-blur-md
-    shadow-white/20
+    shadow-cyan-400
     transition-all
     duration-300  rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 text-white pr-16 walletAddress"
           />
@@ -338,12 +333,11 @@ const RightUserPannel1 = () => {
 
         {message ? (
           <p
-            className={`text-sm p-2 ${
-              message.startsWith("✅Valid Sponser address!") ||
+            className={`text-sm p-2 ${message.startsWith("✅Valid Sponser address!") ||
               message.startsWith("Registration successful!")
-                ? "text-green-400 bg-black"
-                : "text-red-600 bg-black"
-            }`}
+              ? "text-green-400 bg-black"
+              : "text-red-600 bg-black"
+              }`}
           >
             {message}
           </p>
@@ -353,7 +347,7 @@ const RightUserPannel1 = () => {
 
         <div className="w-full flex flex-col items-center justify-center gap-4 px-4 ">
           {(message && message.startsWith("✅Valid Sponser address!")) ||
-          message.startsWith("Registration successful!") ? (
+            message.startsWith("Registration successful!") ? (
             <>
               <div className="w-full max-w-md flex flex-col sm:flex-row gap-4 items-center justify-between bg-gradient-to-r from-green-500 to-yellow-400 text-white font-semibold py-3 px-4 rounded-xl shadow-md hover:shadow-lg transition duration-300 ease-in-out text-center sm:text-left">
                 <h2 className="w-full sm:w-auto">
@@ -403,7 +397,7 @@ const RightUserPannel1 = () => {
         </div>
 
         {isValidser &&
-        parseFloat(UserData?.requireRama) < parseFloat(walletBal) ? (
+          parseFloat(UserData?.requireRama) < parseFloat(walletBal) ? (
           <button
             onClick={handleRegister}
             className="w-full bg-gradient-to-r from-green-500 to-yellow-400 text-white font-semibold py-2 rounded-lg shadow hover:shadow-lg transition duration-200 cursor-pointer"
@@ -413,21 +407,7 @@ const RightUserPannel1 = () => {
         ) : (
           <button
             onClick={handleValidation}
-            className="w-full  border 
-    w-full
-    rounded-xl
-    mt-5
-    bg-cyan-400/10
-    h-10
-    flex
-    border-cyan-400
-    items-center
-    justify-center
-    mx-auto
-    overflow-hidden
-    backdrop-blur-md
-    transition-all
-    duration-300  text-white font-semibold py-2 rounded-lg shadow hover:shadow-lg transition duration-200 cursor-pointer"
+            className="w-full  border  mt-5 bg-cyan-400/10 h-10 flex border-cyan-400 items-center justify-center mx-auto overflow-hidden backdrop-blur-md text-white font-semibold py-2 rounded-lg shadow hover:shadow-lg transition duration-200 cursor-pointer"
           >
             {loading ? <Spinner loading={loading} /> : "Validate Address"}
           </button>

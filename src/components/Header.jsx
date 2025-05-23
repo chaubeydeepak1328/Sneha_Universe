@@ -61,16 +61,16 @@ const Header = () => {
         {/* Logout */}
         <button
           onClick={handleDisconnect}
-          className="flex items-center gap-2 hover:text-red-500 transition-colors duration-200 hover:scale-110 transition-transform"
+          className="flex items-center gap-2 hover:text-red-500 duration-200 hover:scale-110 transition-transform"
         >
           <RiLogoutCircleRLine className="text-red-400 text-lg" />
         </button>
 
 
-        {isConnected && (
-          <GiNetworkBars />
 
-        )}
+        <GiNetworkBars color={isConnected ? "green" : "red"} />
+
+
 
 
 
