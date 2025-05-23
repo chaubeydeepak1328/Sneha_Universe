@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { RxCopy } from "react-icons/rx";
+import { RxClipboardCopy, RxCopy } from "react-icons/rx";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import { IoMdLogOut } from "react-icons/io";
 import universeLogo from "../assets/images/universeLogo.png";
@@ -14,8 +14,28 @@ import LeftUserPannel from "./LeftUserPannel";
 import Header from "./Header";
 import DashboardInfo from "./DashboardInfo";
 
+import { useStore } from "../Store/UserStore";
+
 export default function UplineBonus() {
-  const values = [0.005, 0.001, 0.003, 0.003, 0.002, 0.004, 0.002];
+
+  const [address, setAddress] = useState(JSON.parse(localStorage.getItem("userData")).userAddress);
+
+
+  const partnerTable = useStore((state) => state.partnerTable);
+
+  const [partnerDetails, setPartnerDetails] = useState([]);
+
+  useEffect(() => {
+    const fetchPartnerDetails = async () => {
+      const res = await partnerTable(address);
+      if (res) setPartnerDetails(res);
+    };
+
+    if (address) fetchPartnerDetails();
+  }, [address]);
+
+
+
   return (
     <div
       className=" px-4"
@@ -55,6 +75,11 @@ export default function UplineBonus() {
             <DashboardInfo />
 
             {/* Partners table */}
+
+
+
+
+
             <div
               className="flex flex-col mt-10  border-1 rounded-2xl p-6 text-center  bg-cyan-400/10
     flex
@@ -66,10 +91,10 @@ export default function UplineBonus() {
     backdrop-blur-md
     transition-all
     duration-300  border border-cyan-400 text-cyan-400 px-4 py-1 text-sm font-medium  items-center justify-center flex flex-col rounded-2xl w-full lg:w-[700px] p-10 py-4 text-center backdrop-blur-md shadow-xl "
-              // style={{
-              //   background:
-              //     "linear-gradient(178deg, rgba(5, 53, 102, 1) 0%, rgba(96, 103, 55, 1) 100%)",
-              // }}
+            // style={{
+            //   background:
+            //     "linear-gradient(178deg, rgba(5, 53, 102, 1) 0%, rgba(96, 103, 55, 1) 100%)",
+            // }}
             >
               <div className="text-3xl font-bold mb-5 text-start text-cyan-400">
                 Partners
@@ -83,22 +108,51 @@ export default function UplineBonus() {
                   style={{ minWidth: "600px" }}
                 >
                   <thead>
-                    <tr className="">
-                      <th className="p-2 border">ID</th>
+                    <tr>
+                      <th className="p-2 border">Sno</th>
                       <th className="p-2 border">Date</th>
-                      <th className="p-2 border">From Wallet</th>
-                      <th className="p-2 border">Tx Hash</th>
-                      <th className="p-2 border">Profit</th>
+                      <th className="p-2 border">My Partners</th>
+                      {/* <th className="p-2 border">Tx Hash</th> */}
+                      <th className="p-2 border">Profit (RAMA / USD)</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr className="border-t">
+                    {/* <tr className="border-t">
                       <td className="p-2 border">34</td>
                       <td className="p-2 border">12/02/2024</td>
                       <td className="p-2 border">0xc09...12344</td>
                       <td className="p-2 border">0xc03...38624</td>
                       <td className="p-2 border">0.000 / $0.000</td>
-                    </tr>
+                    </tr> */}
+
+
+                    {partnerDetails?.length > 0 ? (
+                      partnerDetails.map((partner, index) => (
+                        <tr key={index} className="border-t border-gray-600">
+                          <td className="p-2 border text-center">{index + 1}</td>
+                          <td className="p-2 border text-center">
+                            {new Date(parseInt(partner.registrationTime) * 1000).toLocaleDateString()}
+                          </td>
+                          <td className="p-2 border text-center flex justify-evenly">
+                            <p> {partner.wallet?.slice(0, 6)}...{partner.wallet?.slice(-4)}</p>
+                            <RxClipboardCopy
+                              onClick={() => handleCopy(partner.wallet)}
+                              className="text-xl text-cyan-400  cursor-pointer ml-2 sm:ml-4"
+                            />
+                          </td>
+                          {/* <td className="p-2 border text-center">—</td> */}
+                          <td className="p-2 border text-center">
+                            {parseFloat(partner.totalProfit)}
+                          </td>
+                        </tr>
+                      ))
+                    ) : (
+                      <tr>
+                        <td colSpan="5" className="p-4 text-center text-gray-400">
+                          No partner data available
+                        </td>
+                      </tr>
+                    )}
                   </tbody>
                 </table>
               </div>

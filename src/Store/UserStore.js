@@ -151,69 +151,7 @@ export const useStore = create((set, get) => ({
         }
     },
 
-    // generatedId: async (address) => {
-    //     try {
-    //         const [U5, U4, U3prem] = await Promise.all([
-    //             fetchContractAbi("U5"),
-    //             fetchContractAbi("U4"),
-    //             fetchContractAbi("U3prem"),
-    //         ]);
 
-
-    //         const contract1 = new web3.eth.Contract(U5.abi, U5.contractAddress);
-    //         const contract2 = new web3.eth.Contract(U4.abi, U4.contractAddress);
-    //         const contract3 = new web3.eth.Contract(U3prem.abi, U3prem.contractAddress);
-
-
-    //         const u5generated = await contract1.methods.getGeneratedMatrices(address).call();
-
-    //         const u5DataRama = await contract1.methods.getTotalIncomeAcrossMatrices(address).call();
-
-
-    //         if (u5generated) {
-    //             const u4generated = await contract2.methods.getGeneratedMatrices(address).call();
-    //             const u4DataRama = await contract2.methods.getTotalIncomeAcrossMatrices(address).call();
-
-    //             const u3premgenerated = await contract3.methods.getGeneratedMatrices(address).call();
-    //             const u3PremDataRama = await contract3.methods.getTotalIncomeAcrossMatrices(address).call();
-
-
-
-    //             // const rama = web3.utils.fromWei(u5DataRama.totalReceivedAmountInRAMA, 'ether');
-    //             const convertValuesToEther = (weiObject) =>
-    //                 Object.fromEntries(
-    //                     Object.entries(weiObject).map(([key, value]) => [key, web3.utils.fromWei(value, 'ether')])
-    //                 );
-
-
-    //             const u5RamaConverted = convertValuesToEther(u5DataRama);
-    //             const u4RamaConverted = convertValuesToEther(u4DataRama);
-    //             const u3PremRamaConverted = convertValuesToEther(u3PremDataRama);
-
-    //             console.log(u5RamaConverted, u4RamaConverted, u3PremRamaConverted)
-
-
-
-    //             return {
-    //                 "U5": {
-    //                     "generatedId": u5generated,
-    //                     "RamaPrice": u5RamaConverted
-    //                 },
-    //                 "U4": {
-    //                     "generatedId": u4generated,
-    //                     "RamaPrice": u4RamaConverted
-    //                 },
-    //                 "U3 Premium": {
-    //                     "generatedId": u3premgenerated,
-    //                     "RamaPrice": u3PremRamaConverted
-    //                 }
-    //             };
-    //         }
-    //     } catch (error) {
-    //         console.error("Error in generatedId:", error);
-    //         throw error;
-    //     }
-    // },
     generatedId: async (address) => {
         try {
             const [U5, U4, U3prem] = await Promise.allSettled([
@@ -964,53 +902,6 @@ export const useStore = create((set, get) => ({
     },
 
 
-    // getTrxU5: async () => {
-
-    //     // matrixId, slotIndex, positionIndex, chunkIndex
-
-    //     // const { abi, address } = await fetchContractAbi("U5");
-
-    //     // const contract = new web3.eth.Contract(abi, contractAddress);
-
-
-
-    //     // const trxData = await contract.methods.getChunkDetails(matrixId, slotIndex, positionIndex, chunkIndex).call();
-
-
-    //     // const slotStatus = await contract.methods.getChunkDetails(matrixId, slotIndex).call();
-
-    //     // return {
-    //     //     usd: trxData.receivedAmountInUSDT,
-    //     //     rama: trxData.receivedAmounIntRAMA,
-    //     //     TrxHash: "jcdhskfgygf43kur934y4ju4o3",
-    //     //     dateTime: trxData.receiveDate,
-    //     //     status: slotStatus,
-    //     //     ReGenerate: "jkh",
-    //     //     NetProfit: "shdkh"
-
-    //     // }
-
-    //     const response = await fetch(`https://latest-backendapi.ramascan.com/api/v2/addresses/${Contract[U5]}/logs`);
-
-    //     const data = await response.json();
-
-    //     const res = data.filter(val =>
-    //         val.decoded &&
-    //         val.decoded.method_call &&
-    //         val.decoded.method_call.startsWith("SlotPaymentReceived")
-    //     );
-
-    //     console.log(res);
-    //     return res;
-
-
-
-
-
-
-    // },
-
-
     getFilteredLogs: async () => {
         try {
             const response = await fetch(`https://latest-backendapi.ramascan.com/api/v2/addresses/${Contract["U5"]}/logs`);
@@ -1094,19 +985,7 @@ export const useStore = create((set, get) => ({
 
 
 
-    getSplitBonus: async () => {
-        const response = await axios.get(`https://latest-backendapi.ramascan.com/api/v2/addresses/${Contract["U3plus"]}/logs`);
 
-        // filtering the data Payment Spilted
-
-        const data1 = response.data
-
-        const splitPayment = data1.items.filter((val) => val.decoded.method_call.startsWith("PaymentSplited"));
-
-        // const paymentArr = splitPayment.forEach(())
-        console.log(splitPayment)
-        return splitPayment
-    },
 
     getU5table: async (matrixId, slotIndex, selectedPos) => {
 
@@ -1132,7 +1011,7 @@ export const useStore = create((set, get) => ({
                 forwardedFrom: tableData.forwardedFrom[i].toString(),
                 forwardedTo: tableData.forwardedTo[i].toString(),
                 receivedAmountInRAMA: web3.utils.fromWei(tableData.receivedAmountInRAMA[i].toString(), 'ether'),
-                totalAmountAccountedForRegenerationInRAMA: tableData.totalAmountAccountedForRegenerationInRAMA[i].toString(),
+                totalAmountAccountedForRegenerationInRAMA: web3.utils.fromWei(tableData.totalAmountAccountedForRegenerationInRAMA[i].toString(), "ether"),
                 totalAmountForwardedForSlotUpgradeInRAMA: web3.utils.fromWei(tableData.totalAmountForwardedForSlotUpgradeInRAMA[i].toString(), 'ether'),
                 totalProfitInRAMA: web3.utils.fromWei(tableData.totalProfitInRAMA[i].toString(), 'ether'),
                 receivedDate: tableData.receivedDate[i].toString(),
@@ -1145,154 +1024,6 @@ export const useStore = create((set, get) => ({
             return [];
         }
     },
-
-
-
-    // getU5table: async (matrixId, slotIndex, selectedPos) => {
-    //     console.log("matrixId, slotIndex, selectedPos", matrixId, slotIndex, selectedPos);
-
-    //     try {
-
-
-    //         const eventTopic = web3.utils.keccak256("chunkReceived(uint256,uint256,uint256,uint256,uint256,uint256)");
-    //         // 2. Fetch logs for the U5 contract
-    //         // const latestBlock = await web3.eth.getBlockNumber(latestBlock);
-    //         const latestBlock = await web3.eth.getBlockNumber();
-
-
-    //         console.log("-----------Latest block", latestBlock)
-    //         const logs = await web3.eth.getPastLogs({
-    //             fromBlock: "earliest",
-    //             toBlock: latestBlock,
-    //             address: Contract["U5"], // Ensure this is the correct U5 address
-    //             topics: [
-    //                 // eventTopic,
-    //                 "0x6441096f6dc9ec5c293f0c0f151e796cb14acaf79f8e4a23606923f142a569b9",
-    //                 // web3.utils.padLeft(web3.utils.toHex(matrixId), 64),
-    //                 // web3.utils.padLeft(web3.utils.toHex(slotIndex), 64),
-    //                 // web3.utils.padLeft(web3.utils.toHex(selectedPos), 64),
-    //             ]
-    //         });
-
-    //         console.log("Logs----------->", logs)
-
-    //         // 3. Decode the logs
-    //         const result = [];
-    //         for (const log of logs) {
-    //             // Decode the data (6 uint256 parameters)
-    //             const decoded = web3.eth.abi.decodeLog(
-    //                 [
-    //                     { type: 'uint256', name: 'matrixID', indexed: true },
-    //                     { type: 'uint256', name: 'matrixOwnerSlot', indexed: true },
-    //                     { type: 'uint256', name: 'matrixOwnerSlotPosition', indexed: true },
-    //                     { type: 'uint256', name: 'amountInUSD' },
-    //                     { type: 'uint256', name: 'amountInRAMA' },
-    //                     { type: 'uint256', name: 'indexSitAt' },
-    //                 ],
-    //                 log.data,
-    //                 log.topics.slice(1)
-    //                 // log.topics.slice(1) // No indexed parameters except the event topic
-    //             );
-
-    //             // 4. Fetch block timestamp
-    //             const block = await web3.eth.getBlock(log.blockNumber);
-
-
-    //             result.push({
-    //                 // transactionHash: log.transactionHash,
-    //                 timestamp: block.timestamp,
-    //                 matrixID: decoded.matrixID,
-    //                 matrixOwnerSlot: decoded.matrixOwnerSlot,
-    //                 matrixOwnerSlotPosition: decoded.matrixOwnerSlotPosition,
-    //                 amountInUSD: decoded.amountInUSD,
-    //                 amountInRAMA: decoded.amountInRAMA,
-    //                 indexSRAI: decoded.indexSitAt
-    //             });
-
-
-
-    //         }
-
-    //         console.log("📦 Final JSON result:", result);
-    //         return result;
-    //     } catch (error) {
-    //         console.error("❌ Error:", error);
-    //         throw error;
-    //     }
-    // },
-
-
-
-
-
-
-    // getU4info: async (address) => {
-    //     try {
-    //         const { abi, contractAddress } = await fetchContractAbi("U4");
-    //         const contract = new web3.eth.Contract(abi, contractAddress);
-
-    //         const genMatrices = await contract.methods.getGeneratedMatrices(address).call();
-
-    //         console.log("matrix U4 data--->", genMatrices)
-
-
-    //         const slotIndex = 10;
-    //         const values = [
-    //             "$40",
-    //             "$80",
-    //             "$160",
-    //             "$320",
-    //             "$640",
-    //             "$1280",
-    //             "$2560",
-    //             "$5120",
-    //             "$10240",
-    //             "$20480",
-    //         ];
-
-    //         if (!genMatrices || genMatrices.length === 0) {
-    //             console.log("No matrix found for this address");
-    //             return [];
-    //         }
-
-
-    //         const result = await Promise.all(
-    //             genMatrices.map(async (matrixIdStr) => {
-    //                 try {
-    //                     const matrixId = parseInt(matrixIdStr);
-
-    //                     // Prepare parallel calls for all 10 slots for current matrixId
-    //                     const slotPromises = Array.from({ length: slotIndex }, (_, j) =>
-    //                         contract.methods.getU5MatrixPositions(matrixId, j + 1).call()
-    //                     );
-
-    //                     const slotResults = await Promise.all(slotPromises);
-
-    //                     const slotsPosition = slotResults.map(slotPositions =>
-    //                         slotPositions.isFilledPositions.map(pos => (pos === true ? "1" : pos === false ? "0" : ""))
-    //                     );
-
-    //                     return {
-    //                         id: matrixId,
-    //                         values: values,
-    //                         slotsPosition: slotsPosition
-    //                     };
-    //                 } catch (error) {
-    //                     console.error(`Matrix ID ${matrixIdStr} failed:`, error);
-    //                     return null; // Skip this matrixId
-    //                 }
-    //             })
-    //         );
-
-    //         console.log("Slot Data Matrix (U4):", result);
-    //         return result;
-
-    //     } catch (error) {
-    //         console.error("Error:", error);
-    //         alert(`Error checking: ${error.message}`);
-    //     }
-    // },
-
 
 
     getU4info: async (address) => {
@@ -1424,7 +1155,7 @@ export const useStore = create((set, get) => ({
                 forwardedFrom: tableData.forwardedFrom[i].toString(),
                 forwardedTo: tableData.forwardedTo[i].toString(),
                 receivedAmountInRAMA: web3.utils.fromWei(tableData.receivedAmountInRAMA[i].toString(), 'ether'),
-                totalAmountAccountedForRegenerationInRAMA: tableData.totalAmountAccountedForRegenerationInRAMA[i].toString(),
+                totalAmountAccountedForRegenerationInRAMA: web3.utils.fromWei(tableData.totalAmountAccountedForRegenerationInRAMA[i].toString(), "ether"),
                 totalAmountForwardedForSlotUpgradeInRAMA: web3.utils.fromWei(tableData.totalAmountForwardedForSlotUpgradeInRAMA[i].toString(), 'ether'),
                 totalProfitInRAMA: web3.utils.fromWei(tableData.totalProfitInRAMA[i].toString(), 'ether'),
                 receivedDate: tableData.receivedDate[i].toString(),
@@ -1464,7 +1195,7 @@ export const useStore = create((set, get) => ({
                 forwardedFrom: tableData.forwardedFrom[i].toString(),
                 forwardedTo: tableData.forwardedTo[i].toString(),
                 receivedAmountInRAMA: web3.utils.fromWei(tableData.receivedAmountInRAMA[i].toString(), 'ether'),
-                totalAmountAccountedForRegenerationInRAMA: tableData.totalAmountAccountedForRegenerationInRAMA[i].toString(),
+                totalAmountAccountedForRegenerationInRAMA: web3.utils.fromWei(tableData.totalAmountAccountedForRegenerationInRAMA[i].toString(), "ether"),
                 totalAmountForwardedForSlotUpgradeInRAMA: web3.utils.fromWei(tableData.totalAmountForwardedForSlotUpgradeInRAMA[i].toString(), 'ether'),
                 totalProfitInRAMA: web3.utils.fromWei(tableData.totalProfitInRAMA[i].toString(), 'ether'),
                 receivedDate: tableData.receivedDate[i].toString(),
@@ -1797,6 +1528,48 @@ export const useStore = create((set, get) => ({
         }
     },
 
+    getU3PremMartixInfo: async (address) => {
+        try {
+            console.log("---------------->", address);
+            const { abi, contractAddress } = await fetchContractAbi("U3prem");
+            const contract = new web3.eth.Contract(abi, contractAddress);
+
+            const genMatrices = await contract.methods.getGeneratedMatrices(address).call();
+
+            // Parallel fetch all matrix details
+            const data = await Promise.all(
+                genMatrices.map(async (matrixID) => {
+                    const res = await contract.methods.getMatrixDetails(matrixID).call();
+
+
+                    const u5MatrixDetail = {
+                        "Received": 0,
+                        "Upgraded": 0,
+                        "Generated": web3.utils.fromWei(res?.totalRegenerationAmount.toString(), "ether"),
+                        "NetProfit": web3.utils.fromWei(res?.totalProfit.toString(), "ether"),
+                        "GeneratedID": res?.totalRegeneratedMatrices.toString()
+                    }
+
+
+                    console.log("getU5MartixInfo", u5MatrixDetail)
+
+
+                    return {
+                        matrixID,
+                        u5MatrixDetail,
+                    };
+                })
+            );
+
+            console.log("data", data);
+            return data;
+
+        } catch (error) {
+            console.error("Error in getU5MartixInfo:", error);
+            return [];
+        }
+    },
+
 
 
     LeftUserPanInfo: async (address) => {
@@ -1845,6 +1618,227 @@ export const useStore = create((set, get) => ({
         }
     },
 
+
+
+    partnerTable: async (address) => {
+        try {
+            console.log("🔍 Fetching earnings for:", address);
+
+            const { abi, contractAddress } = await fetchContractAbi("UserMang");
+            const contract = new web3.eth.Contract(abi, contractAddress);
+
+            const userDetails = await contract.methods.getUser(address).call();
+
+            console.log(userDetails?.directReferrals)
+
+            if (!userDetails?.directReferrals) {
+                console.warn("No direct referrals found.");
+                return [];
+            }
+
+            const directReferrals = userDetails.directReferrals;
+            const partnerArr = [];
+
+            for (let i = 0; i < directReferrals.length; i++) {
+                const refUserDetails = await contract.methods.users(directReferrals[i]).call();
+
+
+                partnerArr.push({
+                    wallet: refUserDetails.wallet.toString(),
+                    registrationTime: refUserDetails.registrationTime,
+                    formattedDate: new Date(Number(refUserDetails.registrationTime) * 1000).toLocaleString(), // <-- formatted
+                    totalProfit: refUserDetails.totalProfit,
+                });
+
+            }
+
+            console.log("|||||||||||||||||||||||||||||||||partnerArr", partnerArr)
+
+            return partnerArr;
+
+        } catch (error) {
+            console.error("❌ Error in partnerTable:", error);
+            return null;
+        }
+    },
+
+
+    // partnerTable: async (Waladdress) => {
+    //     try {
+    //         const { abi, contractAddress } = await fetchContractAbi("UserMang");
+
+    //         const contract = new web3.eth.Contract(abi, contractAddress);
+
+    //         const userDetails = await contract.methods.getUser(address).call();
+
+    //        const referralArr = userDetails?.directReferrals
+
+
+    //         const TOPIC0 = "0xb33790cd3098de54cda8ce6c69264da35751cc71987bfe44c41eaf84bcb239c2";
+    //         const topicEncodedAddress = "0x" + Waladdress.toLowerCase().replace("0x", "").padStart(64, "0");
+
+    //         // Get logs where the wallet is the initiator
+    //         const logs = await web3.eth.getPastLogs({
+    //             fromBlock: 0,
+    //             toBlock: "latest",
+    //             address: contractAddress,
+    //             topics: [TOPIC0, topicEncodedAddress]
+    //         });
+
+    //         // Deduplicate logs by transactionHash
+    //         const uniqueLogs = Array.from(
+    //             new Map(logs.map(log => [log.transactionHash, log])).values()
+    //         );
+
+    //         // Decode logs
+    //         const eventAbi = abi.find(e => e.name === "PositionCompleted" && e.type === "event");
+
+    //         const decoded = await Promise.all(
+    //             uniqueLogs.map(async (log) => {
+    //                 const decodedLog = web3.eth.abi.decodeLog(eventAbi.inputs, log.data, log.topics.slice(1));
+    //                 return {
+    //                     wallet: decodedLog.slotFilledBy,
+    //                     registrationTime: decodedLog.registrationTime,
+    //                     formattedDate: new Date(Number(decodedLog.timestamp) * 1000).toLocaleString(),
+    //                     totalProfit: web3.utils.fromWei(decodedLog.totalReceivedAmount, "ether")
+    //                 };
+    //             })
+    //         );
+
+    //         return decoded;
+    //     } catch (err) {
+    //         console.error("❌ Error fetching U3 logs:", err.message);
+    //     }
+    // },
+
+
+
+    GetFirstId: async () => {
+        try {
+            const { abi, contractAddress } = await fetchContractAbi("UserMang");
+            const contract = new web3.eth.Contract(abi, contractAddress);
+            const userAddress = await contract.methods.allUsers(0).call();
+            return userAddress;
+        } catch (error) {
+            console.error("❌ GetFirstId error:", error);
+            return null;
+        }
+    },
+
+
+
+    // getSplitBonus: async (walletAdd) => {
+    //     try {
+    //         if (!walletAdd || walletAdd.length !== 42 || !walletAdd.startsWith("0x")) {
+    //             throw new Error("Invalid wallet address");
+    //         }
+
+    //         // Load MatrixDataView contract
+    //         const matrixDataView = await fetchContractAbi("MatrixDataView");
+    //         const contract = new web3.eth.Contract(matrixDataView.abi, matrixDataView.contractAddress);
+
+    //         // Fetch all active slots for this wallet
+    //         const slotDataList = await contract.methods.getActiveSlots(walletAdd).call();
+
+    //         const result = [];
+
+    //         // Loop over each slot
+    //         for (const slot of slotDataList) {
+    //             const slotNo = Number(slot.slotNo);
+    //             const currentCycle = Number(slot.currentCycle);
+
+    //             // Loop over each cycle from 1 to currentCycle
+    //             const cycleResults = [];
+
+    //             for (let cycle = 1; cycle <= currentCycle; cycle++) {
+    //                 try {
+    //                     const splits = await contract.methods.getSplitPayments(walletAdd, slotNo, cycle).call();
+
+    //                     // Normalize to array if single object is returned
+    //                     const splitArray = Array.isArray(splits) ? splits : [splits];
+
+    //                     // Format the splits
+    //                     const formattedSplits = splitArray.map(split => ({
+    //                         initiatedFrom: split.initiatedFrom,
+    //                         splitedWith: split.splitedWith,
+    //                         isReceiverSecondUpline: split.isReceiverSecondUpline,
+    //                         amountInRAMA: split.amountInRAMA,
+    //                         amountInUSD: split.amountInUSD,
+    //                         receiver: split.receiver,
+    //                         timeStamp: Number(split.timeStamp)
+    //                     }));
+
+    //                     // Only add if there are actual payments
+    //                     if (formattedSplits.length > 0) {
+    //                         cycleResults.push({
+    //                             cycle: cycle,
+    //                             splitPayment: formattedSplits
+    //                         });
+    //                     }
+
+    //                 } catch (innerErr) {
+    //                     console.warn(`Cycle ${cycle} for slot ${slotNo} failed:`, innerErr.message);
+    //                     continue; // skip this cycle if error
+    //                 }
+    //             }
+
+    //             if (cycleResults.length > 0) {
+    //                 result.push({
+    //                     slot: slotNo,
+    //                     cycles: cycleResults
+    //                 });
+    //             }
+    //         }
+
+    //         return result;
+    //     } catch (error) {
+    //         console.error("❌ Error in getSplitBonus:", error.message);
+    //         return [];
+    //     }
+    // }
+
+
+    getSplitBonus: async (walletAdd) => {
+        try {
+            if (!walletAdd || walletAdd.length !== 42 || !walletAdd.startsWith("0x")) {
+                throw new Error("Invalid wallet address");
+            }
+
+            const matrixDataView = await fetchContractAbi("MatrixDataView");
+            const matrixContract = new web3.eth.Contract(matrixDataView.abi, matrixDataView.contractAddress);
+
+            const activeSlots = await matrixContract.methods.getActiveSlots(walletAdd).call();
+
+            const result = [];
+
+            for (const slot of activeSlots) {
+                const slotNo = Number(slot.slotNo);
+                const currentCycle = Number(slot.currentCycle);
+                const payments = [];
+
+                for (let i = 1; i <= currentCycle; i++) {
+                    const paymentsForCycle = await matrixContract.methods.getSplitPayments(walletAdd, slotNo, i).call();
+                    paymentsForCycle.forEach(p => {
+                        payments.push({ ...p, cycle: i });
+                    });
+                }
+
+                // Add `cycleList` to support UI filtering
+                const cycleList = [...new Set(payments.map(p => Number(p.cycle)))];
+
+                result.push({
+                    slot: slotNo,
+                    splitPayments: payments,
+                    cycleList,
+                });
+            }
+
+            return result;
+        } catch (err) {
+            console.error("Error fetching split bonus:", err.message);
+            return [];
+        }
+    },
 
 
 

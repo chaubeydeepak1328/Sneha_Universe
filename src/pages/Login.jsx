@@ -272,10 +272,10 @@ export default function Login() {
     backdrop-blur-md
     transition-all
     duration-300  text-white font-semibold py-2 rounded-lg shadow hover:shadow-lg transition duration-200 cursor-pointer max-w-xs mt-6 rounded-xl text-lg sm:text-xl font-semibold text-black py-3 text-center transition hover:brightness-110 cursor-pointer"
-                  // style={{
-                  //   background:
-                  //     "linear-gradient(262deg, rgba(32, 173, 29, 1) 0%, rgba(239, 185, 10, 1) 50%)",
-                  // }}
+                // style={{
+                //   background:
+                //     "linear-gradient(262deg, rgba(32, 173, 29, 1) 0%, rgba(239, 185, 10, 1) 50%)",
+                // }}
                 >
                   {authLoading ? (
                     <Spinner loading={authLoading} />
@@ -305,7 +305,7 @@ export default function Login() {
     backdrop-blur-md
     transition-all
     duration-300  text-white font-semibold py-2  shadow hover:shadow-lg transition duration-200 cursor-pointer outline-none focus:ring-2 focus:ring-blue-500 text-white"
-                    placeholder="Enter user id"
+                    placeholder="Enter user ID"
                     value={inputData}
                     onChange={(e) => setInputData(e.target.value)}
                   />
@@ -330,10 +330,10 @@ export default function Login() {
     backdrop-blur-md
     transition-all
     duration-300  text-white font-semibold py-2 rounded-lg shadow hover:shadow-lg transition duration-200 cursor-pointer max-w-xs mt-8 rounded-xl text-lg sm:text-xl font-semibold text-black py-3 text-center transition hover:brightness-110 cursor-pointer"
-                  // style={{
-                  //   background:
-                  //     "linear-gradient(262deg, rgba(32, 173, 29, 1) 0%, rgba(239, 185, 10, 1) 50%)",
-                  // }}
+                // style={{
+                //   background:
+                //     "linear-gradient(262deg, rgba(32, 173, 29, 1) 0%, rgba(239, 185, 10, 1) 50%)",
+                // }}
                 >
                   {viewLoading ? <Spinner loading={viewLoading} /> : "Viewing"}
                 </button>

@@ -5,33 +5,39 @@ import DashboardInfo from "./DashboardInfo";
 import { useStore } from "../Store/UserStore";
 
 export default function UplineBonus() {
-  const values = [0.005, 0.001, 0.003, 0.003, 0.002, 0.004, 0.002];
-
-  const [address, setAddress] = useState(
-    JSON.parse(localStorage.getItem("userData") || "{}")?.userAddress
-  );
-
-  const [splitData, setSplitData] = useState();
+  const [address, setAddress] = useState(JSON.parse(localStorage.getItem("userData") || '{}')?.userAddress);
+  const [splitData, setSplitData] = useState([]);
+  const [selectedSlot, setSelectedSlot] = useState(null);
+  const [selectedCycle, setSelectedCycle] = useState(null);
 
   const getSplitBonus = useStore((state) => state.getSplitBonus);
-  const fetchU3MatrixLogs = useStore((state) => state.fetchU3MatrixLogs);
-
-  useEffect(() => {
-    const fetch = async () => {
-      await fetchU3MatrixLogs(address); // 👈 this is what actually fills u3MatrixLogs
-    };
-    fetch();
-  }, []);
 
   useEffect(() => {
     const fetchSplit = async () => {
-      const data = await getSplitBonus();
-      console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$u3plsu split Bonus", data);
+      const data = await getSplitBonus(address);
+      console.log("&&&&&&&&&&&&&&&&&&&", data)
       setSplitData(data);
-    };
 
-    fetchSplit();
-  }, []);
+    };
+    if (address) fetchSplit();
+  }, [address]);
+
+  const handleSlotChange = (e) => {
+    setSelectedSlot(Number(e.target.value));
+    setSelectedCycle(null); // Reset cycle when slot changes
+  };
+
+  const handleCycleChange = (e) => {
+    setSelectedCycle(Number(e.target.value));
+  };
+
+  const slotOptions = splitData.map(item => item.slot);
+  const cycleOptions = selectedSlot != null
+    ? splitData.find(item => item.slot === selectedSlot)?.cycleList || []
+    : [];
+
+  const selectedData = splitData.find(item => item.slot === selectedSlot);
+  const splitPayments = selectedData?.splitPayments?.filter(p => p.cycle === selectedCycle) || [];
 
   return (
     <div
@@ -82,13 +88,29 @@ export default function UplineBonus() {
     backdrop-blur-md
     transition-all
     duration-300  border border-cyan-400 text-cyan-400 px-4 py-1 text-sm font-medium  items-center justify-center flex flex-col rounded-2xl w-full lg:w-[700px] p-10 py-4 text-center backdrop-blur-md shadow-xl"
-              // style={{
-              //   background:
-              //     "linear-gradient(178deg, rgba(5, 53, 102, 1) 0%, rgba(96, 103, 55, 1) 100%)",
-              // }}
+            // style={{
+            //   background:
+            //     "linear-gradient(178deg, rgba(5, 53, 102, 1) 0%, rgba(96, 103, 55, 1) 100%)",
+            // }}
             >
               <div className="text-3xl font-bold mb-5 text-start text-cyan-400">
                 Split Bonus Details
+              </div>
+
+              <div className="flex gap-4 mb-6">
+                <select value={selectedSlot ?? ''} onChange={handleSlotChange} className="p-2 rounded bg-white text-black">
+                  <option value="" disabled>Select Slot</option>
+                  {slotOptions.map(slot => (
+                    <option key={slot} value={slot}>{slot}</option>
+                  ))}
+                </select>
+
+                <select value={selectedCycle ?? ''} onChange={handleCycleChange} className="p-2 rounded bg-white text-black" disabled={selectedSlot === null}>
+                  <option value="" disabled>Select Cycle</option>
+                  {cycleOptions.map(cycle => (
+                    <option key={cycle} value={cycle}>{cycle}</option>
+                  ))}
+                </select>
               </div>
 
               <div className="w-full overflow-x-auto">
@@ -100,25 +122,38 @@ export default function UplineBonus() {
                 >
                   <thead>
                     <tr className="">
-                      <th className="p-2 border">Type</th>
-                      <th className="p-2 border">From Wallet</th>
-                      <th className="p-2 border">Tx Hash</th>
-                      <th className="p-2 border">from slot</th>
-                      <th className="p-2 border">from cycle</th>
-                      <th className="p-2 border">Level</th>
-                      <th className="p-2 border">Profit</th>
+                      <th className="p-2 border">Initiated From</th>
+                      <th className="p-2 border">Splited With</th>
+                      <th className="p-2 border">Second Upline</th>
+                      <th className="p-2 border">RAMA</th>
+                      <th className="p-2 border">USD</th>
+                      <th className="p-2 border">Receiver</th>
+                      <th className="p-2 border">Timestamp</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr className="border-t">
-                      <td className="p-2 border">34</td>
-                      <td className="p-2 border">0xc09...12344</td>
-                      <td className="p-2 border">0xc03...38624</td>
-                      <td className="p-2 border">2</td>
-                      <td className="p-2 border">2</td>
-                      <td className="p-2 border">2</td>
-                      <td className="p-2 border">0.000 / $0.000</td>
-                    </tr>
+                    {splitPayments.map((item, idx) => (
+                      <tr key={idx} className="border-t">
+                        <td className="p-2 border">{item.initiatedFrom.slice(0, 6) + "...." + item.initiatedFrom.slice(-8)}</td>
+                        <td className="p-2 border">{item.splitedWith.slice(0, 6) + "...." + item.splitedWith.slice(-8)}</td>
+                        <td className="p-2 border">{item.isReceiverSecondUpline ? "Yes" : "No"}</td>
+                        <td className="p-2 border">
+                          {Number(item.amountInRAMA?.toString()) / 1e18} RAMA
+                        </td>
+                        <td className="p-2 border">
+                          ${Number(item.amountInUSD?.toString())}
+                        </td>
+                        <td className="p-2 border">{item.receiver.slice(0, 6) + "...." + item.receiver.slice(-8)}</td>
+                        <td className="p-2 border">
+                          {new Date(Number(item.timeStamp?.toString()) * 1000).toLocaleString()}
+                        </td>
+                      </tr>
+                    ))}
+                    {splitPayments.length === 0 && (
+                      <tr>
+                        <td className="p-2 border text-center" colSpan="7">No split payments for this cycle.</td>
+                      </tr>
+                    )}
                   </tbody>
                 </table>
               </div>

@@ -5,8 +5,8 @@ import {
     FaChevronUp,
 } from "react-icons/fa";
 import { FaChevronDown } from "react-icons/fa6";
-import { PiLineVerticalLight} from "react-icons/pi";
-import {  useLocation } from "react-router-dom";
+import { PiLineVerticalLight } from "react-icons/pi";
+import { useLocation } from "react-router-dom";
 import { BsCaretUpFill } from "react-icons/bs";
 import Header from "../../components/Header";
 import LeftUserPannel from "../../components/LeftUserPannel";
@@ -239,7 +239,7 @@ export default function UserPanel() {
                         </div>
 
                         {/* Partners Table */}
-                       
+
 
 
                         <div className="w-full overflow-x-auto py-4  max-w-6xl mx-auto">
@@ -258,7 +258,7 @@ export default function UserPanel() {
                                                 <th className="p-3 text-left text-black">Chunk</th>
                                                 <th className="p-3 text-left text-black">RAMA</th>
                                                 <th className="p-3 text-left text-black">USD</th>
-                                                <th className="p-3 text-left text-black">Transaction Hash</th>
+                                                {/* <th className="p-3 text-left text-black">Transaction Hash</th> */}
                                                 <th className="p-3 text-left text-black">Date/Time</th>
                                                 {/* <th className="p-3 text-left text-black">Status</th> */}
                                                 <th className="p-3 text-left text-black">Net Profit</th>
@@ -274,9 +274,9 @@ export default function UserPanel() {
                                                     <td className="p-3">{index + 1}</td>
                                                     <td className="p-3">{tx?.receivedAmountInRAMA}</td>
                                                     <td className="p-3">{tx?.totalAmountAccountedForRegenerationInRAMA}</td>
-                                                    <td className="p-3 font-mono text-blue-600">
+                                                    {/* <td className="p-3 font-mono text-blue-600">
                                                         {"0xihehweoho"}...
-                                                    </td>
+                                                    </td> */}
                                                     <td className="p-3">{convertTimestampToDateTime(tx?.receivedDate)}</td>
                                                     <td className="p-3">{tx?.totalProfitInRAMA}</td>
 

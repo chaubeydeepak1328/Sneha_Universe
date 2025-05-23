@@ -121,12 +121,12 @@ export default function UserPanel() {
 
   const filterData = Array.isArray(tableData)
     ? tableData
-        .filter(
-          (val) =>
-            Number(val.cycleNo) === Number(cycleIndex + 1) &&
-            Number(val.slotLevel) === Number(slotIndex + 1)
-        )
-        .sort((a, b) => Number(a.positionIndex) - Number(b.positionIndex)) // Sort by positionIndex ascending
+      .filter(
+        (val) =>
+          Number(val.cycleNo) === Number(cycleIndex + 1) &&
+          Number(val.slotLevel) === Number(slotIndex + 1)
+      )
+      .sort((a, b) => Number(a.positionIndex) - Number(b.positionIndex)) // Sort by positionIndex ascending
     : [];
 
   const lastIndex = currentPage * recordsPerPage;
@@ -208,11 +208,10 @@ export default function UserPanel() {
                 <div className="flex flex-col items-center justify-center mt-10">
                   <FaChevronUp
                     onClick={isLoadingU3 ? undefined : prevCycle}
-                    className={`cursor-pointer text-3xl ${
-                      isLoadingU3
-                        ? "opacity-50 cursor-not-allowed"
-                        : "hover:text-blue-500"
-                    }`}
+                    className={`cursor-pointer text-3xl ${isLoadingU3
+                      ? "opacity-50 cursor-not-allowed"
+                      : "hover:text-blue-500"
+                      }`}
                   />
                   <div className="flex justify-center items-center gap-8">
                     <div>RECYCLE</div>
@@ -223,11 +222,10 @@ export default function UserPanel() {
                   </div>
                   <FaChevronDown
                     onClick={isLoadingU3 ? undefined : nextCycle}
-                    className={`cursor-pointer text-3xl ${
-                      isLoadingU3
-                        ? "opacity-50 cursor-not-allowed"
-                        : "hover:text-blue-500"
-                    }`}
+                    className={`cursor-pointer text-3xl ${isLoadingU3
+                      ? "opacity-50 cursor-not-allowed"
+                      : "hover:text-blue-500"
+                      }`}
                   />
                 </div>
 
@@ -236,11 +234,10 @@ export default function UserPanel() {
                   <div className="flex justify-center items-center gap-2">
                     <FaChevronLeft
                       onClick={isLoadingU3 ? undefined : prevSlot}
-                      className={`cursor-pointer text-xl ${
-                        isLoadingU3
-                          ? "opacity-50 cursor-not-allowed"
-                          : "hover:text-blue-500"
-                      }`}
+                      className={`cursor-pointer text-xl ${isLoadingU3
+                        ? "opacity-50 cursor-not-allowed"
+                        : "hover:text-blue-500"
+                        }`}
                     />
                     <button
                       onClick={isLoadingU3 ? undefined : prevSlot}
@@ -286,9 +283,9 @@ export default function UserPanel() {
                                 ? slotIndex === 0
                                   ? { backgroundColor: "white" }
                                   : {
-                                      background:
-                                        "linear-gradient(to bottom, white 50%, #ff66d9 50%)",
-                                    }
+                                    background:
+                                      "linear-gradient(to bottom, white 50%, #ff66d9 50%)",
+                                  }
                                 : { color: "gray" }
                             }
                           />
@@ -296,17 +293,15 @@ export default function UserPanel() {
                           <GiCircle
                             key={j}
                             // className={status ? "bg-white rounded-2xl text-xl" : "text-gray-500 text-xl"}
-                            className={`text-xl rounded-full size-8 ${
-                              status ? "bg-green-300" : "text-gray-400"
-                            }`}
+                            className={`text-xl rounded-full size-8 ${status ? "bg-green-300" : "text-gray-400"
+                              }`}
                           />
                         ) : (
                           <GiCircle
                             key={j}
                             // className={status ? "bg-white rounded-2xl text-xl" : "text-gray-500 text-xl"}
-                            className={`text-xl rounded-full size-8 ${
-                              status ? "text-white bg-white" : "text-gray-400"
-                            }`}
+                            className={`text-xl rounded-full size-8 ${status ? "text-white bg-white" : "text-gray-400"
+                              }`}
                           />
                         )
                       )}
@@ -322,28 +317,24 @@ export default function UserPanel() {
                     </button>
                     <FaChevronRight
                       onClick={isLoadingU3 ? undefined : nextSlot}
-                      className={`cursor-pointer text-xl ${
-                        isLoadingU3
-                          ? "opacity-50 cursor-not-allowed"
-                          : "hover:text-blue-500"
-                      }`}
+                      className={`cursor-pointer text-xl ${isLoadingU3
+                        ? "opacity-50 cursor-not-allowed"
+                        : "hover:text-blue-500"
+                        }`}
                     />
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="w-[700px] overflow-x-auto py-4 max-w-6xl mx-auto mt-4 rounded-xl bg-cyan-400/10 border border-cyan-400 backdrop-blur-md transition-all duration-300">
+            <div className="lg:w-[700px] overflow-x-auto py-4 max-w-6xl mx-auto mt-4 rounded-xl bg-cyan-400/10 border border-cyan-400 backdrop-blur-md transition-all duration-300">
               {/* Table Container */}
-              <div className="min-w-[700px] md:min-w-full md:min-w-[700px]">
-                {" "}
-                {/* This ensures the table maintains minimum width */}
+              <div className="w-full overflow-auto rounded-xl shadow-xl border border-cyan-500 bg-black/30 backdrop-blur-md p-4">
                 {Array.isArray(currentRecords) && currentRecords.length > 0 ? (
                   <>
-                    {/* Table */}
-                    <table className=" border-collapse text-xs sm:text-sm md:text-base sm:w-[600px]">
+                    <table className="min-w-[900px] w-full text-sm text-white border-collapse">
                       <thead>
-                        <tr className="bg-cyan-200">
+                        <tr className="bg-cyan-600/30 text-cyan-300 text-left">
                           {[
                             "Sno",
                             "Slot",
@@ -361,7 +352,7 @@ export default function UserPanel() {
                           ].map((header) => (
                             <th
                               key={header}
-                              className="p-3 mx-auto text-left text-black whitespace-nowrap min-w-[250px] "
+                              className="p-3 text-xs sm:text-sm whitespace-nowrap font-semibold"
                             >
                               {header}
                             </th>
@@ -370,51 +361,30 @@ export default function UserPanel() {
                       </thead>
                       <tbody>
                         {currentRecords.map((tx, index) => (
-                          <tr key={index} className="border-t">
-                            <td className="p-1 whitespace-nowrap">
-                              {index + 1}
-                            </td>
-                            <td className="p-1 whitespace-nowrap">
-                              {tx?.slotLevel ?? "-"}
-                            </td>
-                            <td className="p-1 whitespace-nowrap">
-                              {tx?.cycleNo ?? "-"}
-                            </td>
-                            <td className="p-1 whitespace-nowrap">
-                              {tx?.positionIndex ?? "-"}
-                            </td>
-                            <td className="p-1 whitespace-nowrap">
+                          <tr
+                            key={index}
+                            className="border-t border-cyan-800 hover:bg-cyan-900/20 transition"
+                          >
+                            <td className="p-2">{index + 1}</td>
+                            <td className="p-2">{tx?.slotLevel ?? "-"}</td>
+                            <td className="p-2">{tx?.cycleNo ?? "-"}</td>
+                            <td className="p-2">{tx?.positionIndex ?? "-"}</td>
+                            <td className="p-2 font-mono text-xs text-cyan-200">
                               {tx?.initiatedFrom
-                                ? `${tx.initiatedFrom.slice(
-                                    0,
-                                    6
-                                  )}...${tx.initiatedFrom.slice(-4)}`
+                                ? `${tx.initiatedFrom.slice(0, 6)}...${tx.initiatedFrom.slice(-4)}`
                                 : "-"}
                             </td>
-                            <td className="p-2 whitespace-nowrap">
+                            <td className="p-2 font-mono text-xs text-cyan-200">
                               {tx?.finalReceiver
-                                ? `${tx.finalReceiver.slice(
-                                    0,
-                                    6
-                                  )}...${tx.finalReceiver.slice(-4)}`
+                                ? `${tx.finalReceiver.slice(0, 6)}...${tx.finalReceiver.slice(-4)}`
                                 : "-"}
                             </td>
-                            <td className="p-2 whitespace-nowrap">
-                              {tx?.paymentType ?? "-"}
-                            </td>
-                            <td className="p-2 whitespace-nowrap">
-                              {tx?.purpose ?? "-"}
-                            </td>
-                            <td className="p-2 whitespace-nowrap">
-                              {tx?.totalReceivedAmount ?? "0"} RAMA
-                            </td>
-                            <td className="p-2 whitespace-nowrap">
-                              {tx?.amountDebitedForPurpose ?? "0"} RAMA
-                            </td>
-                            <td className="p-2 whitespace-nowrap">
-                              {tx?.netProfit ?? "0"} RAMA
-                            </td>
-                            <td className="p-2 whitespace-nowrap font-mono text-blue-600">
+                            <td className="p-2">{tx?.paymentType ?? "-"}</td>
+                            <td className="p-2">{tx?.purpose ?? "-"}</td>
+                            <td className="p-2 text-green-300">{tx?.totalReceivedAmount ?? "0"} RAMA</td>
+                            <td className="p-2 text-red-300">{tx?.amountDebitedForPurpose ?? "0"} RAMA</td>
+                            <td className="p-2 text-yellow-300">{tx?.netProfit ?? "0"} RAMA</td>
+                            <td className="p-2 font-mono text-blue-400">
                               <a
                                 target="_blank"
                                 rel="noopener noreferrer"
@@ -422,35 +392,30 @@ export default function UserPanel() {
                                 className="truncate block max-w-[120px]"
                               >
                                 {tx?.txHash
-                                  ? `${tx.txHash.slice(
-                                      0,
-                                      7
-                                    )}...${tx.txHash.slice(-7)}`
+                                  ? `${tx.txHash.slice(0, 7)}...${tx.txHash.slice(-7)}`
                                   : "-"}
                               </a>
                             </td>
-                            <td className="p-2 whitespace-nowrap">
-                              {tx?.formattedDate ?? "-"}
-                            </td>
+                            <td className="p-2">{tx?.formattedDate ?? "-"}</td>
                           </tr>
                         ))}
                       </tbody>
                     </table>
 
-                    {/* Pagination - unchanged */}
-                    <div className="flex justify-center lg:justify-end gap-6 items-center mt-4">
+                    {/* Pagination */}
+                    <div className="flex flex-wrap justify-center md:justify-end gap-4 mt-6 text-white text-sm">
                       <button
-                        className="px-4 py-2 text-black bg-gray-100 rounded disabled:opacity-50"
+                        className="px-4 py-2 bg-cyan-700 hover:bg-cyan-800 rounded-lg transition disabled:opacity-40"
                         onClick={() => setCurrentPage((p) => p - 1)}
                         disabled={currentPage === 1}
                       >
                         Previous
                       </button>
-                      <span>
+                      <span className="px-2 py-2">
                         Page {currentPage} of {totalPages}
                       </span>
                       <button
-                        className="px-4 py-2 text-black bg-gray-100 rounded disabled:opacity-50"
+                        className="px-4 py-2 bg-cyan-700 hover:bg-cyan-800 rounded-lg transition disabled:opacity-40"
                         onClick={() => setCurrentPage((p) => p + 1)}
                         disabled={currentPage === totalPages}
                       >
@@ -459,11 +424,14 @@ export default function UserPanel() {
                     </div>
                   </>
                 ) : (
-                  <div className="text-center p-8 text-gray-500">
+                  <div className="text-center p-6 text-cyan-300 font-medium">
                     No transactions found for this slot and cycle.
                   </div>
                 )}
               </div>
+
+
+
             </div>
           </div>
         </div>

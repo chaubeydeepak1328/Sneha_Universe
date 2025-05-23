@@ -10,6 +10,7 @@ import TransactionModal from "./TransactionModal";
 import { Spinner } from "../util/helpers";
 
 const RightUserPannel1 = () => {
+
   // for Modal
   // ========================================================
   const [showModal, setShowModal] = useState(false);
@@ -17,38 +18,67 @@ const RightUserPannel1 = () => {
 
   const [trxData, setTrxData] = useState();
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false)
 
   const { handleSendTx, hash } = useTransaction(trxData !== null && trxData);
+
+
+  const [Referal, SetReferal] = useState('N/a');
+
+
+  const GetFirstId = useStore((state) => state.GetFirstId)
+
+
+  useEffect(() => {
+    const fetchFirstId = async () => {
+      const res = await GetFirstId();
+      console.log("==============================")
+      console.log(res)
+      console.log("==============================")
+
+      SetReferal(res)
+    }
+
+    fetchFirstId();
+  }, [])
+
+
 
   useEffect(() => {
     if (hash) {
       console.log("Transaction hash:", hash);
 
-      // trxHashInfo
-      setMessage("Registration successful!");
-      setLoading(false);
 
-      setShowModal(true);
+      // trxHashInfo
+      setMessage('Registration successful!');
+      setLoading(false)
+
+      setShowModal(true)
     }
-  }, [hash]);
+  }, [hash])
+
 
   useEffect(() => {
     if (trxData) {
       try {
         handleSendTx(trxData);
       } catch (error) {
-        setLoading(false);
-        alert("somthing went Wrong");
+        setLoading(false)
+        alert("somthing went Wrong")
       }
+
     }
   }, [trxData]);
 
-  const { address, isConnected } = useAppKitAccount();
+
+
+
+  const { address, isConnected } = useAppKitAccount()
   const registerUser = useStore((state) => state.registerUser);
   const IsUserExist = useStore((state) => state.IsUserExist);
-  const getCurrentRamaPrice = useStore((state) => state.getCurrentRamaPrice);
-  const getBalance = useStore((state) => state.getBalance);
+  const getCurrentRamaPrice = useStore((state) => state.getCurrentRamaPrice)
+  const getBalance = useStore((state) => state.getBalance)
+
 
   const [walletBal, setWallBal] = useState();
 
@@ -57,90 +87,99 @@ const RightUserPannel1 = () => {
   useEffect(() => {
     console.log("Address:", address);
     console.log("Is Connected:", isConnected);
-  }, [isConnected]);
 
-  const [sponsorAddress, setSponsorAddress] = useState("");
+  }, [isConnected])
+
+  const [sponsorAddress, setSponsorAddress] = useState('');
 
   const [isValidser, setIsValidser] = useState(false);
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
 
   const handleValidation = async () => {
-    setLoading(true);
+    setLoading(true)
 
     const udtoRama = await getCurrentRamaPrice();
     console.log("=======!::::", udtoRama);
     if (sponsorAddress.length !== 0) {
+
       const sponserExist = await IsUserExist(sponsorAddress);
 
-      console.log(`this is sponser-->`, sponserExist.isexist);
+      console.log(`this is sponser-->`, sponserExist.isexist)
 
-      console.log(sponserExist);
+      console.log(sponserExist)
 
       if (sponserExist.isexist) {
+
         const balance = await getBalance(address);
-        setWallBal(balance);
+        setWallBal(balance)
 
         if (balance) {
-          setUserData(sponserExist);
+          setUserData(sponserExist)
 
           if (parseFloat(sponserExist?.requireRama) > parseFloat(balance)) {
-            setMessage("Insufficient fund");
+            setMessage("Insufficient fund")
           } else {
-            setMessage(
-              `✅Valid Sponser address! You can Conitnue for registration`
-            );
-            setLoading(false);
+            setMessage(`✅Valid Sponser address! You can Conitnue for registration`);
+            setLoading(false)
           }
+
+
         }
+
+
       } else {
-        setLoading(false);
+        setLoading(false)
         setMessage("Invalid sponser Address");
         return;
       }
+
+
     } else {
-      setLoading(false);
-      setMessage("Please enter a valid address");
+      setLoading(false)
+      setMessage('Please enter a valid address');
       return;
     }
     // Example validation logic
     // const isValid = sponsorAddress.length > 0; // Check if the address is not empty
     setIsValidser(true);
-    setLoading(false);
-  };
+    setLoading(false)
+  }
 
   const handleRegister = async () => {
     // Example registration logic
-    setLoading(true);
+    setLoading(true)
     if (isValidser) {
       try {
+
         if (!isConnected) {
           alert("Please Connect Wallet First");
-          setLoading(false);
+          setLoading(false)
           return;
         }
         if (!sponsorAddress) {
           alert("Please Provide Sponser Wallet Address");
-          setLoading(false);
+          setLoading(false)
           return;
         }
 
-        console.log("Registering with address:", sponsorAddress);
+        console.log('Registering with address:', sponsorAddress);
         const trxResponse = await registerUser(sponsorAddress, address);
-        console.log("trxResponse", trxResponse);
+        console.log("trxResponse", trxResponse)
         setTrxData(trxResponse);
 
         setIsValidser(false);
       } catch (error) {
-        setLoading(false);
+        setLoading(false)
         setMessage(`Registration failed: ${error.message}`);
       }
     } else {
-      setLoading(false);
-      console.log("Invalid address. Please enter a valid referral address.");
+      setLoading(false)
+      console.log('Invalid address. Please enter a valid referral address.');
     }
-  };
+  }
 
-  const staticReferal = "0x43e76a14e75ae2DE6c8D8799112f11e5E62b767d";
+
+
 
   const handlePast = async () => {
     try {
@@ -166,11 +205,10 @@ const RightUserPannel1 = () => {
         progress: undefined,
       });
     }
-  };
+  }
 
   const handleCopy = () => {
-    navigator.clipboard
-      .writeText(staticReferal)
+    navigator.clipboard.writeText(Referal)
       .then(() =>
         toast.success("Referral address copied!", {
           position: "top-right",
@@ -180,25 +218,27 @@ const RightUserPannel1 = () => {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-        })
-      )
-      .catch(() =>
-        toast.error("Copy failed", {
-          position: "top-right",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        })
-      );
-  };
+        }))
+      .catch(() => toast.error("Copy failed", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      }))
+  }
+
+
+
+
 
   // To close the modal from the TransactionModal:
   const handleCloseModal = () => {
     setShowModal(false);
   };
+
 
   // className = "w-full px-6 py-8 bg-white rounded-xl shadow-lg max-w-md mx-auto h-fit"
   return (
@@ -353,7 +393,7 @@ const RightUserPannel1 = () => {
           </div>
           <div className="flex flex-row flex-wrap gap-4">
             <p>
-              {staticReferal.slice(1, 7)} .... {staticReferal.slice(-6)}
+              {Referal.slice(1, 7)} .... {Referal.slice(-6)}
             </p>{" "}
             <FaRegCopy
               className="cursor-pointer text-[#00d3f3] "

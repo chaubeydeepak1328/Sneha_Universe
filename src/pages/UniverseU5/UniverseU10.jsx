@@ -1,4 +1,4 @@
-import  {  useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
     FaChevronLeft,
     FaChevronRight,
@@ -151,7 +151,7 @@ export default function UserPanel() {
     const [currentPage, setCurrentPage] = useState(1);
     const recordsPerPage = 9;
 
-    
+
     const lastIndex = currentPage * recordsPerPage;
     const firstIndex = lastIndex - recordsPerPage;
     const currentRecords = tableData?.slice(firstIndex, lastIndex);
@@ -285,7 +285,7 @@ export default function UserPanel() {
                         </div>
 
 
-                      
+
 
 
 
@@ -305,7 +305,7 @@ export default function UserPanel() {
                                                 <th className="p-3 text-left text-black">Chunk</th>
                                                 <th className="p-3 text-left text-black">RAMA</th>
                                                 <th className="p-3 text-left text-black">USD</th>
-                                                <th className="p-3 text-left text-black">Transaction Hash</th>
+                                                {/* <th className="p-3 text-left text-black">Transaction Hash</th> */}
                                                 <th className="p-3 text-left text-black">Date/Time</th>
                                                 {/* <th className="p-3 text-left text-black">Status</th> */}
                                                 <th className="p-3 text-left text-black">Net Profit</th>
@@ -321,9 +321,9 @@ export default function UserPanel() {
                                                     <td className="p-3">{index + 1}</td>
                                                     <td className="p-3">{tx?.receivedAmountInRAMA}</td>
                                                     <td className="p-3">{tx?.totalAmountAccountedForRegenerationInRAMA}</td>
-                                                    <td className="p-3 font-mono text-blue-600">
+                                                    {/* <td className="p-3 font-mono text-blue-600">
                                                         {"0xihehweoho"}...
-                                                    </td>
+                                                    </td> */}
                                                     <td className="p-3">{convertTimestampToDateTime(tx?.receivedDate)}</td>
                                                     <td className="p-3">{tx?.totalProfitInRAMA}</td>
 

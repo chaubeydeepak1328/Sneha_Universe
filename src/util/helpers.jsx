@@ -33,4 +33,11 @@ export const Spinner = ({ loading }) => {
             data-testid="loader"
         /></div>
     )
-}  
+}
+
+
+
+export const formatWithCommas = (number) => {
+    if (isNaN(number)) return number;
+    return Number(number).toLocaleString("en-US");
+}

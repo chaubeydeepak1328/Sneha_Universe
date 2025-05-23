@@ -74,11 +74,11 @@ const DashboardInfo = () => {
     transition-all
     duration-300  border border-cyan-400 text-cyan-400 px-4 py-1 text-sm font-medium  items-center justify-center flex flex-col rounded-2xl w-full lg:w-[330px] p-10 py-4 text-center backdrop-blur-md shadow-xl "
         to="/user-panel-home/upline-bonus"
-        // className="flex justify-center items-center h-20 w-full md:w-[320px] rounded-xl  text-black p-4"
-        // style={{
-        //     background:
-        //         "linear-gradient(90deg, rgba(65, 238, 12, 1) 0%, rgba(112, 88, 206, 1) 63%)",
-        // }}
+      // className="flex justify-center items-center h-20 w-full md:w-[320px] rounded-xl  text-black p-4"
+      // style={{
+      //     background:
+      //         "linear-gradient(90deg, rgba(65, 238, 12, 1) 0%, rgba(112, 88, 206, 1) 63%)",
+      // }}
       >
         <div className="flex justify-center items-center gap-6 ">
           <div>
@@ -106,12 +106,12 @@ const DashboardInfo = () => {
     backdrop-blur-md
     transition-all
     duration-300  border border-cyan-400 text-cyan-400 px-4 py-1 text-sm font-medium  items-center justify-center flex flex-col rounded-2xl w-full lg:w-[330px] p-10 py-4 text-center backdrop-blur-md shadow-xl "
-        // to="/user-panel-home/upline-bonus"
-        // className="flex justify-center items-center h-20 w-full md:w-[320px] rounded-xl  text-black p-4"
-        // style={{
-        //     background:
-        //         "linear-gradient(90deg, rgba(65, 238, 12, 1) 0%, rgba(112, 88, 206, 1) 63%)",
-        // }}
+      // to="/user-panel-home/upline-bonus"
+      // className="flex justify-center items-center h-20 w-full md:w-[320px] rounded-xl  text-black p-4"
+      // style={{
+      //     background:
+      //         "linear-gradient(90deg, rgba(65, 238, 12, 1) 0%, rgba(112, 88, 206, 1) 63%)",
+      // }}
       >
         <div className="flex justify-center items-center gap-6">
           <div>
@@ -125,11 +125,11 @@ const DashboardInfo = () => {
       </Link>
       <button
         onClick={() => {
-          ActivatedSlot
-            ? navigate("/user-panel-home/slot-activate", {
-                state: { ActivateSlot: Number(ActivatedSlot + 1) },
-              })
-            : "";
+          if (ActivatedSlot < 10) {
+            navigate("/user-panel-home/slot-activate", {
+              state: { ActivateSlot: Number(ActivatedSlot + 1) }
+            });
+          }
         }}
         className=" bg-cyan-400/10
     flex
@@ -142,12 +142,12 @@ const DashboardInfo = () => {
     transition-all
     duration-300  border border-cyan-400 text-cyan-400 px-4 py-1 text-sm font-medium  items-center justify-center flex flex-col rounded-2xl w-full lg:w-[330px] p-10 py-4 text-center backdrop-blur-md shadow-xl "
 
-        // to="/user-panel-home/slot-activate" ActivatedSlot
-        // className="flex justify-center items-center h-20 w-full md:w-[320px] rounded-xl bg-blue-500 text-black p-4 cursor-pointer"
-        // style={{
-        //     background:
-        //         "linear-gradient(90deg, rgba(65, 238, 12, 1) 0%, rgba(112, 88, 206, 1) 63%)",
-        // }}
+      // to="/user-panel-home/slot-activate" ActivatedSlot
+      // className="flex justify-center items-center h-20 w-full md:w-[320px] rounded-xl bg-blue-500 text-black p-4 cursor-pointer"
+      // style={{
+      //     background:
+      //         "linear-gradient(90deg, rgba(65, 238, 12, 1) 0%, rgba(112, 88, 206, 1) 63%)",
+      // }}
       >
         <div
           className="flex justify-center items-center gap-6"
@@ -177,11 +177,11 @@ const DashboardInfo = () => {
     transition-all
     duration-300 border border-cyan-400 text-cyan-400 px-4 py-1 text-sm font-medium  items-center justify-center flex flex-col rounded-2xl w-full lg:w-[330px] p-10 py-4 text-center backdrop-blur-md shadow-xl "
         to="/user-panel-home/upline-bonus"
-        // className="flex justify-center items-center h-20 w-full md:w-[320px] rounded-xl bg-blue-500 text-black p-4 cursor-pointer"
-        // style={{
-        //     background:
-        //         "linear-gradient(90deg, rgba(65, 238, 12, 1) 0%, rgba(112, 88, 206, 1) 63%)",
-        // }}
+      // className="flex justify-center items-center h-20 w-full md:w-[320px] rounded-xl bg-blue-500 text-black p-4 cursor-pointer"
+      // style={{
+      //     background:
+      //         "linear-gradient(90deg, rgba(65, 238, 12, 1) 0%, rgba(112, 88, 206, 1) 63%)",
+      // }}
       >
         <div className="flex justify-center items-center gap-6">
           <div>

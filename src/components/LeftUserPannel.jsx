@@ -9,6 +9,7 @@ import { FaExternalLinkAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import Home from "../pages/Home";
+import { formatWithCommas } from "../util/helpers";
 
 const LeftUserPannel = () => {
   const [address, setAddress] = useState(
@@ -90,10 +91,10 @@ const LeftUserPannel = () => {
   overflow-y-auto              
   transition-all duration-300
   lg:min-h-[400px]"
-      // style={{
-      //     background:
-      //         "linear-gradient(180deg, rgba(11, 11, 142, 1) 0%, rgba(115, 118, 120, 1) 100%)",
-      // }}
+    // style={{
+    //     background:
+    //         "linear-gradient(180deg, rgba(11, 11, 142, 1) 0%, rgba(115, 118, 120, 1) 100%)",
+    // }}
     >
       <div className="flex flex-row justify-between items-center gap-4 p-1 w-full">
         <div className="text-md font-semibold text-blue-500">
@@ -116,7 +117,7 @@ const LeftUserPannel = () => {
       </div>
       <div className="w-full flex justify-center ">
         <p className="text-3xl md:text-4xl lg:text-4xl text-pink-500">
-          ${fetchData?.earnedDollar || 0}
+          ${formatWithCommas(fetchData?.earnedDollar) || 0}
         </p>
       </div>
 
@@ -151,9 +152,9 @@ const LeftUserPannel = () => {
 
       <div className="flex justify-between items-center mt-2 px-2 w-full">
         {/* Left icon - External Link */}
-        <div className="flex justify-start mx-5">
+        <a target="_blank" href={`http://ramascan.com/address/${userAddress}`} className="flex justify-start mx-5">
           <FaExternalLinkAlt className="hover:text-blue-700 cursor-pointer text-lg" />
-        </div>
+        </a>
         <div className="mt-2 h-10 flex items-center justify-center w-full lg:w-[250px] mx-auto text-xl font-bold">
           {userAddress
             ? userAddress.slice(0, 7) + "..." + userAddress.slice(-7)
@@ -219,7 +220,11 @@ const LeftUserPannel = () => {
 
       <div className="flex items-center justify-between w-full mt-2 px-2">
         {/* Left-aligned icon - fixed spacing */}
-        <FaExternalLinkAlt className="text-xl text-cyan-400  cursor-pointer mr-2 sm:mr-4" />
+
+        <a target="_blank" href={`http://ramascan.com/address/${data?.sponserAdd}`} >
+          <FaExternalLinkAlt className="text-xl text-cyan-400  cursor-pointer mr-2 sm:mr-4" />
+
+        </a>
 
         {/* Center text - responsive truncation */}
         <div className="flex-1 min-w-0 text-center px-2">
