@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import universeLogo from "../assets/images/Universe_dahboard_Loogo.png";
+import universeLogo from "../assets/images/universeHeroBg.png";
 import { CiYoutube } from "react-icons/ci";
 import { FiLink } from "react-icons/fi";
 import { TbLogin } from "react-icons/tb";
@@ -77,7 +77,7 @@ export default function Home() {
             <img
               src={universeLogo}
               alt="Universe Top Art"
-              className="w-40 sm:w-60 md:w-80 lg:w-[300px] xl:w-[500px] object-contain mx-auto"
+              className="w-80 sm:w-90 md:w-80 lg:w-[400px] xl:w-[700px] object-contain mx-auto"
             />
           </div>
         </div>

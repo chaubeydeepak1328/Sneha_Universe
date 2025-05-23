@@ -263,7 +263,7 @@ const RightUserPannel1 = () => {
   duration-300"
 
     >
-      {!showModal && (
+      {showModal && (
         <div className="absolute">
           <TransactionModal className="text-cyan-400"
             isOpen={showModal}

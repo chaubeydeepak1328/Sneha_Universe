@@ -1477,7 +1477,7 @@ export const useStore = create((set, get) => ({
 
             console.log("----------------> priceInUSD", priceInUSD);
 
-            return priceInUSD.dollars;
+            return priceInUSD.microCents;
 
         } catch (error) {
             console.error("Error Message:", error);

@@ -45,7 +45,7 @@ const Header = () => {
 
         {/* RAMA Price */}
         <div className="border border-cyan-400 text-cyan-300 rounded-full px-5 py-1 bg-black/20 backdrop-blur-md shadow-inner">
-          <span className="font-medium">1 RAMA = ${formatWithCommas(Number(ramaInUSD)) || "0.00"}</span>
+          <span className="font-medium">1 RAMA = ${formatWithCommas((Number(ramaInUSD) || 0) / 1e6)}</span>
         </div>
 
         {/* Telegram */}

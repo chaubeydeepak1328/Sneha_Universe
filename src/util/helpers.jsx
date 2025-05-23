@@ -36,8 +36,12 @@ export const Spinner = ({ loading }) => {
 }
 
 
-
-export const formatWithCommas = (number) => {
-    if (isNaN(number)) return number;
-    return Number(number).toLocaleString("en-US");
-}
+export const formatWithCommas = (value) => {
+    const number = Number(value);
+    if (isNaN(number)) return "0.000";
+    return number.toLocaleString("en-US", {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 3,
+    });
+};
+  

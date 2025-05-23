@@ -38,6 +38,22 @@ const LeftUserPannel = () => {
     fetchUserData();
   }, [address]);
 
+
+  const getBalance = useStore((state) => state.getBalance)
+
+  const [Wallbalance, setWallBalance] = useState()
+
+  useEffect(() => {
+    const fetchBalance = async () => {
+      const res = await getBalance(address);
+      setWallBalance(res)
+    }
+
+    if (address)
+      fetchBalance()
+  }, [])
+
+
   const [userId, setUserId] = useState(null);
   const [userAddress, setUserAddress] = useState(null);
   const [data, setData] = useState(null);
@@ -187,7 +203,7 @@ const LeftUserPannel = () => {
     transition-all
     duration-300"
       >
-        Ramestta Blockchain
+        Ramestta wallet &nbsp;<span className="text-green-400 text-xl">{Wallbalance || 0}</span>
       </div>
       <Link
         to="https://ramestta.com"
