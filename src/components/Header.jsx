@@ -77,7 +77,7 @@ const Header = () => {
 
 
 
-        <GiNetworkBars color={isConnected ? "green" : "red"} />
+        {/* <GiNetworkBars color={isConnected ? "green" : "red"} /> */}
 
 
 

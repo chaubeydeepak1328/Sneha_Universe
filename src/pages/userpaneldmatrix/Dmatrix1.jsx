@@ -121,12 +121,12 @@ export default function UserPanel() {
 
   const filterData = Array.isArray(tableData)
     ? tableData
-      .filter(
-        (val) =>
-          Number(val.cycleNo) === Number(cycleIndex + 1) &&
-          Number(val.slotLevel) === Number(slotIndex + 1)
-      )
-      .sort((a, b) => Number(a.positionIndex) - Number(b.positionIndex)) // Sort by positionIndex ascending
+        .filter(
+          (val) =>
+            Number(val.cycleNo) === Number(cycleIndex + 1) &&
+            Number(val.slotLevel) === Number(slotIndex + 1)
+        )
+        .sort((a, b) => Number(a.positionIndex) - Number(b.positionIndex)) // Sort by positionIndex ascending
     : [];
 
   const lastIndex = currentPage * recordsPerPage;
@@ -149,23 +149,74 @@ export default function UserPanel() {
         minHeight: "100vh",
       }}
     >
-      <div className="stars-container absolute inset-0 overflow-hidden">
-        {[...Array(50)].map((_, i) => (
-          <div
-            key={i}
-            className="star absolute bg-white rounded-full"
-            style={{
-              width: `${Math.random() * 3}px`,
-              height: `${Math.random() * 3}px`,
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              opacity: Math.random(),
-              animation: `twinkle ${Math.random() * 5 + 3}s infinite alternate`,
-            }}
-          />
-        ))}
+      {/* Dynamic Moving Stars Background */}
+      <div className="stars-container absolute inset-0 overflow-hidden z-0">
+        {[...Array(350)].map((_, i) => {
+          // Random properties for each star
+          const size = Math.random() * 3;
+          const duration = 10 + Math.random() * 40; // Longer duration for smoother movement
+          const delay = Math.random() * 10;
+          const startX = Math.random() * 100;
+          const startY = Math.random() * 100;
+
+          // Generate random path (4-6 points)
+          const points = [];
+          const pointCount = 4 + Math.floor(Math.random() * 3);
+
+          for (let p = 0; p < pointCount; p++) {
+            points.push({
+              x: startX + (Math.random() * 30 - 15),
+              y: startY + (Math.random() * 30 - 15),
+              time: (p / (pointCount - 1)) * 100,
+            });
+          }
+
+          // Create keyframe CSS
+          const keyframes = points
+            .map(
+              (point, index) =>
+                `${point.time}% { transform: translate(${point.x}vw, ${point.y}vh); }`
+            )
+            .join(" ");
+
+          return (
+            <>
+              <div
+                key={i}
+                className="star absolute bg-white rounded-full"
+                style={{
+                  width: `${size}px`,
+                  height: `${size}px`,
+                  left: `${startX}vw`,
+                  top: `${startY}vh`,
+                  opacity: Math.random() * 0.7 + 0.3,
+                  animation: `
+                twinkle-${i} ${3 + Math.random() * 4}s ease-in-out infinite,
+                move-${i} ${duration}s linear infinite ${delay}s
+              `,
+                  filter: `blur(${Math.random()}px)`,
+                }}
+              />
+              <style jsx global>{`
+                @keyframes twinkle-${i} {
+                  0%,
+                  100% {
+                    opacity: ${Math.random() * 0.3 + 0.1};
+                  }
+                  50% {
+                    opacity: ${Math.random() * 0.7 + 0.5};
+                  }
+                }
+                @keyframes move-${i} {
+                  ${keyframes}
+                }
+              `}</style>
+            </>
+          );
+        })}
       </div>
-      <div className="max-w-6xl mx-auto p-4">
+
+      <div className="max-w-6xl mx-auto p-2">
         {/* Top Header */}
         <Header />
 
@@ -176,13 +227,14 @@ export default function UserPanel() {
 
           {/* Right Side Content */}
           <div className="">
-            <DashboardInfo />
+            <div className="hidden md:block   block sm:hidden">
+              <DashboardInfo />
+            </div>
 
             {/* Universe U3 Plus Section */}
             <div
-              className="grid grid-cols-1 mt-10 rounded-2xl p-6 text-center rounded-xl
+              className="grid grid-cols-1 mt-10 rounded-2xl p-3 text-center rounded-xl
     bg-cyan-400/10
-    flex
     items-center
     justify-center
     mx-auto
@@ -190,7 +242,7 @@ export default function UserPanel() {
     overflow-hidden
     backdrop-blur-md
     transition-all
-    duration-300  border border-cyan-400 text-cyan-400 px-4 py-1 text-sm font-medium  items-center justify-center flex flex-col rounded-2xl w-full lg:w-[700px] p-10 py-4 text-center backdrop-blur-md shadow-xl "
+    duration-300  border border-cyan-400 text-cyan-400 px-2 py-1 text-sm font-medium  items-center justify-center flex flex-col rounded-2xl w-full lg:w-[700px]  py-4 text-center backdrop-blur-md shadow-xl "
             >
               <div className="w-full">
                 <div className="flex justify-start">
@@ -208,10 +260,11 @@ export default function UserPanel() {
                 <div className="flex flex-col items-center justify-center mt-10">
                   <FaChevronUp
                     onClick={isLoadingU3 ? undefined : prevCycle}
-                    className={`cursor-pointer text-3xl ${isLoadingU3
-                      ? "opacity-50 cursor-not-allowed"
-                      : "hover:text-blue-500"
-                      }`}
+                    className={`cursor-pointer text-3xl ${
+                      isLoadingU3
+                        ? "opacity-50 cursor-not-allowed"
+                        : "hover:text-blue-500"
+                    }`}
                   />
                   <div className="flex justify-center items-center gap-8">
                     <div>RECYCLE</div>
@@ -222,10 +275,11 @@ export default function UserPanel() {
                   </div>
                   <FaChevronDown
                     onClick={isLoadingU3 ? undefined : nextCycle}
-                    className={`cursor-pointer text-3xl ${isLoadingU3
-                      ? "opacity-50 cursor-not-allowed"
-                      : "hover:text-blue-500"
-                      }`}
+                    className={`cursor-pointer text-3xl ${
+                      isLoadingU3
+                        ? "opacity-50 cursor-not-allowed"
+                        : "hover:text-blue-500"
+                    }`}
                   />
                 </div>
 
@@ -234,10 +288,11 @@ export default function UserPanel() {
                   <div className="flex justify-center items-center gap-2">
                     <FaChevronLeft
                       onClick={isLoadingU3 ? undefined : prevSlot}
-                      className={`cursor-pointer text-xl ${isLoadingU3
-                        ? "opacity-50 cursor-not-allowed"
-                        : "hover:text-blue-500"
-                        }`}
+                      className={`cursor-pointer text-xl ${
+                        isLoadingU3
+                          ? "opacity-50 cursor-not-allowed"
+                          : "hover:text-blue-500"
+                      }`}
                     />
                     <button
                       onClick={isLoadingU3 ? undefined : prevSlot}
@@ -283,9 +338,9 @@ export default function UserPanel() {
                                 ? slotIndex === 0
                                   ? { backgroundColor: "white" }
                                   : {
-                                    background:
-                                      "linear-gradient(to bottom, white 50%, #ff66d9 50%)",
-                                  }
+                                      background:
+                                        "linear-gradient(to bottom, white 50%, #ff66d9 50%)",
+                                    }
                                 : { color: "gray" }
                             }
                           />
@@ -293,15 +348,17 @@ export default function UserPanel() {
                           <GiCircle
                             key={j}
                             // className={status ? "bg-white rounded-2xl text-xl" : "text-gray-500 text-xl"}
-                            className={`text-xl rounded-full size-8 ${status ? "bg-green-300" : "text-gray-400"
-                              }`}
+                            className={`text-xl rounded-full size-8 ${
+                              status ? "bg-green-300" : "text-gray-400"
+                            }`}
                           />
                         ) : (
                           <GiCircle
                             key={j}
                             // className={status ? "bg-white rounded-2xl text-xl" : "text-gray-500 text-xl"}
-                            className={`text-xl rounded-full size-8 ${status ? "text-white bg-white" : "text-gray-400"
-                              }`}
+                            className={`text-xl rounded-full size-8 ${
+                              status ? "text-white bg-white" : "text-gray-400"
+                            }`}
                           />
                         )
                       )}
@@ -317,10 +374,11 @@ export default function UserPanel() {
                     </button>
                     <FaChevronRight
                       onClick={isLoadingU3 ? undefined : nextSlot}
-                      className={`cursor-pointer text-xl ${isLoadingU3
-                        ? "opacity-50 cursor-not-allowed"
-                        : "hover:text-blue-500"
-                        }`}
+                      className={`cursor-pointer text-xl ${
+                        isLoadingU3
+                          ? "opacity-50 cursor-not-allowed"
+                          : "hover:text-blue-500"
+                      }`}
                     />
                   </div>
                 </div>
@@ -371,19 +429,31 @@ export default function UserPanel() {
                             <td className="p-2">{tx?.positionIndex ?? "-"}</td>
                             <td className="p-2 font-mono text-xs text-cyan-200">
                               {tx?.initiatedFrom
-                                ? `${tx.initiatedFrom.slice(0, 6)}...${tx.initiatedFrom.slice(-4)}`
+                                ? `${tx.initiatedFrom.slice(
+                                    0,
+                                    6
+                                  )}...${tx.initiatedFrom.slice(-4)}`
                                 : "-"}
                             </td>
                             <td className="p-2 font-mono text-xs text-cyan-200">
                               {tx?.finalReceiver
-                                ? `${tx.finalReceiver.slice(0, 6)}...${tx.finalReceiver.slice(-4)}`
+                                ? `${tx.finalReceiver.slice(
+                                    0,
+                                    6
+                                  )}...${tx.finalReceiver.slice(-4)}`
                                 : "-"}
                             </td>
                             <td className="p-2">{tx?.paymentType ?? "-"}</td>
                             <td className="p-2">{tx?.purpose ?? "-"}</td>
-                            <td className="p-2 text-green-300">{tx?.totalReceivedAmount ?? "0"} RAMA</td>
-                            <td className="p-2 text-red-300">{tx?.amountDebitedForPurpose ?? "0"} RAMA</td>
-                            <td className="p-2 text-yellow-300">{tx?.netProfit ?? "0"} RAMA</td>
+                            <td className="p-2 text-green-300">
+                              {tx?.totalReceivedAmount ?? "0"} RAMA
+                            </td>
+                            <td className="p-2 text-red-300">
+                              {tx?.amountDebitedForPurpose ?? "0"} RAMA
+                            </td>
+                            <td className="p-2 text-yellow-300">
+                              {tx?.netProfit ?? "0"} RAMA
+                            </td>
                             <td className="p-2 font-mono text-blue-400">
                               <a
                                 target="_blank"
@@ -392,7 +462,10 @@ export default function UserPanel() {
                                 className="truncate block max-w-[120px]"
                               >
                                 {tx?.txHash
-                                  ? `${tx.txHash.slice(0, 7)}...${tx.txHash.slice(-7)}`
+                                  ? `${tx.txHash.slice(
+                                      0,
+                                      7
+                                    )}...${tx.txHash.slice(-7)}`
                                   : "-"}
                               </a>
                             </td>
@@ -429,27 +502,10 @@ export default function UserPanel() {
                   </div>
                 )}
               </div>
-
-
-
             </div>
           </div>
         </div>
       </div>
-      {/* CSS for animation */}
-      <style jsx>{`
-        @keyframes twinkle {
-          0% {
-            opacity: 0.2;
-          }
-          100% {
-            opacity: 1;
-          }
-        }
-        .star {
-          will-change: opacity;
-        }
-      `}</style>
     </div>
   );
 }

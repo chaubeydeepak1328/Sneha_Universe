@@ -38,21 +38,18 @@ const LeftUserPannel = () => {
     fetchUserData();
   }, [address]);
 
+  const getBalance = useStore((state) => state.getBalance);
 
-  const getBalance = useStore((state) => state.getBalance)
-
-  const [Wallbalance, setWallBalance] = useState()
+  const [Wallbalance, setWallBalance] = useState();
 
   useEffect(() => {
     const fetchBalance = async () => {
       const res = await getBalance(address);
-      setWallBalance(res)
-    }
+      setWallBalance(res);
+    };
 
-    if (address)
-      fetchBalance()
-  }, [])
-
+    if (address) fetchBalance();
+  }, []);
 
   const [userId, setUserId] = useState(null);
   const [userAddress, setUserAddress] = useState(null);
@@ -107,10 +104,10 @@ const LeftUserPannel = () => {
   overflow-y-auto              
   transition-all duration-300
   lg:min-h-[400px]"
-    // style={{
-    //     background:
-    //         "linear-gradient(180deg, rgba(11, 11, 142, 1) 0%, rgba(115, 118, 120, 1) 100%)",
-    // }}
+      // style={{
+      //     background:
+      //         "linear-gradient(180deg, rgba(11, 11, 142, 1) 0%, rgba(115, 118, 120, 1) 100%)",
+      // }}
     >
       <div className="flex flex-row justify-between items-center gap-4 p-1 w-full">
         <div className="text-md font-semibold text-blue-500">
@@ -124,10 +121,10 @@ const LeftUserPannel = () => {
             to="/user-panel-home"
             className="uppercase text-white cursor-pointer text-xl"
           >
-            Dashboard
+            Dashboard <span className="text-sm text-cyan">>></span>
           </Link>
         </div>
-        <div className=" text-xl order-2 text-red-400  font-bold bg-gray-800/50 px-4 py-2 rounded-lg">
+        <div className=" text-xl order-2 text-red-400  font-semibold bg-gray-800/50 px-2 py-2 rounded-lg">
           {userId ? "ID :" + userId : "Not Registered"}
         </div>
       </div>
@@ -168,7 +165,11 @@ const LeftUserPannel = () => {
 
       <div className="flex justify-between items-center mt-2 px-2 w-full">
         {/* Left icon - External Link */}
-        <a target="_blank" href={`http://ramascan.com/address/${userAddress}`} className="flex justify-start mx-5">
+        <a
+          target="_blank"
+          href={`http://ramascan.com/address/${userAddress}`}
+          className="flex justify-start mx-5"
+        >
           <FaExternalLinkAlt className="hover:text-blue-700 cursor-pointer text-lg" />
         </a>
         <div className="mt-2 h-10 flex items-center justify-center w-full lg:w-[250px] mx-auto text-xl font-bold">
@@ -203,7 +204,8 @@ const LeftUserPannel = () => {
     transition-all
     duration-300"
       >
-        Ramestta wallet &nbsp;<span className="text-green-400 text-xl">{Wallbalance || 0}</span>
+        Ramestta wallet &nbsp;
+        <span className="text-green-400 text-xl">{Wallbalance || 0}</span>
       </div>
       <Link
         to="https://ramestta.com"
@@ -237,9 +239,11 @@ const LeftUserPannel = () => {
       <div className="flex items-center justify-between w-full mt-2 px-2">
         {/* Left-aligned icon - fixed spacing */}
 
-        <a target="_blank" href={`http://ramascan.com/address/${data?.sponserAdd}`} >
+        <a
+          target="_blank"
+          href={`http://ramascan.com/address/${data?.sponserAdd}`}
+        >
           <FaExternalLinkAlt className="text-xl text-cyan-400  cursor-pointer mr-2 sm:mr-4" />
-
         </a>
 
         {/* Center text - responsive truncation */}

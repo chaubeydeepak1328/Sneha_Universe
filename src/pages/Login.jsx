@@ -195,28 +195,78 @@ export default function Login() {
       }}
     >
       {/* Twinkling Stars Background - Improved */}
+
+      {/* Dynamic Moving Stars Background */}
       <div className="stars-container absolute inset-0 overflow-hidden z-0">
-        {[...Array(100)].map((_, i) => (
-          <div
-            key={i}
-            className="star absolute bg-white rounded-full animate-twinkle"
-            style={{
-              width: `${Math.random() * 3}px`,
-              height: `${Math.random() * 3}px`,
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              opacity: Math.random() * 0.7 + 0.3, // More visible stars
-              animationDuration: `${Math.random() * 4 + 2}s`,
-              animationDelay: `${Math.random() * 5}s`,
-            }}
-          />
-        ))}
+        {[...Array(350)].map((_, i) => {
+          // Random properties for each star
+          const size = Math.random() * 3;
+          const duration = 10 + Math.random() * 40; // Longer duration for smoother movement
+          const delay = Math.random() * 10;
+          const startX = Math.random() * 100;
+          const startY = Math.random() * 100;
+
+          // Generate random path (4-6 points)
+          const points = [];
+          const pointCount = 4 + Math.floor(Math.random() * 3);
+
+          for (let p = 0; p < pointCount; p++) {
+            points.push({
+              x: startX + (Math.random() * 30 - 15),
+              y: startY + (Math.random() * 30 - 15),
+              time: (p / (pointCount - 1)) * 100,
+            });
+          }
+
+          // Create keyframe CSS
+          const keyframes = points
+            .map(
+              (point, index) =>
+                `${point.time}% { transform: translate(${point.x}vw, ${point.y}vh); }`
+            )
+            .join(" ");
+
+          return (
+            <>
+              <div
+                key={i}
+                className="star absolute bg-white rounded-full"
+                style={{
+                  width: `${size}px`,
+                  height: `${size}px`,
+                  left: `${startX}vw`,
+                  top: `${startY}vh`,
+                  opacity: Math.random() * 0.7 + 0.3,
+                  animation: `
+                twinkle-${i} ${3 + Math.random() * 4}s ease-in-out infinite,
+                move-${i} ${duration}s linear infinite ${delay}s
+              `,
+                  filter: `blur(${Math.random()}px)`,
+                }}
+              />
+              <style jsx global>{`
+                @keyframes twinkle-${i} {
+                  0%,
+                  100% {
+                    opacity: ${Math.random() * 0.3 + 0.1};
+                  }
+                  50% {
+                    opacity: ${Math.random() * 0.7 + 0.5};
+                  }
+                }
+                @keyframes move-${i} {
+                  ${keyframes}
+                }
+              `}</style>
+            </>
+          );
+        })}
       </div>
 
       {/* Content */}
-      <div className="relative z-10  w-full max-w-[1800px] mx-auto px-4 sm:px-6 md:px-8">
+      <div className="relative z-10  w-full max-w-[1800px] mx-auto px-3 sm:px-1 md:px-8">
         <ToastContainer />
-        <div className="flex flex-col items-center py-10 px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20">
+        <div className="flex flex-col items-center py-10 px-4 sm:px-1 md:px-10 lg:px-16 xl:px-20">
           <div
             className="min-h-screen "
             style={{
@@ -225,7 +275,7 @@ export default function Login() {
           >
             <ToastContainer />
 
-            <div className="flex flex-col items-center py-10 px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20">
+            <div className="flex flex-col items-center py-10 px-1 sm:px-6 md:px-10 lg:px-13 xl:px-16">
               <div
                 className="flex flex-col justify-start border-2 border-cyan-400
   bg-cyan-300/10  rounded-xl backdrop-blur-[8px]
@@ -234,7 +284,7 @@ export default function Login() {
   duration-300
   hover:shadow-cyan-400/30
   shadow-xl shadow-cyan-400/20
-  text-white items-center rounded-xl w-full max-w-xl p-6 sm:p-10  shadow-lg"
+  text-white items-center rounded-xl w-full max-w-xl p-4 sm:p-6  shadow-lg"
               >
                 {/* Logo */}
                 <Link to="/">
@@ -246,12 +296,12 @@ export default function Login() {
                 </Link>
 
                 {/* Title */}
-                <h1 className="text-2xl sm:text-4xl font-bold mt-6 text-white text-center">
+                <h1 className="text-2xl uppercase sm:text-4xl font-bold mt-6 text-white text-center">
                   Explore the Universe
                 </h1>
-                <p className="text-center text-lg sm:text-xl mt-2 text-white">
+                {/* <p className="text-center text-lg sm:text-xl mt-2 text-white">
                   Ramestta Newtork
-                </p>
+                </p> */}
 
                 {/* Authorization Button */}
                 <button
@@ -272,10 +322,10 @@ export default function Login() {
     backdrop-blur-md
     transition-all
     duration-300  text-white font-semibold py-2 rounded-lg shadow hover:shadow-lg transition duration-200 cursor-pointer max-w-xs mt-6 rounded-xl text-lg sm:text-xl font-semibold text-black py-3 text-center transition hover:brightness-110 cursor-pointer"
-                // style={{
-                //   background:
-                //     "linear-gradient(262deg, rgba(32, 173, 29, 1) 0%, rgba(239, 185, 10, 1) 50%)",
-                // }}
+                  // style={{
+                  //   background:
+                  //     "linear-gradient(262deg, rgba(32, 173, 29, 1) 0%, rgba(239, 185, 10, 1) 50%)",
+                  // }}
                 >
                   {authLoading ? (
                     <Spinner loading={authLoading} />
@@ -330,10 +380,10 @@ export default function Login() {
     backdrop-blur-md
     transition-all
     duration-300  text-white font-semibold py-2 rounded-lg shadow hover:shadow-lg transition duration-200 cursor-pointer max-w-xs mt-8 rounded-xl text-lg sm:text-xl font-semibold text-black py-3 text-center transition hover:brightness-110 cursor-pointer"
-                // style={{
-                //   background:
-                //     "linear-gradient(262deg, rgba(32, 173, 29, 1) 0%, rgba(239, 185, 10, 1) 50%)",
-                // }}
+                  // style={{
+                  //   background:
+                  //     "linear-gradient(262deg, rgba(32, 173, 29, 1) 0%, rgba(239, 185, 10, 1) 50%)",
+                  // }}
                 >
                   {viewLoading ? <Spinner loading={viewLoading} /> : "Viewing"}
                 </button>
@@ -374,22 +424,6 @@ export default function Login() {
           </div>
         </div>
       </div>
-
-      {/* Tailwind CSS Animation - Add to your globals.css */}
-      <style jsx global>{`
-        @keyframes twinkle {
-          0%,
-          100% {
-            opacity: 0.3;
-          }
-          50% {
-            opacity: 1;
-          }
-        }
-        .animate-twinkle {
-          animation: twinkle linear infinite;
-        }
-      `}</style>
     </div>
   );
 }

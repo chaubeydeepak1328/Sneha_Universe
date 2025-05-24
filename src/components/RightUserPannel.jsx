@@ -70,7 +70,7 @@ const RightUserPannel = () => {
       {/* Universe U3 Plus Section */}
       <div
         className=" grid-cols-1 mt-10  bg-cyan-400/10
-    flex
+   
     items-center
     justify-center
     mx-auto
@@ -78,7 +78,7 @@ const RightUserPannel = () => {
     overflow-hidden
     backdrop-blur-md
     transition-all
-    duration-300   border-1 rounded-2xl p-6 text-center"
+    duration-300   border-1 rounded-2xl p-1 text-center"
         // style={{
         //     background:
         //         "linear-gradient(178deg, rgba(5, 53, 102, 1) 0%, rgb(7, 7, 4) 100%)",
@@ -94,7 +94,7 @@ const RightUserPannel = () => {
         </div>
 
         {/* First Card - First Row */}
-        <div className="flex justify-center mt-10">
+        <div className="flex justify-center mt-10 ">
           {values.slice(0, 1).map((value, index) => {
             const slotIndex = index + 1;
             const slot = slotData[index];
@@ -121,7 +121,7 @@ const RightUserPannel = () => {
                 </div>
 
                 {/* Vertical lines section */}
-                <div className="w-full px-0">
+                <div className="w-full px-0 ">
                   {" "}
                   {/* Removed horizontal padding */}
                   {[...Array(2)].map((_, i) => (
@@ -411,7 +411,7 @@ const RightUserPannel = () => {
 
             {/* Box for Dynamic Data */}
 
-            <div className="p-6">
+            <div className="">
               <h2 className="text-2xl font-bold mb-6 text-ehite text-center">
                 Total Matrix Summary
               </h2>

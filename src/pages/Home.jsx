@@ -121,13 +121,16 @@ export default function Home() {
                 // to="/erv-token-home"
                 className="px-6 py-3 text-white text-md font-semibold flex justify-center items-center gap-2 "
               >
-                <CiYoutube className="text-3xl" />
+                {/* <CiYoutube className="text-3xl" /> */}
                 <a
                   href="https://t.me/ramauniverse"
                   target="_blank"
                   className="flex justify-center items-center gap-2 "
                 >
-                  <div>{/* <FaTelegram className="text-blue-500" /> */}</div>
+                  <div>
+                    {" "}
+                    <FaTelegram className="text-cyan-400 hover:hover:bg-blue " />{" "}
+                  </div>
                   <div>Join Telegram </div>
                 </a>
               </button>
