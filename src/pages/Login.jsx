@@ -333,12 +333,13 @@ export default function Login() {
                     "Authorization"
                   )}
                 </button>
+                <p className="text-sm w-[60%] text-center pt-4">{`if you are already Registerd than Click here for Authorization)`}</p>
 
                 {/* ID Input Section */}
                 <div className="mt-6 text-center text-white">
-                  <h2 className="text-xl sm:text-2xl">
+                  {/* <h2 className="text-xl sm:text-2xl">
                     To View, enter the account ID
-                  </h2>
+                  </h2> */}
                   <input
                     type="text"
                     className="mt-4 w-full max-w-xs px-4 py-2 rounded-md text-center border 
@@ -360,6 +361,9 @@ export default function Login() {
                     onChange={(e) => setInputData(e.target.value)}
                   />
                 </div>
+
+                <p className="text-sm w-[60%] text-center pt-4">{`(for View Enter the id)`}</p>
+
 
                 {/* Viewing Button */}
                 <button
@@ -393,16 +397,16 @@ export default function Login() {
                   <p className="text-sm sm:text-lg">
                     Join if you are not yet with us:
                   </p>
-                  <div className="mt-2 flex items-center justify-center gap-2 text-sm sm:text-lg cursor-pointer hover:underline">
+                  <button onClick={handleClick} className="mt-2 flex items-center justify-center gap-2 text-sm sm:text-lg cursor-pointer hover:underline">
                     <LuUserRound className="text-xl sm:text-2xl" />
-                    <a
-                      href="https://ramascan.com/"
-                      target="_blank"
+                    <p
+
+
                       className="flex justify-center items-center gap-2"
                     >
-                      Check in RamaScan
-                    </a>
-                  </div>
+                      Click here to Register
+                    </p>
+                  </button>
                 </div>
               </div>
 

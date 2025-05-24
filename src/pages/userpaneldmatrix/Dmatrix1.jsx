@@ -12,6 +12,9 @@ import LeftUserPannel from "../../components/LeftUserPannel";
 import Header from "../../components/Header";
 import DashboardInfo from "../../components/DashboardInfo";
 import { useStore } from "../../Store/UserStore";
+import { RxClipboardCopy } from "react-icons/rx";
+import { handleCopy } from "../../util/helpers";
+import { ToastContainer } from "react-toastify";
 
 export default function UserPanel() {
   const location = useLocation();
@@ -149,6 +152,8 @@ export default function UserPanel() {
         minHeight: "100vh",
       }}
     >
+
+      <ToastContainer />
       {/* Dynamic Moving Stars Background */}
       <div className="stars-container fixed inset-0 w-full h-full pointer-events-none overflow-hidden z-0">
         {[...Array(350)].map((_, i) => {
@@ -394,7 +399,7 @@ export default function UserPanel() {
                             "Position",
                             "Initiated From",
                             "Final Receiver",
-                            "Type",
+                            "Payment Type",
                             "Purpose",
                             "Total Received",
                             "Debited",
@@ -422,20 +427,34 @@ export default function UserPanel() {
                             <td className="p-2">{tx?.cycleNo ?? "-"}</td>
                             <td className="p-2">{tx?.positionIndex ?? "-"}</td>
                             <td className="p-2 font-mono text-xs text-cyan-200">
-                              {tx?.initiatedFrom
-                                ? `${tx.initiatedFrom.slice(
-                                  0,
-                                  6
-                                )}...${tx.initiatedFrom.slice(-4)}`
-                                : "-"}
+
+                              <a target="_blank" href={`https://ramascan.com/address/${tx.initiatedFrom}`}>
+                                {tx?.initiatedFrom
+                                  ? `${tx.initiatedFrom.slice(
+                                    0,
+                                    6
+                                  )}...${tx.initiatedFrom.slice(-4)}`
+                                  : "-"}
+                              </a>
+                              <RxClipboardCopy
+                                onClick={() => handleCopy(tx.splitedWith)}
+                                className="text-xl text-cyan-400  cursor-pointer ml-2 sm:ml-4"
+                              />
+
                             </td>
                             <td className="p-2 font-mono text-xs text-cyan-200">
-                              {tx?.finalReceiver
-                                ? `${tx.finalReceiver.slice(
-                                  0,
-                                  6
-                                )}...${tx.finalReceiver.slice(-4)}`
-                                : "-"}
+                              <a target="_blank" href={`https://ramascan.com/address/${tx.finalReceiver}`}>
+                                {tx?.finalReceiver
+                                  ? `${tx.finalReceiver.slice(
+                                    0,
+                                    6
+                                  )}...${tx.finalReceiver.slice(-4)}`
+                                  : "-"}
+                              </a>
+                              <RxClipboardCopy
+                                onClick={() => handleCopy(tx.finalReceiver)}
+                                className="text-xl text-cyan-400  cursor-pointer ml-2 sm:ml-4"
+                              />
                             </td>
                             <td className="p-2">{tx?.paymentType ?? "-"}</td>
                             <td className="p-2">{tx?.purpose ?? "-"}</td>
@@ -462,6 +481,10 @@ export default function UserPanel() {
                                   )}...${tx.txHash.slice(-7)}`
                                   : "-"}
                               </a>
+                              <RxClipboardCopy
+                                onClick={() => handleCopy(tx.txHash)}
+                                className="text-xl text-cyan-400  cursor-pointer ml-2 sm:ml-4"
+                              />
                             </td>
                             <td className="p-2">{tx?.formattedDate ?? "-"}</td>
                           </tr>

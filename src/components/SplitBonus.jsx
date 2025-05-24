@@ -3,6 +3,9 @@ import LeftUserPannel from "./LeftUserPannel";
 import Header from "./Header";
 import DashboardInfo from "./DashboardInfo";
 import { useStore } from "../Store/UserStore";
+import { ToastContainer } from "react-toastify";
+import { RxClipboardCopy } from "react-icons/rx";
+import { handleCopy } from "../util/helpers";
 
 export default function UplineBonus() {
   const [address, setAddress] = useState(
@@ -52,6 +55,8 @@ export default function UplineBonus() {
         minHeight: "100vh",
       }}
     >
+
+      <ToastContainer />
       {/* Dynamic Moving Stars Background */}
       <div className="stars-container fixed inset-0 w-full h-full pointer-events-none overflow-hidden z-0">
         {[...Array(350)].map((_, i) => {
@@ -208,14 +213,26 @@ export default function UplineBonus() {
                     {splitPayments.map((item, idx) => (
                       <tr key={idx} className="border-t">
                         <td className="p-2 border">
-                          {item.initiatedFrom.slice(0, 6) +
-                            "...." +
-                            item.initiatedFrom.slice(-8)}
+                          <a href={`https://ramascan.com/address/${item.initiatedFrom}`}>
+                            {item.initiatedFrom.slice(0, 6) +
+                              "...." +
+                              item.initiatedFrom.slice(-8)}
+                          </a>
+                          <RxClipboardCopy
+                            onClick={() => handleCopy(item.initiatedFrom)}
+                            className="text-xl text-cyan-400  cursor-pointer ml-2 sm:ml-4"
+                          />
                         </td>
                         <td className="p-2 border">
-                          {item.splitedWith.slice(0, 6) +
-                            "...." +
-                            item.splitedWith.slice(-8)}
+                          <a href={`https://ramascan.com/address/${item.splitedWith}`}>
+                            {item.splitedWith.slice(0, 6) +
+                              "...." +
+                              item.splitedWith.slice(-8)}
+                          </a>
+                          <RxClipboardCopy
+                            onClick={() => handleCopy(item.splitedWith)}
+                            className="text-xl text-cyan-400  cursor-pointer ml-2 sm:ml-4"
+                          />
                         </td>
                         <td className="p-2 border">
                           {item.isReceiverSecondUpline ? "Yes" : "No"}

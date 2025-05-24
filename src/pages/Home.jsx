@@ -150,7 +150,7 @@ export default function Home() {
     duration-300   text-white text-lg font-semibold rounded-xl shadow-xl  hover:bg-[#00d3f3] hover:text-black hover:scale-105 transition-all duration-300 ease-in-out justify-center items-center ga-2  text-white text-lg font-semibold rounded-xl shadow-xl  hover:scale-105 transition-all duration-300 ease-in-out"
             >
               <TbLogin className="text-3xl" />
-              Join Now
+              Register Now
             </button>
           </div>
 

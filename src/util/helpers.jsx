@@ -44,4 +44,20 @@ export const formatWithCommas = (value) => {
         maximumFractionDigits: 3,
     });
 };
-  
+
+
+export const handleCopy = (address) => {
+    if (address) {
+        navigator.clipboard.writeText(address);
+        toast.success("Address copied to clipboard!", {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
+    }
+};
+
