@@ -103,7 +103,7 @@ const LeftUserPannel = () => {
   shadow-xl
   shadow-cyan-400/20            
   min-h-[300px]                 
-  max-h-[70vh]                
+  max-h-[60vh]                
   overflow-y-auto              
   transition-all duration-300
   lg:min-h-[400px]"

@@ -33,17 +33,32 @@ import Swal from 'sweetalert2';
 
 
 
+// const Contract = {
+//     "UserMang": "0x0ad39396FF507a796D7cdDffC161cdEA9bc7F52D",
+//     "U3plus": "0xe3bAE2834085180c58CF3DfC0044a3fF2b27B171",
+//     "U5": "0xdC7d2466323E7D2D3cb7F35fF176b651ee891384",
+//     "PriceConv": "0x6178947474ca70A891AD9373cCb7754d9f89611c",
+//     "UIncome": "0x895A125730721bC8B9B1748ad57b91dc059b9593",
+//     "U4": "0x61a0eba8D1f899F006022101322fe2c031A65741",
+//     "U3prem": "0x680CdaA591AC7bc3d0C0a68c89ea40FbDE5E3696",
+//     "contReg": "0xc6E55AC39b6135Af3bE66F5413C1DAe789EBF481",
+//     "MatrixDataView": "0x5D070f0F680ED97145370D18321b6301d5e13D70",
+// }
+
+
+
 const Contract = {
-    "UserMang": "0x0ad39396FF507a796D7cdDffC161cdEA9bc7F52D",
-    "U3plus": "0xe3bAE2834085180c58CF3DfC0044a3fF2b27B171",
-    "U5": "0xdC7d2466323E7D2D3cb7F35fF176b651ee891384",
-    "PriceConv": "0x6178947474ca70A891AD9373cCb7754d9f89611c",
-    "UIncome": "0x895A125730721bC8B9B1748ad57b91dc059b9593",
-    "U4": "0x61a0eba8D1f899F006022101322fe2c031A65741",
-    "U3prem": "0x680CdaA591AC7bc3d0C0a68c89ea40FbDE5E3696",
+    "UserMang": "0x966eB5bcc062daEe77c74A4d31eC349827f1AcdF",
+    "U3plus": "0x6f7A4Ffd818bdE1468d9352FE187449E98c01d1C",
+    "U5": "0x000D21A44BBEaa5682Ad6aa992004ae418FDb5d1",
+    "PriceConv": "0x7295f6b43A817fc4a18BfEE911751d45cd79cF13",
+    "UIncome": "0x8f2C3fddC555861f2eBb10Ac41898f882B159beA",
+    "U4": "0x1e9A3AA48Bd29093181Fa3E99C4880a38C810FC2",
+    "U3prem": "0x9Ce6E4216FE8D98c6E4de7A2B82c85e4448d7f13",
     "contReg": "0xc6E55AC39b6135Af3bE66F5413C1DAe789EBF481",
-    "MatrixDataView": "0x5D070f0F680ED97145370D18321b6301d5e13D70",
+    "MatrixDataView": "0x8f0A35b3eaB9F16b2D5E226d77c426Fe23569A8D",
 }
+
 
 const fetchContractAbi = async (contractName) => {
     try {
@@ -1473,11 +1488,11 @@ export const useStore = create((set, get) => ({
 
 
             // Rama Price In Usd ((getting the static value form the method))
-            const priceInUSD = await contract.methods.getReadableRamaPrice().call();
+            const priceInUSD = await contract.methods.ramaPriceInUSD().call();
 
             console.log("----------------> priceInUSD", priceInUSD);
 
-            return priceInUSD.microCents;
+            return priceInUSD;
 
         } catch (error) {
             console.error("Error Message:", error);

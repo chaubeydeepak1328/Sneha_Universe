@@ -167,10 +167,31 @@ export default function UserPanel() {
 
     return (
         <div
-            className="bg-black min-h-screen rounded-3xl"
-            style={{ background: "linear-gradient(180deg, #000000, #25752D)" }}
+            className="min-h-screen rounded-3xl"
+            style={{
+                background: "linear-gradient(180deg, #000000, rgb(13, 35, 13))",
+                position: "relative",
+                overflow: "hidden",
+                minHeight: "100vh",
+            }}
         >
-            <div className="max-w-6xl mx-auto p-4">
+            <div className="stars-container absolute inset-0 overflow-hidden">
+                {[...Array(50)].map((_, i) => (
+                    <div
+                        key={i}
+                        className="star absolute bg-white rounded-full"
+                        style={{
+                            width: `${Math.random() * 3}px`,
+                            height: `${Math.random() * 3}px`,
+                            top: `${Math.random() * 100}%`,
+                            left: `${Math.random() * 100}%`,
+                            opacity: Math.random(),
+                            animation: `twinkle ${Math.random() * 5 + 3}s infinite alternate`,
+                        }}
+                    />
+                ))}
+            </div>
+            <div className="max-w-6xl mx-auto ">
                 {/* Top Header */}
                 <Header />
 
@@ -180,26 +201,37 @@ export default function UserPanel() {
                     <LeftUserPannel />
 
                     {/* Right Side Content */}
-                    <div className="w-full">
+                    <div className="">
 
                         <DashboardInfo />
 
                         {/* Universe U3 Plus Section */}
                         <div
-                            className="grid grid-cols-1 mt-10 rounded-2xl p-6 text-center"
-                            style={{
-                                background:
-                                    "linear-gradient(178deg, rgba(5, 53, 102, 1) 0%, rgba(96, 103, 55, 1) 100%)",
-                            }}
+                            className="grid grid-cols-1 mt-10 rounded-2xl p-6 bg-cyan-400/10
+    flex
+    items-center
+    justify-center
+    mx-auto
+    border-cyan-400
+    bg-cyan-400/10
+    overflow-hidden
+    backdrop-blur-md
+    shadow-lg
+    transition-all
+    duration-300   border-1 rounded-2xl p-6 text-center"
+                        // style={{
+                        //     background:
+                        //         "linear-gradient(178deg, rgba(5, 53, 102, 1) 0%, rgba(96, 103, 55, 1) 100%)",
+                        // }}
                         >
                             <div className="flex gap-5 justify-center mt-10">
-                                <span className="border-2 text-sm lg:text-2xl lg:px-12 py-2 bg-yellow-500 rounded-xl"> Detailed View U5{'>>>>>'} </span>
+                                <span className="border-2 text-sm lg:text-2xl lg:px-12 py-2 bg-cyan-400/10 border-cyan-400 text-cyan-400 rounded-xl"> Detailed View U5{'>>>>>'} </span>
 
-                                <span className="border-2 text-sm lg:text-2xl lg:px-12 py-2  bg-green-500 rounded-xl"> Matrix ID: {id} </span>
+                                <span className="border-2 text-sm lg:text-2xl lg:px-12 py-2 bg-cyan-400/10 border-cyan-400 text-cyan-400 rounded-xl"> Matrix ID: {id} </span>
                             </div>
 
                             <div className="mt-10">
-                                <span className="border-2 text-2xl px-12 py-2  bg-blue-500 rounded-xl">slot {slotIndex + 1}</span>
+                                <span className="border-2 text-2xl px-12 py-2  bg-cyan-400/10 border-cyan-400  rounded-xl">slot {slotIndex + 1}</span>
                             </div>
 
                             {/* Matrix View */}
@@ -289,7 +321,7 @@ export default function UserPanel() {
 
 
 
-                        <div className="w-full overflow-x-auto py-4  max-w-6xl mx-auto">
+                        <div className="w-full overflow-x-auto py-4 mt-3 rounded-xl max-w-6xl mx-auto  bg-cyan-400/10 border-2 border-cyan-400">
                             {/* Selection Controls */}
 
 
@@ -298,7 +330,7 @@ export default function UserPanel() {
                                 <div>
                                     <table className="w-full min-w-[700px] border-collapse text-sm sm:text-base">
                                         <thead>
-                                            <tr className="bg-gray-100">
+                                            <tr className="bg-cyan-200">
                                                 <th className="p-3 text-left text-black">Sno</th>
                                                 <th className="p-3 text-left text-black">Slot</th>
                                                 <th className="p-3 text-left text-black">Position</th>
@@ -373,7 +405,21 @@ export default function UserPanel() {
                     </div>
                 </div>
             </div>
-        </div>
+            {/* CSS for animation */}
+            <style jsx>{`
+        @keyframes twinkle {
+          0% {
+            opacity: 0.2;
+          }
+          100% {
+            opacity: 1;
+          }
+        }
+        .star {
+          will-change: opacity;
+        }
+      `}</style>
+        </div >
     );
 }
 

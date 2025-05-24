@@ -19,6 +19,7 @@ import Umatrix1 from './pages/userpaneldmatrix/Umatrix1';
 import SplitBonus from './components/SplitBonus';
 import UmatrixUThreeplus from './pages/userpaneldmatrix/UmatrixUThreeplus';
 import UniverseU10 from "./pages/UniverseU5/UniverseU10";
+import profile from './pages/Profile'
 // =================================================
 // Wallet Connect Functionality
 // =================================================
@@ -38,6 +39,7 @@ import Umatrix4 from './pages/userpaneldmatrix/UmatrixU4';
 import UniverseU40 from './pages/UniverseU4/UniverseU40';
 import UniverseU340 from './pages/UniverseU340/UniverseU340';
 import Referral from './pages/Referral';
+import Profile from './pages/Profile';
 
 
 const queryClient = new QueryClient()
@@ -114,6 +116,8 @@ function App() {
           <Route path='/user-panel-home/user-panel-umatrix4' element={<Umatrix4 />} />
           <Route path='/user-panel-home/UniverseU4' element={<UniverseU40 />} />
 
+
+          <Route path='/profile' element={<Profile />} />
 
 
 

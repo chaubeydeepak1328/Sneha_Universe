@@ -69,7 +69,7 @@ const RightUserPannel = () => {
 
       {/* Universe U3 Plus Section */}
       <div
-        className="grid grid-cols-1 mt-10  bg-cyan-400/10
+        className=" grid-cols-1 mt-10  bg-cyan-400/10
     flex
     items-center
     justify-center
