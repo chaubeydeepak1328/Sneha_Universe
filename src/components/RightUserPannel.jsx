@@ -11,6 +11,7 @@ import DashboardInfo from "./DashboardInfo";
 import cart from "../assets/images/cart.png";
 import RamaLoader from "../util/RamaLoader";
 import pointingFinger from "../assets/images/pointingFinger.png";
+import { formatWithCommas } from "../util/helpers";
 
 const RightUserPannel = () => {
   const [address, setAddress] = useState(
@@ -79,10 +80,10 @@ const RightUserPannel = () => {
     backdrop-blur-md
     transition-all
     duration-300   border-1 rounded-2xl p-1 text-center"
-        // style={{
-        //     background:
-        //         "linear-gradient(178deg, rgba(5, 53, 102, 1) 0%, rgb(7, 7, 4) 100%)",
-        // }}
+      // style={{
+      //     background:
+      //         "linear-gradient(178deg, rgba(5, 53, 102, 1) 0%, rgb(7, 7, 4) 100%)",
+      // }}
       >
         <div>
           <span className="text-4xl md:text-5xl text-[#00d3f3] font-extrabold">
@@ -113,9 +114,8 @@ const RightUserPannel = () => {
                 className="flex flex-col items-center p-0" // Removed all responsive paddings
               >
                 <div
-                  className={`h-10 w-20 sm:w-24 md:w-28 lg:w-26 bg-[#DED8C8] rounded-xl flex justify-center items-center text-black text-lg sm:text-xl cursor-pointer ${
-                    slotIndex < slotData.length + 1 ? "bg-green-500" : ""
-                  }`}
+                  className={`h-10 w-20 sm:w-24 md:w-28 lg:w-26 bg-[#DED8C8] rounded-xl flex justify-center items-center text-black text-lg sm:text-xl cursor-pointer ${slotIndex < slotData.length + 1 ? "bg-green-500" : ""
+                    }`}
                 >
                   ${value}
                 </div>
@@ -145,17 +145,15 @@ const RightUserPannel = () => {
                     return j == 2 ? (
                       <GiCircle
                         key={j}
-                        className={`rounded-full ${
-                          isFilled ? "bg-white" : "text-gray-500"
-                        }`}
+                        className={`rounded-full ${isFilled ? "bg-white" : "text-gray-500"
+                          }`}
                         size={14}
                       />
                     ) : (
                       <GiCircle
                         key={j}
-                        className={`${
-                          isFilled ? "bg-white rounded-full" : "text-gray-500"
-                        }`}
+                        className={`${isFilled ? "bg-white rounded-full" : "text-gray-500"
+                          }`}
                         size={14}
                       />
                     );
@@ -214,9 +212,8 @@ const RightUserPannel = () => {
                 </div>
 
                 <div
-                  className={`h-10 w-20 sm:w-24 md:w-28 lg:w-26 bg-[#DED8C8] rounded-xl flex justify-center items-center text-black text-lg sm:text-xl cursor-pointer ${
-                    slotIndex < slotData.length ? "bg-green-500" : ""
-                  }`}
+                  className={`h-10 w-20 sm:w-24 md:w-28 lg:w-26 bg-[#DED8C8] rounded-xl flex justify-center items-center text-black text-lg sm:text-xl cursor-pointer ${slotIndex < slotData.length ? "bg-green-500" : ""
+                    }`}
                 >
                   ${value}
                 </div>
@@ -237,9 +234,9 @@ const RightUserPannel = () => {
                         style={
                           isFilled
                             ? {
-                                background:
-                                  "linear-gradient(to bottom, white 50%, #ff66d9 50%)",
-                              }
+                              background:
+                                "linear-gradient(to bottom, white 50%, #ff66d9 50%)",
+                            }
                             : { color: "gray" }
                         }
                       />
@@ -300,9 +297,8 @@ const RightUserPannel = () => {
                 </div>
 
                 <div
-                  className={`h-10 w-20 sm:w-24 md:w-28 lg:w-26 bg-[#DED8C8] rounded-xl flex justify-center items-center text-black text-lg sm:text-xl cursor-pointer ${
-                    slotIndex < slotData.length ? "bg-green-500" : ""
-                  }`}
+                  className={`h-10 w-20 sm:w-24 md:w-28 lg:w-26 bg-[#DED8C8] rounded-xl flex justify-center items-center text-black text-lg sm:text-xl cursor-pointer ${slotIndex < slotData.length ? "bg-green-500" : ""
+                    }`}
                 >
                   ${value}
                 </div>
@@ -325,9 +321,9 @@ const RightUserPannel = () => {
                         style={
                           isFilled
                             ? {
-                                background:
-                                  "linear-gradient(to bottom, white 50%, #ff66d9 50%)",
-                              }
+                              background:
+                                "linear-gradient(to bottom, white 50%, #ff66d9 50%)",
+                            }
                             : { color: "gray" }
                         }
                       />
@@ -393,10 +389,10 @@ const RightUserPannel = () => {
     backdrop-blur-md
     transition-all
     duration-300  border-2 rounded-2xl p-6 text-center"
-            // style={{
-            //     background:
-            //         "linear-gradient(100deg, rgba(5, 53, 102, 1) 0%, rgba(169, 190, 10, 1) 100%)",
-            // }}
+          // style={{
+          //     background:
+          //         "linear-gradient(100deg, rgba(5, 53, 102, 1) 0%, rgba(169, 190, 10, 1) 100%)",
+          // }}
           >
             <div>
               <span className="text-4xl md:text-5xl text-[#00d3f3] font-extrabold">
@@ -423,36 +419,36 @@ const RightUserPannel = () => {
                     title: "Received",
                     usd: "$23",
                     rama:
-                      MatrixInfo?.[name]?.RamaPrice
-                        ?.totalReceivedAmountInRAMA || 0,
+                      formatWithCommas(MatrixInfo?.[name]?.RamaPrice
+                        ?.totalReceivedAmountInRAMA) || 0,
                   },
                   {
                     title: "Upgraded",
                     usd: "$23",
                     rama:
-                      MatrixInfo?.[name]?.RamaPrice
-                        ?.totalForwardedAmountInRAMA || 0,
+                      formatWithCommas(MatrixInfo?.[name]?.RamaPrice
+                        ?.totalForwardedAmountInRAMA) || 0,
                   },
                   {
                     title: "Generated",
                     usd: "$20",
                     rama:
-                      MatrixInfo?.[name]?.RamaPrice
-                        ?.totalRegenerationAmountInRAMA || 0,
+                      formatWithCommas(MatrixInfo?.[name]?.RamaPrice
+                        ?.totalRegenerationAmountInRAMA) || 0,
                   },
                   {
                     title: "Net Profit",
                     usd: "$23",
-                    rama: MatrixInfo?.[name]?.RamaPrice?.totalProfitInRAMA || 0,
+                    rama: formatWithCommas(MatrixInfo?.[name]?.RamaPrice?.totalProfitInRAMA) || 0,
                   },
                   {
                     title: "Generated ID's",
-                    totalId: MatrixInfo?.[name]?.generatedId.length || 0,
+                    totalId: formatWithCommas(MatrixInfo?.[name]?.generatedId.length) || 0,
                   },
                   { title: "view Matrix" },
                 ].map((item, index) =>
                   item?.title !== "Generated ID's" &&
-                  item?.title !== "view Matrix" ? (
+                    item?.title !== "view Matrix" ? (
                     <div
                       key={index}
                       style={

@@ -16,7 +16,7 @@ export function Profile() {
       }}
     >
       {/* Dynamic Moving Stars Background */}
-      <div className="stars-container absolute inset-0 overflow-hidden z-0">
+      <div className="stars-container fixed inset-0 w-full h-full pointer-events-none overflow-hidden z-0">
         {[...Array(350)].map((_, i) => {
           // Random properties for each star
           const size = Math.random() * 3;
@@ -49,7 +49,7 @@ export function Profile() {
             <>
               <div
                 key={i}
-                className="star absolute bg-white rounded-full"
+                className="star  bg-white rounded-full"
                 style={{
                   width: `${size}px`,
                   height: `${size}px`,

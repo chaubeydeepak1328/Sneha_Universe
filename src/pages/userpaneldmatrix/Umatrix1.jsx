@@ -107,7 +107,7 @@ export default function UserPanel() {
       }}
     >
       {/* Dynamic Moving Stars Background */}
-      <div className="stars-container absolute inset-0 overflow-hidden z-0">
+      <div className="stars-container fixed inset-0 w-full h-full pointer-events-none overflow-hidden z-0">
         {[...Array(350)].map((_, i) => {
           // Random properties for each star
           const size = Math.random() * 3;
@@ -140,7 +140,7 @@ export default function UserPanel() {
             <>
               <div
                 key={i}
-                className="star absolute bg-white rounded-full"
+                className="star  bg-white rounded-full"
                 style={{
                   width: `${size}px`,
                   height: `${size}px`,
@@ -202,10 +202,10 @@ export default function UserPanel() {
     backdrop-blur-md
     transition-all
     duration-300  border border-cyan-400 text-cyan-400 px-2 py-1 text-sm font-medium  items-center justify-center flex flex-col rounded-2xl w-full lg:w-[700px]  py-4 text-center backdrop-blur-md shadow-xl  border-1 rounded-2xl  text-center"
-              // style={{
-              //   background:
-              //     "linear-gradient(178deg, rgba(5, 53, 102, 1) 0%, rgba(96, 103, 55, 1) 100%)",
-              // }}
+            // style={{
+            //   background:
+            //     "linear-gradient(178deg, rgba(5, 53, 102, 1) 0%, rgba(96, 103, 55, 1) 100%)",
+            // }}
             >
               <div className="flex items-center justify-between">
                 <button
@@ -284,11 +284,10 @@ export default function UserPanel() {
                               });
                             }
                           }}
-                          className={`h-10 w-30 ${
-                            currentMatrix?.slotsPosition[0][0] == "1"
-                              ? "bg-green-500"
-                              : "bg-[#DED8C8]"
-                          } rounded-xl flex justify-center items-center text-black text-lg cursor-pointer`}
+                          className={`h-10 w-30 ${currentMatrix?.slotsPosition[0][0] == "1"
+                            ? "bg-green-500"
+                            : "bg-[#DED8C8]"
+                            } rounded-xl flex justify-center items-center text-black text-lg cursor-pointer`}
                         >
                           {values[0]}
                         </button>
@@ -304,13 +303,12 @@ export default function UserPanel() {
                             <button
                               key={j}
                               className={`h-[20px] w-[20px] rounded-full flex justify-center items-center cursor-pointer border border-black
-                  ${
-                    value === "1"
-                      ? j % 2 === 0
-                        ? "bg-yellow-500"
-                        : "bg-blue-400"
-                      : ""
-                  } hover:opacity-80`}
+                  ${value === "1"
+                                  ? j % 2 === 0
+                                    ? "bg-yellow-500"
+                                    : "bg-blue-400"
+                                  : ""
+                                } hover:opacity-80`}
                             >
                               {value === "1" && j % 2 === 0 && (
                                 <BsCaretUpFill className="text-black text-xl" />
@@ -354,11 +352,10 @@ export default function UserPanel() {
                             }}
                             // className="h-10 w-30 bg-[#DED8C8] rounded-xl flex justify-center items-center text-black text-lg cursor-pointer"
 
-                            className={`h-10 w-40 ${
-                              currentMatrix?.slotsPosition[index + 1][0] === "1"
-                                ? "bg-green-500"
-                                : "bg-[#DED8C8]"
-                            } rounded-xl flex justify-center items-center text-black text-lg cursor-pointer`}
+                            className={`h-10 w-40 ${currentMatrix?.slotsPosition[index + 1][0] === "1"
+                              ? "bg-green-500"
+                              : "bg-[#DED8C8]"
+                              } rounded-xl flex justify-center items-center text-black text-lg cursor-pointer`}
                           >
                             {value}
                           </button>
@@ -374,13 +371,12 @@ export default function UserPanel() {
                               <button
                                 key={j}
                                 className={`h-[20px] w-[20px] rounded-full flex justify-center items-center cursor-pointer border border-black
-                    ${
-                      val === "1"
-                        ? j % 2 === 0
-                          ? "bg-yellow-500"
-                          : "bg-blue-400"
-                        : ""
-                    } hover:opacity-80`}
+                    ${val === "1"
+                                    ? j % 2 === 0
+                                      ? "bg-yellow-500"
+                                      : "bg-blue-400"
+                                    : ""
+                                  } hover:opacity-80`}
                               >
                                 {val === "1" && j % 2 === 0 && (
                                   <BsCaretUpFill className="text-black text-xl" />
@@ -453,7 +449,7 @@ export default function UserPanel() {
 
                 return cards.map((item, index) =>
                   item.title !== "Generated ID's" &&
-                  item.title !== "view Matrix" ? (
+                    item.title !== "view Matrix" ? (
                     <div
                       key={index}
                       // style={{

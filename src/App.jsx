@@ -88,16 +88,11 @@ function App() {
     <WagmiProvider config={wagmiAdapter.wagmiConfig}>
       <QueryClientProvider client={queryClient}>
 
+
+
         <Routes>
           <Route path='/' element={<Home />} />
-          {/* <Route path='/' element={<LaunchingPage/>}/> */}
-          {/* <Route path='/erv-token-home' element={<EVRToken />} /> */}
           <Route path='/user-login' element={<Login />} />
-          {/* <Route path='/express-login' element={<ExpressLogin />} />
-          <Route path='/buy-token' element={<BuyToken />} />
-          <Route path='/sell-token' element={<SellToken />} /> */}
-          {/* <Route path='/d-matrix' element={<DMatrix />} /> */}
-          {/* <Route path='/user-panel-home/team' element={<Team />} /> */}
           <Route path='/user-panel-home/partners' element={<Partners />} />
           <Route path='/user-panel-home/upline-bonus' element={<UplineBonus />} />
           <Route path='/user-panel-home/split-bonus' element={<SplitBonus />} />

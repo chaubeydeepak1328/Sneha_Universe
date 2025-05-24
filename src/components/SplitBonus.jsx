@@ -53,7 +53,7 @@ export default function UplineBonus() {
       }}
     >
       {/* Dynamic Moving Stars Background */}
-      <div className="stars-container absolute inset-0 overflow-hidden z-0">
+      <div className="stars-container fixed inset-0 w-full h-full pointer-events-none overflow-hidden z-0">
         {[...Array(350)].map((_, i) => {
           // Random properties for each star
           const size = Math.random() * 3;
@@ -86,7 +86,7 @@ export default function UplineBonus() {
             <>
               <div
                 key={i}
-                className="star absolute bg-white rounded-full"
+                className="star  bg-white rounded-full"
                 style={{
                   width: `${size}px`,
                   height: `${size}px`,
@@ -144,10 +144,10 @@ export default function UplineBonus() {
     backdrop-blur-md
     transition-all
     duration-300  border border-cyan-400 text-cyan-400 px-4 py-1 text-sm font-medium  items-center justify-center flex flex-col rounded-2xl w-full lg:w-[700px] p-10 py-4 text-center backdrop-blur-md shadow-xl"
-              // style={{
-              //   background:
-              //     "linear-gradient(178deg, rgba(5, 53, 102, 1) 0%, rgba(96, 103, 55, 1) 100%)",
-              // }}
+            // style={{
+            //   background:
+            //     "linear-gradient(178deg, rgba(5, 53, 102, 1) 0%, rgba(96, 103, 55, 1) 100%)",
+            // }}
             >
               <div className="text-3xl font-bold mb-5 text-start text-cyan-400">
                 Split Bonus Details
@@ -252,7 +252,7 @@ export default function UplineBonus() {
           </div>
         </div>
       </div>
-     
+
     </div>
   );
 }

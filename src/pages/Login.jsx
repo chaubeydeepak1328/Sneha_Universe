@@ -197,7 +197,7 @@ export default function Login() {
       {/* Twinkling Stars Background - Improved */}
 
       {/* Dynamic Moving Stars Background */}
-      <div className="stars-container absolute inset-0 overflow-hidden z-0">
+      <div className="stars-container fixed inset-0 w-full h-full pointer-events-none overflow-hidden z-0">
         {[...Array(350)].map((_, i) => {
           // Random properties for each star
           const size = Math.random() * 3;
@@ -230,7 +230,7 @@ export default function Login() {
             <>
               <div
                 key={i}
-                className="star absolute bg-white rounded-full"
+                className="star  bg-white rounded-full"
                 style={{
                   width: `${size}px`,
                   height: `${size}px`,
@@ -322,10 +322,10 @@ export default function Login() {
     backdrop-blur-md
     transition-all
     duration-300  text-white font-semibold py-2 rounded-lg shadow hover:shadow-lg transition duration-200 cursor-pointer max-w-xs mt-6 rounded-xl text-lg sm:text-xl font-semibold text-black py-3 text-center transition hover:brightness-110 cursor-pointer"
-                  // style={{
-                  //   background:
-                  //     "linear-gradient(262deg, rgba(32, 173, 29, 1) 0%, rgba(239, 185, 10, 1) 50%)",
-                  // }}
+                // style={{
+                //   background:
+                //     "linear-gradient(262deg, rgba(32, 173, 29, 1) 0%, rgba(239, 185, 10, 1) 50%)",
+                // }}
                 >
                   {authLoading ? (
                     <Spinner loading={authLoading} />
@@ -380,10 +380,10 @@ export default function Login() {
     backdrop-blur-md
     transition-all
     duration-300  text-white font-semibold py-2 rounded-lg shadow hover:shadow-lg transition duration-200 cursor-pointer max-w-xs mt-8 rounded-xl text-lg sm:text-xl font-semibold text-black py-3 text-center transition hover:brightness-110 cursor-pointer"
-                  // style={{
-                  //   background:
-                  //     "linear-gradient(262deg, rgba(32, 173, 29, 1) 0%, rgba(239, 185, 10, 1) 50%)",
-                  // }}
+                // style={{
+                //   background:
+                //     "linear-gradient(262deg, rgba(32, 173, 29, 1) 0%, rgba(239, 185, 10, 1) 50%)",
+                // }}
                 >
                   {viewLoading ? <Spinner loading={viewLoading} /> : "Viewing"}
                 </button>

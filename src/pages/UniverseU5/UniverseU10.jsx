@@ -139,7 +139,7 @@ export default function UserPanel() {
       }}
     >
       {/* Dynamic Moving Stars Background */}
-      <div className="stars-container absolute inset-0 overflow-hidden z-0">
+      <div className="stars-container fixed inset-0 w-full h-full pointer-events-none overflow-hidden z-0">
         {[...Array(350)].map((_, i) => {
           // Random properties for each star
           const size = Math.random() * 3;
@@ -172,7 +172,7 @@ export default function UserPanel() {
             <>
               <div
                 key={i}
-                className="star absolute bg-white rounded-full"
+                className="star a bg-white rounded-full"
                 style={{
                   width: `${size}px`,
                   height: `${size}px`,
@@ -233,10 +233,10 @@ export default function UserPanel() {
     shadow-lg
     transition-all
     duration-300   border-1 rounded-2xl text-center"
-              // style={{
-              //     background:
-              //         "linear-gradient(178deg, rgba(5, 53, 102, 1) 0%, rgba(96, 103, 55, 1) 100%)",
-              // }}
+            // style={{
+            //     background:
+            //         "linear-gradient(178deg, rgba(5, 53, 102, 1) 0%, rgba(96, 103, 55, 1) 100%)",
+            // }}
             >
               <div className="flex gap-5 justify-center mt-10">
                 <span className="border-2 p-2 text-sm lg:text-2xl lg:px-12 py-2 bg-cyan-400/10 border-cyan-400 text-cyan-400 rounded-xl">
@@ -312,17 +312,15 @@ export default function UserPanel() {
                               key={j}
                               onClick={() => handlePositionClick(j)}
                               className={`h-[20px] w-[20px] rounded-full flex justify-center items-center cursor-pointer border border-black
-                                                            ${
-                                                              j === selectedPos
-                                                                ? "ring-2 ring-green-500 shadow-[0_0_20px_3px_rgba(34,197,94,0.7)]"
-                                                                : ""
-                                                            }   ${
-                                val === "1"
+                                                            ${j === selectedPos
+                                  ? "ring-2 ring-green-500 shadow-[0_0_20px_3px_rgba(34,197,94,0.7)]"
+                                  : ""
+                                }   ${val === "1"
                                   ? j % 2 === 0
                                     ? "bg-yellow-500"
                                     : "bg-blue-400"
                                   : ""
-                              } hover:opacity-80`}
+                                } hover:opacity-80`}
                             >
                               {val === "1" && j % 2 === 0 && (
                                 <BsCaretUpFill className="text-black text-xl" />
@@ -488,7 +486,7 @@ export default function UserPanel() {
           </div>
         </div>
       </div>
-      
+
     </div>
   );
 }

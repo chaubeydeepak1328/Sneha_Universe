@@ -1600,8 +1600,8 @@ export const useStore = create((set, get) => ({
             const matrixDataViewContract = new web3.eth.Contract(MatrixDataView.abi, MatrixDataView.contractAddress);
 
             // Get price in USD object
-            const priceInUSDObject = await priceConvContract.methods.getReadableRamaPrice().call();
-            const priceInUSDFloat = parseFloat(priceInUSDObject.dollars); // Already readable
+            const priceInUSDObject = await priceConvContract.methods.ramaPriceInUSD().call();
+            const priceInUSDFloat = Number(priceInUSDObject) / 1e6;
 
             // Get earnings
             const res = await matrixDataViewContract.methods.getTotalMatrixEarnings(address).call();
@@ -1612,6 +1612,7 @@ export const useStore = create((set, get) => ({
             const totalU4Ether = web3.utils.fromWei(res.totalU4, 'ether');
             const totalU5Ether = web3.utils.fromWei(res.totalU5, 'ether');
             const totalU3PremiumEther = web3.utils.fromWei(res.totalU3Premium, 'ether');
+
 
             const earnedDollar = parseFloat(grandEarningEther) * priceInUSDFloat;
 
@@ -1639,8 +1640,14 @@ export const useStore = create((set, get) => ({
         try {
             console.log("🔍 Fetching earnings for:", address);
 
-            const { abi, contractAddress } = await fetchContractAbi("UserMang");
-            const contract = new web3.eth.Contract(abi, contractAddress);
+            const [PriceConv, MatrixDataView] = await Promise.all([
+                fetchContractAbi("UserMang"),
+                fetchContractAbi("MatrixDataView")
+            ]);
+
+            const contract = new web3.eth.Contract(PriceConv.abi, PriceConv.contractAddress);
+            const contract1 = new web3.eth.Contract(MatrixDataView.abi, MatrixDataView.contractAddress);
+
 
             const userDetails = await contract.methods.getUser(address).call();
 
@@ -1656,13 +1663,15 @@ export const useStore = create((set, get) => ({
 
             for (let i = 0; i < directReferrals.length; i++) {
                 const refUserDetails = await contract.methods.users(directReferrals[i]).call();
+                const income = await contract1.methods.getTotalMatrixEarnings(directReferrals[i]).call();
 
-
+                console.log("=====================income", income)
                 partnerArr.push({
+                    id: refUserDetails.id.toString(),
                     wallet: refUserDetails.wallet.toString(),
                     registrationTime: refUserDetails.registrationTime,
                     formattedDate: new Date(Number(refUserDetails.registrationTime) * 1000).toLocaleString(), // <-- formatted
-                    totalProfit: refUserDetails.totalProfit,
+                    totalProfit: web3.utils.fromWei(income.grandTotal, "ether") / 1e6,
                 });
 
             }

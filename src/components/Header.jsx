@@ -37,7 +37,7 @@ const Header = () => {
   return (
     <header className="w-full px-4 md:px-10 py-4 shadow-md flex flex-col md:flex-row justify-between items-center gap-4">
       {/* Logo */}
-      <Link to="/user-panel-home">
+      <Link to="/user-panel-home" className='cursor-pointer'>
         <img src={universeLogo} alt="Logo" className="h-25 md:h-20" />
       </Link>
 
@@ -70,14 +70,14 @@ const Header = () => {
         {/* Logout */}
         <button
           onClick={handleDisconnect}
-          className="flex items-center gap-2 hover:text-red-500 duration-200 hover:scale-110 transition-transform"
+          className="flex items-center gap-2 hover:text-red-500 duration-200 hover:scale-110 transition-transform cursor-pointer"
         >
           <RiLogoutCircleRLine className="text-red-400 text-lg" />
         </button>
 
 
 
-        {/* <GiNetworkBars color={isConnected ? "green" : "red"} /> */}
+        <GiNetworkBars color={isConnected ? "green" : "red"} />
 
 
 

@@ -18,6 +18,8 @@ const LeftUserPannel = () => {
 
   const LeftUserPanInfo = useStore((state) => state.LeftUserPanInfo);
 
+  const { isConnected } = useAppKitAccount()
+
   const [fetchData, setFetchData] = useState();
 
   useEffect(() => {
@@ -26,7 +28,7 @@ const LeftUserPannel = () => {
         const res = await LeftUserPanInfo(address);
         console.log(
           "*******************Fetched Matrix Earnings:",
-          res?.grandTotal
+          res, res?.earnedDollar
         );
 
         if (res) {
@@ -104,11 +106,12 @@ const LeftUserPannel = () => {
   overflow-y-auto              
   transition-all duration-300
   lg:min-h-[400px]"
-      // style={{
-      //     background:
-      //         "linear-gradient(180deg, rgba(11, 11, 142, 1) 0%, rgba(115, 118, 120, 1) 100%)",
-      // }}
+    // style={{
+    //     background:
+    //         "linear-gradient(180deg, rgba(11, 11, 142, 1) 0%, rgba(115, 118, 120, 1) 100%)",
+    // }}
     >
+      <ToastContainer />
       <div className="flex flex-row justify-between items-center gap-4 p-1 w-full">
         <div className="text-md font-semibold text-blue-500">
           {/* <RiBitCoinLine /> */}
@@ -121,7 +124,7 @@ const LeftUserPannel = () => {
             to="/user-panel-home"
             className="uppercase text-white cursor-pointer text-xl"
           >
-            Dashboard <span className="text-sm text-cyan">>></span>
+            Dashboard <span className="text-sm text-cyan">{'>>'}</span>
           </Link>
         </div>
         <div className=" text-xl order-2 text-red-400  font-semibold bg-gray-800/50 px-2 py-2 rounded-lg">
@@ -159,7 +162,7 @@ const LeftUserPannel = () => {
         RAMA &nbsp; :
         <span className=" text-2xl md:text-2xl lg:text-3xl text-green-400">
           {" "}
-          &nbsp;{fetchData?.grandTotal || 0}
+          &nbsp;{formatWithCommas(fetchData?.grandTotal) || 0}
         </span>
       </div>
 
@@ -205,7 +208,9 @@ const LeftUserPannel = () => {
     duration-300"
       >
         Ramestta wallet &nbsp;
-        <span className="text-green-400 text-xl">{Wallbalance || 0}</span>
+
+
+        <span className="text-green-400 text-xl">{isConnected ? formatWithCommas(Wallbalance) : 0}</span>
       </div>
       <Link
         to="https://ramestta.com"

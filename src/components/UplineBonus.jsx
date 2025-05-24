@@ -1,20 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { RxClipboardCopy, RxCopy } from "react-icons/rx";
-import { FaExternalLinkAlt } from "react-icons/fa";
-import { IoMdLogOut } from "react-icons/io";
-import universeLogo from "../assets/images/universeLogo.png";
-import universeCoin from "../assets/images/universeCoin.png";
-import { FaTelegram } from "react-icons/fa";
-import { PiUsersFourBold } from "react-icons/pi";
-import { GiSplitArrows } from "react-icons/gi";
-import { MdOutlineContactMail } from "react-icons/md";
-import { FaCheckToSlot } from "react-icons/fa6";
+import { RxClipboardCopy } from "react-icons/rx";
+
 import LeftUserPannel from "./LeftUserPannel";
 import Header from "./Header";
 import DashboardInfo from "./DashboardInfo";
 
 import { useStore } from "../Store/UserStore";
+import { formatWithCommas } from "../util/helpers";
 
 export default function UplineBonus() {
   const [address, setAddress] = useState(
@@ -45,7 +37,7 @@ export default function UplineBonus() {
       }}
     >
       {/* Dynamic Moving Stars Background */}
-      <div className="stars-container absolute inset-0 overflow-hidden z-0">
+      <div className="stars-container fixed inset-0 w-full h-full pointer-events-none overflow-hidden z-0">
         {[...Array(350)].map((_, i) => {
           // Random properties for each star
           const size = Math.random() * 3;
@@ -78,7 +70,7 @@ export default function UplineBonus() {
             <>
               <div
                 key={i}
-                className="star absolute bg-white rounded-full"
+                className="star  bg-white rounded-full"
                 style={{
                   width: `${size}px`,
                   height: `${size}px`,
@@ -136,10 +128,10 @@ export default function UplineBonus() {
     backdrop-blur-md
     transition-all
     duration-300  border border-cyan-400 text-cyan-400 px-4 py-1 text-sm font-medium  items-center justify-center flex flex-col rounded-2xl w-full lg:w-[700px] p-10 py-4 text-center backdrop-blur-md shadow-xl "
-              // style={{
-              //   background:
-              //     "linear-gradient(178deg, rgba(5, 53, 102, 1) 0%, rgba(96, 103, 55, 1) 100%)",
-              // }}
+            // style={{
+            //   background:
+            //     "linear-gradient(178deg, rgba(5, 53, 102, 1) 0%, rgba(96, 103, 55, 1) 100%)",
+            // }}
             >
               <div className="text-3xl font-bold mb-5 text-start text-cyan-400">
                 Partners
@@ -194,7 +186,7 @@ export default function UplineBonus() {
                           </td>
                           {/* <td className="p-2 border text-center">—</td> */}
                           <td className="p-2 border text-center">
-                            {parseFloat(partner.totalProfit)}
+                            {formatWithCommas(partner?.totalProfit)}
                           </td>
                         </tr>
                       ))

@@ -80,6 +80,8 @@ const DashboardInfo = () => {
       //         "linear-gradient(90deg, rgba(65, 238, 12, 1) 0%, rgba(112, 88, 206, 1) 63%)",
       // }}
       >
+
+
         <div className="flex justify-center items-center gap-6 ">
           <div>
             {" "}
@@ -194,7 +196,7 @@ const DashboardInfo = () => {
             <br />
             <span>Click to Copy</span>
           </div>
-          <div>
+          <div className="cursor-pointer">
             <RxCopy
               onClick={() =>
                 handleCopy(`${window.location.origin}/referral/${userId}`)
