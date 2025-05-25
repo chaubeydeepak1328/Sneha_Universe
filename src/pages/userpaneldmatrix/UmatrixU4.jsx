@@ -105,10 +105,11 @@ export default function UserPanel() {
   const [MatrixDetails, setMatrixDetails] = useState();
 
   const fetchmatrixInfo = async () => {
-    setLoading(true);
+
     const res = await getU4MartixInfo(address);
+
+    console.log("u4----------------------->", res)
     setMatrixDetails(res);
-    setLoading(false);
   };
 
   useEffect(() => {
@@ -441,14 +442,7 @@ export default function UserPanel() {
                 const detail = matchedMatrix?.u5MatrixDetail || {};
 
                 const cards = [
-                  {
-                    title: "Received",
-                    rama: detail.Received?.toString() || "0",
-                  },
-                  {
-                    title: "Upgraded",
-                    rama: detail.Upgraded?.toString() || "0",
-                  },
+                 
                   {
                     title: "Generated",
                     rama: detail.Generated?.toString() || "0",

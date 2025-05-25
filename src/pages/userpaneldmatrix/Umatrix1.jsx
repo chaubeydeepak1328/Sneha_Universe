@@ -425,14 +425,7 @@ export default function UserPanel() {
                 const detail = matchedMatrix?.u5MatrixDetail || {};
 
                 const cards = [
-                  {
-                    title: "Received",
-                    rama: detail.Received?.toString() || "0",
-                  },
-                  {
-                    title: "Upgraded",
-                    rama: detail.Upgraded?.toString() || "0",
-                  },
+
                   {
                     title: "Generated",
                     rama: detail.Generated?.toString() || "0",

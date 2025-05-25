@@ -210,7 +210,7 @@ const LeftUserPannel = () => {
         Ramestta wallet &nbsp;
 
 
-        <span className="text-green-400 text-xl">{isConnected ? formatWithCommas(Wallbalance) : 0}</span>
+        <span className={`${isConnected ? "text-green-400" : "text-red-400"}  text-xl`}>{isConnected ? formatWithCommas(Wallbalance) : "Not Connected"}</span>
       </div>
       <Link
         to="https://ramestta.com"

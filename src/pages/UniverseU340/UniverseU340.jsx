@@ -385,7 +385,7 @@ export default function UserPanel() {
                               scope="col"
                               className="px-3 py-3 text-left text-xs font-medium text-black uppercase tracking-wider"
                             >
-                              USD
+                              REGENERATE
                             </th>
                             <th
                               scope="col"
