@@ -1866,6 +1866,57 @@ export const useStore = create((set, get) => ({
 
 
 
+    UserProfileIncome: async (walletAdd) => {
+        try {
+            const [UserMang, MatrixDataView] = await Promise.all([
+                fetchContractAbi("UserMang"),
+                fetchContractAbi("MatrixDataView"),
+            ]);
+
+            const contract = new web3.eth.Contract(UserMang.abi, UserMang.contractAddress);
+
+            const userInfo = await contract.methods.getUser(walletAdd).call();
+            const sponserId = await contract.methods.getUserIDByAddress(userInfo.sponsor).call();
+
+            const BasicDetails = {
+                userId: userInfo.id,
+                SponserAdd: userInfo.sponsor.slice(0, 10) + "..." + userInfo.sponsor.slice(-10),
+                SponserID: sponserId,
+            };
+
+            const contract1 = new web3.eth.Contract(MatrixDataView.abi, MatrixDataView.contractAddress);
+            const matrixEarning = await contract1.methods.getTotalMatrixEarnings(walletAdd).call();
+
+            const EarningInfo = {
+                U3plus: Number(web3.utils.fromWei(matrixEarning.totalU3Plus, "ether")).toFixed(3),
+                U5: Number(web3.utils.fromWei(matrixEarning.totalU5, "ether")).toFixed(3),
+                U4: Number(web3.utils.fromWei(matrixEarning.totalU4, "ether")).toFixed(3),
+                u3pre: Number(web3.utils.fromWei(matrixEarning.totalU3Premium, "ether")).toFixed(3),
+                GrandTotal: Number(web3.utils.fromWei(matrixEarning.grandTotal, "ether")).toFixed(3),
+            };
+
+            const contactInfo = {
+                U5: Contract["U5"].slice(0, 10) + "..." + Contract["U5"].slice(-10),
+                U4: Contract["U4"].slice(0, 10) + "..." + Contract["U4"].slice(-10),
+                U3plus: Contract["U3plus"].slice(0, 10) + "..." + Contract["U3plus"].slice(-10),
+                UIncome: Contract["UIncome"].slice(0, 10) + "..." + Contract["UIncome"].slice(-10),
+                UserMang: Contract["UserMang"].slice(0, 10) + "..." + Contract["UserMang"].slice(-10),
+                U3prem: Contract["U3prem"].slice(0, 10) + "..." + Contract["U3prem"].slice(-10),
+                view: Contract["MatrixDataView"].slice(0, 10) + "..." + Contract["MatrixDataView"].slice(-10),
+                Registry: Contract["contReg"].slice(0, 10) + "..." + Contract["U5"].slice(-10), 
+            };
+
+            const matrixInfo = {}; // define properly if needed
+
+            return { BasicDetails, EarningInfo, matrixInfo, contactInfo };
+        } catch (error) {
+            console.error("Error in UserProfileIncome:", error);
+            return null;
+        }
+    }
+
+
+
 
 
 }));
