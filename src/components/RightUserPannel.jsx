@@ -420,30 +420,33 @@ const RightUserPannel = () => {
                     usd: "$23",
                     rama:
                       formatWithCommas(MatrixInfo?.[name]?.RamaPrice
-                        ?.totalReceivedAmountInRAMA) || 0,
+                        ?.totalReceivedAmountInRAMA) !== '0' ? formatWithCommas(MatrixInfo?.[name]?.RamaPrice
+                          ?.totalReceivedAmountInRAMA) : "0.000",
                   },
                   {
                     title: "Upgraded",
                     usd: "$23",
                     rama:
                       formatWithCommas(MatrixInfo?.[name]?.RamaPrice
-                        ?.totalForwardedAmountInRAMA) || 0,
+                        ?.totalForwardedAmountInRAMA) !== '0' ? formatWithCommas(MatrixInfo?.[name]?.RamaPrice
+                          ?.totalForwardedAmountInRAMA) : "0.000",
                   },
                   {
                     title: "Generated",
                     usd: "$20",
                     rama:
                       formatWithCommas(MatrixInfo?.[name]?.RamaPrice
-                        ?.totalRegenerationAmountInRAMA) || 0,
+                        ?.totalRegenerationAmountInRAMA) !== '0' ? formatWithCommas(MatrixInfo?.[name]?.RamaPrice
+                          ?.totalRegenerationAmountInRAMA) : "0.000",
                   },
                   {
                     title: "Net Profit",
                     usd: "$23",
-                    rama: formatWithCommas(MatrixInfo?.[name]?.RamaPrice?.totalProfitInRAMA) || 0,
+                    rama: formatWithCommas(MatrixInfo?.[name]?.RamaPrice?.totalProfitInRAMA) !== '0' ? formatWithCommas(MatrixInfo?.[name]?.RamaPrice?.totalProfitInRAMA) : "0.000",
                   },
                   {
                     title: "Generated ID's",
-                    totalId: formatWithCommas(MatrixInfo?.[name]?.generatedId.length) || 0,
+                    totalId: formatWithCommas(MatrixInfo?.[name]?.generatedId.length),
                   },
                   { title: "view Matrix" },
                 ].map((item, index) =>

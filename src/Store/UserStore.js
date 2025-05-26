@@ -1903,7 +1903,7 @@ export const useStore = create((set, get) => ({
                 UserMang: Contract["UserMang"].slice(0, 10) + "..." + Contract["UserMang"].slice(-10),
                 U3prem: Contract["U3prem"].slice(0, 10) + "..." + Contract["U3prem"].slice(-10),
                 view: Contract["MatrixDataView"].slice(0, 10) + "..." + Contract["MatrixDataView"].slice(-10),
-                Registry: Contract["contReg"].slice(0, 10) + "..." + Contract["U5"].slice(-10), 
+                Registry: Contract["contReg"].slice(0, 10) + "..." + Contract["U5"].slice(-10),
             };
 
             const matrixInfo = {}; // define properly if needed
@@ -1913,7 +1913,49 @@ export const useStore = create((set, get) => ({
             console.error("Error in UserProfileIncome:", error);
             return null;
         }
+    },
+
+
+
+    getSlotActivatRamaU3plus: async (walletAdd, SlotNo) => {
+
+
+        try {
+            if (!walletAdd || !SlotNo) {
+                throw new Error("Wallet address is required.");
+            }
+
+
+
+            const balanceWei = await web3.eth.getBalance(walletAdd);
+            const balanceEth = web3.utils.fromWei(balanceWei, 'ether');
+
+
+            console.log("getSlotActivatRamaU3plus", walletAdd, SlotNo, parseFloat(balanceEth).toFixed(4));
+
+            const UIncome = await fetchContractAbi("UIncome");
+            if (!UIncome?.abi || !UIncome?.contractAddress) {
+                throw new Error("Contract ABI or address not found for UIncome.");
+            }
+
+            const contract = new web3.eth.Contract(UIncome.abi, UIncome.contractAddress);
+
+            // requiredAmount to Activate slot 
+
+            const ramaAmount = await contract.methods.requiredRAMAForSlotUpgrade(SlotNo).call();
+
+
+            return {
+                balance: balanceEth,
+                requiredRama: web3.utils.fromWei(ramaAmount, 'ether'),
+                isEnough: parseFloat(balanceEth) >= parseFloat(web3.utils.fromWei(ramaAmount, 'ether'))
+            }
+        } catch (error) {
+            console.error("Failed to fetch balance:", error.message);
+            return null; // Or throw error depending on use case
+        }
     }
+
 
 
 

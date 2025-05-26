@@ -13,7 +13,7 @@ import Header from "../../components/Header";
 import DashboardInfo from "../../components/DashboardInfo";
 import { useStore } from "../../Store/UserStore";
 import { RxClipboardCopy } from "react-icons/rx";
-import { handleCopy } from "../../util/helpers";
+import { formatWithCommas, handleCopy } from "../../util/helpers";
 import { ToastContainer } from "react-toastify";
 
 export default function UserPanel() {
@@ -459,13 +459,13 @@ export default function UserPanel() {
                             <td className="p-2">{tx?.paymentType ?? "-"}</td>
                             <td className="p-2">{tx?.purpose ?? "-"}</td>
                             <td className="p-2 text-green-300">
-                              {tx?.totalReceivedAmount ?? "0"} RAMA
+                              {formatWithCommas(tx?.totalReceivedAmount) ?? "0"} RAMA
                             </td>
                             <td className="p-2 text-red-300">
-                              {tx?.amountDebitedForPurpose ?? "0"} RAMA
+                              {formatWithCommas(tx?.amountDebitedForPurpose) ?? "0"} RAMA
                             </td>
                             <td className="p-2 text-yellow-300">
-                              {tx?.netProfit ?? "0"} RAMA
+                              {formatWithCommas(tx?.netProfit) ?? "0"} RAMA
                             </td>
                             <td className="p-2 font-mono text-blue-400">
                               <a

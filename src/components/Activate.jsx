@@ -7,7 +7,7 @@ import { useStore } from "../Store/UserStore";
 
 import SlotActivationModal from "./SlotActivationModal";
 
-import { Spinner } from "../util/helpers";
+import { formatWithCommas, Spinner } from "../util/helpers";
 
 export default function Activate() {
   const location = useLocation();
@@ -102,6 +102,47 @@ export default function Activate() {
     setShowModal(false);
   };
 
+
+  // =========================================================
+  // Slot Activation Data Fetching
+  // =========================================================
+
+  const [wallAdd, SetWallAdd] = useState(() => {
+    try {
+      const data = JSON.parse(localStorage.getItem("userData"));
+      return data?.userAddress || "";
+    } catch {
+      return "";
+    }
+  });
+
+
+  const getSlotActivatRamaU3plus = useStore((state) => state.getSlotActivatRamaU3plus);
+
+  const [ActivationData, setActivationData] = useState();
+  useEffect(() => {
+    const fetchRequireRama = async () => {
+
+      console.log("Address:", wallAdd, ActivateSlot);
+      if (!address && !ActivateSlot) return;
+
+      const slotNumber = Number(ActivateSlot);
+      if (isNaN(slotNumber) || slotNumber <= 0) {
+        console.warn("Invalid slot number passed:", ActivateSlot);
+        return;
+      }
+
+      const res = await getSlotActivatRamaU3plus(wallAdd, slotNumber);
+      console.log("this is requireRama", res);
+      setActivationData(res);
+    };
+
+    fetchRequireRama();
+  }, [wallAdd, ActivateSlot]);
+  // =========================================================
+  // Slot Activation Data Fetching
+  // =========================================================
+
   return (
     <div
       className="min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 py-8"
@@ -140,12 +181,12 @@ export default function Activate() {
     backdrop-blur-md
     transition-all
     duration-300  border border-cyan-400 text-cyan-400 px-4 py-1 text-sm font-medium  items-center justify-center flex flex-col rounded-2xl w-full lg:w-[700px] p-10 py-4 text-center backdrop-blur-md shadow-xl  border-1 rounded-2xl p-6 text-center"
-        // style={{
-        //   background:
-        //     "linear-gradient(178deg, rgba(236, 238, 250, 0.9) 0%, rgba(9, 111, 114, 0.95) 42%)",
-        //   boxShadow:
-        //     "0 10px 25px rgba(0, 0, 0, 0.3), 0 0 40px rgba(37, 117, 45, 0.15) inset",
-        // }}
+      // style={{
+      //   background:
+      //     "linear-gradient(178deg, rgba(236, 238, 250, 0.9) 0%, rgba(9, 111, 114, 0.95) 42%)",
+      //   boxShadow:
+      //     "0 10px 25px rgba(0, 0, 0, 0.3), 0 0 40px rgba(37, 117, 45, 0.15) inset",
+      // }}
       >
         <Link
           to="/user-panel-home"
@@ -172,9 +213,32 @@ export default function Activate() {
           Check your wallet before proceeding to payment.
         </p>
 
-        <button
-          onClick={ActivateNewMatric}
-          className="mt-8 inline-block w-full max-w-xs border-2   bg-cyan-400/10
+        {/* ============================================== */}
+        {/* RequiredRama & Available Rama */}
+        {
+          isConnected && (
+            <div className="mt-4 px-4 py-2 rounded-lg bg-gray-800 text-white max-w-md mx-auto shadow-lg">
+              <div className="flex flex-wrap justify-center gap-3 text-sm md:text-base text-center">
+
+                <p>
+                  <span className="font-semibold">Required Rama:</span>{" "}
+                  {formatWithCommas(ActivationData?.requiredRama)}
+                </p>
+                <p>
+                  <span className="font-semibold">Available Rama:</span>{" "}
+                  {formatWithCommas(ActivationData?.balance)}
+                </p>
+              </div>
+            </div>
+          )
+        }
+        {/* RequiredRama & Available Rama */}
+        {/* ============================================== */}
+
+        {isConnected ? (
+          <button
+            onClick={ActivateNewMatric}
+            className="mt-8 inline-block w-full max-w-xs border-2   bg-cyan-400/10
     flex
     items-center
     justify-center
@@ -183,9 +247,17 @@ export default function Activate() {
     backdrop-blur-md
     transition-all
     duration-300  border border-cyan-400   text-white py-4 rounded-xl text-lg sm:text-xl font-semibold shadow-lg hover:scale-[1.03] hover:shadow-xl transition-all duration-300 "
-        >
-          {loading ? <Spinner /> : "Activate"}
-        </button>
+          >
+            {loading ? <Spinner /> : "Activate"}
+          </button>
+        ) :
+          (
+            <button
+              className="mt-8 inline-block w-full max-w-xs border-2  text-red-500 p-4 bg-cyan-400/10">
+              Not Connected
+            </button>
+          )
+        }
 
         <div className="mt-10 space-y-4">
           <Link
@@ -269,16 +341,18 @@ export default function Activate() {
         </motion.div>
       )} */}
 
-      {showModal && (
-        <div className="absolute">
-          <SlotActivationModal
-            isOpen={showModal}
-            hash={hash}
-            userWallet={address}
-            closeModal={handleCloseModal} // Pass close function
-          />
-        </div>
-      )}
-    </div>
+      {
+        showModal && (
+          <div className="absolute">
+            <SlotActivationModal
+              isOpen={showModal}
+              hash={hash}
+              userWallet={address}
+              closeModal={handleCloseModal} // Pass close function
+            />
+          </div>
+        )
+      }
+    </div >
   );
 }

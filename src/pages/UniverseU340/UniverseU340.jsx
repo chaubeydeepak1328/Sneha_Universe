@@ -8,6 +8,7 @@ import Header from "../../components/Header";
 import LeftUserPannel from "../../components/LeftUserPannel";
 import DashboardInfo from "../../components/DashboardInfo";
 import { useStore } from "../../Store/UserStore";
+import { formatWithCommas } from "../../util/helpers";
 
 export default function UserPanel() {
   const location = useLocation();
@@ -417,16 +418,16 @@ export default function UserPanel() {
                                 {index + 1}
                               </td>
                               <td className="px-3 py-4 whitespace-nowrap text-sm text-white">
-                                {tx?.receivedAmountInRAMA}
+                                {formatWithCommas(tx?.receivedAmountInRAMA)}
                               </td>
                               <td className="px-3 py-4 whitespace-nowrap text-sm text-white">
-                                {tx?.totalAmountAccountedForRegenerationInRAMA}
+                                {formatWithCommas(tx?.totalAmountAccountedForRegenerationInRAMA)}
                               </td>
                               <td className="px-3 py-4 whitespace-nowrap text-sm text-white">
                                 {convertTimestampToDateTime(tx?.receivedDate)}
                               </td>
                               <td className="px-3 py-4 whitespace-nowrap text-sm text-white">
-                                {tx?.totalProfitInRAMA}
+                                {formatWithCommas(tx?.totalProfitInRAMA)}
                               </td>
                             </tr>
                           ))}
