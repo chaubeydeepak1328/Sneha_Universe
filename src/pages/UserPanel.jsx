@@ -22,33 +22,20 @@ export default function UserPanel() {
 
 
 
-  const handleCopy = (address) => {
-    if (address) {
-      navigator.clipboard.writeText(address);
-      toast.success("Address copied to clipboard!", {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-    }
-  };
+
 
   return (
     <div
-      style={{
-        background: "linear-gradient(180deg, #000000, rgb(13, 35, 13))",
-        position: "relative",
-        overflow: "hidden",
-        minHeight: "100vh",
-      }}
+    // style={{
+    //   background: "linear-gradient(180deg, #000000, rgb(13, 35, 13))",
+    //   position: "relative",
+    //   overflow: "hidden",
+    //   minHeight: "100vh",
+    // }}
     >
       {/* Twinkling Stars Background */}
       {/* Dynamic Moving Stars Background */}
-      <div className="stars-container fixed inset-0 w-full h-full pointer-events-none overflow-hidden z-0">
+      {/* <div className="stars-container fixed inset-0 w-full h-full pointer-events-none overflow-hidden z-0">
         {[...Array(350)].map((_, i) => {
           // Random properties for each star
           const size = Math.random() * 3;
@@ -112,7 +99,7 @@ export default function UserPanel() {
             </React.Fragment>
           );
         })}
-      </div>
+      </div> */}
 
       {/* Content */}
       <div className="relative z-10">

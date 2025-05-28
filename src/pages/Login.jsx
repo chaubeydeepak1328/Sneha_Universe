@@ -197,7 +197,7 @@ export default function Login() {
       {/* Twinkling Stars Background - Improved */}
 
       {/* Dynamic Moving Stars Background */}
-      <div className="stars-container fixed inset-0 w-full h-full pointer-events-none overflow-hidden z-0">
+      {/* <div className="stars-container fixed inset-0 w-full h-full pointer-events-none overflow-hidden z-0">
         {[...Array(350)].map((_, i) => {
           // Random properties for each star
           const size = Math.random() * 3;
@@ -261,7 +261,7 @@ export default function Login() {
             </React.Fragment>
           );
         })}
-      </div>
+      </div> */}
 
       {/* Content */}
       <div className="relative z-10  w-full max-w-[1800px] mx-auto px-3 sm:px-1 md:px-8">

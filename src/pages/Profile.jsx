@@ -59,15 +59,15 @@ export function Profile() {
     <>
       <Header />
       <div
-        style={{
-          background: "linear-gradient(180deg, #000000, rgb(13, 35, 13))",
-          position: "relative",
-          overflow: "hidden",
-          minHeight: "100vh",
-        }}
+      // style={{
+      //   background: "linear-gradient(180deg, #000000, rgb(13, 35, 13))",
+      //   position: "relative",
+      //   overflow: "hidden",
+      //   minHeight: "100vh",
+      // }}
       >
         {/* Dynamic Moving Stars Background */}
-        <div className="stars-container fixed inset-0 w-full h-full pointer-events-none overflow-hidden z-0">
+        {/* <div className="stars-container fixed inset-0 w-full h-full pointer-events-none overflow-hidden z-0">
           {[...Array(350)].map((_, i) => {
             // Random properties for each star
             const size = Math.random() * 3;
@@ -131,7 +131,7 @@ export function Profile() {
               </>
             );
           })}
-        </div>
+        </div> */}
 
         {/* Content */}
         <div className="relative z-10 min-h-screen  text-white">

@@ -35,16 +35,16 @@ export default function UplineBonus() {
 
       <div
         className=" px-4"
-        style={{
-          background: "linear-gradient(180deg, #000000, rgb(13, 35, 13))",
-          position: "relative",
-          overflow: "hidden",
-          minHeight: "100vh",
-        }}
+      // style={{
+      //   background: "linear-gradient(180deg, #000000, rgb(13, 35, 13))",
+      //   position: "relative",
+      //   overflow: "hidden",
+      //   minHeight: "100vh",
+      // }}
       >
 
         {/* Dynamic Moving Stars Background */}
-        <div className="stars-container fixed inset-0 w-full h-full pointer-events-none overflow-hidden z-0">
+        {/* <div className="stars-container fixed inset-0 w-full h-full pointer-events-none overflow-hidden z-0">
           {[...Array(350)].map((_, i) => {
             // Random properties for each star
             const size = Math.random() * 3;
@@ -108,7 +108,7 @@ export default function UplineBonus() {
               </React.Fragment>
             );
           })}
-        </div>
+        </div> */}
         <ToastContainer />
         <div className="max-w-6xl  h-auto m-auto p-1">
           {/* Top Header */}

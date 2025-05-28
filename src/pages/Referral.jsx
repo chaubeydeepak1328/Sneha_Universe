@@ -190,7 +190,7 @@ const Referral = () => {
   return (
     <div className="w-full min-h-screen flex items-center justify-center bg-black px-4 py-10">
       {/* Dynamic Moving Stars Background */}
-      <div className="stars-container absolute inset-0 overflow-hidden z-0">
+      {/* <div className="stars-container absolute inset-0 overflow-hidden z-0">
         {[...Array(350)].map((_, i) => {
           // Random properties for each star
           const size = Math.random() * 3;
@@ -254,7 +254,7 @@ const Referral = () => {
             </>
           );
         })}
-      </div>
+      </div> */}
 
       <div
         className="relative w-full max-w-md bg-cyan-400/10

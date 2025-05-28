@@ -33,6 +33,16 @@ export default function UserPanel() {
     }
   });
 
+
+  const [userId, setUserId] = useState(() => {
+    try {
+      const data = JSON.parse(localStorage.getItem("userData"));
+      return data?.userId || "";
+    } catch {
+      return "";
+    }
+  });
+
   // const getU3Details = useStore((state) => state.getU3Details);
 
   // const [u3Data, setU3Data] = useState();
@@ -145,17 +155,17 @@ export default function UserPanel() {
   return (
     <div
       className="bg-black min-h-screen rounded-3xl"
-      style={{
-        background: "linear-gradient(180deg, #000000, rgb(13, 35, 13))",
-        position: "relative",
-        overflow: "hidden",
-        minHeight: "100vh",
-      }}
+    // style={{
+    //   background: "linear-gradient(180deg, #000000, rgb(13, 35, 13))",
+    //   position: "relative",
+    //   overflow: "hidden",
+    //   minHeight: "100vh",
+    // }}
     >
 
       <ToastContainer />
       {/* Dynamic Moving Stars Background */}
-      <div className="stars-container fixed inset-0 w-full h-full pointer-events-none overflow-hidden z-0">
+      {/* <div className="stars-container fixed inset-0 w-full h-full pointer-events-none overflow-hidden z-0">
         {[...Array(350)].map((_, i) => {
           // Random properties for each star
           const size = Math.random() * 3;
@@ -219,7 +229,7 @@ export default function UserPanel() {
             </>
           );
         })}
-      </div>
+      </div> */}
 
       <div className="max-w-6xl mx-auto p-2">
         {/* Top Header */}
@@ -238,16 +248,15 @@ export default function UserPanel() {
 
             {/* Universe U3 Plus Section */}
             <div
-              className="grid grid-cols-1 mt-10 rounded-2xl p-3 text-center rounded-xl
+              className="grid grid-cols-1 mt-10  p-3 
     bg-cyan-400/10
     items-center
     justify-center
     mx-auto
     border-green-400
     overflow-hidden
-    backdrop-blur-md
     transition-all
-    duration-300  border border-cyan-400 text-cyan-400 px-2 py-1 text-sm font-medium  items-center justify-center flex flex-col rounded-2xl w-full lg:w-[700px]  py-4 text-center backdrop-blur-md shadow-xl "
+    duration-300  border text-cyan-400 px-2  text-sm font-medium  flex-col rounded-2xl w-full lg:w-[700px]  py-4 text-center backdrop-blur-md shadow-xl "
             >
               <div className="w-full">
                 <div className="flex justify-start">
@@ -308,7 +317,7 @@ export default function UserPanel() {
                   <div className="flex flex-col items-center p-6 rounded-2xl transition-transform duration-300">
                     <div className="h-16 w-40 border border-cyan-400 rounded-xl flex justify-center items-center text-white text-2xl font-bold">
                       {/* ID : S{slot.slotNo}-C{cycleIndex + 1} */}
-                      ID : 0
+                      ID : {userId}
                     </div>
                     <div className="bg-[#24b6ca] w-30 h-8 ml-36 mt-[-10px] z-0 rounded-sm text-white flex justify-center items-center">
                       slot {slotIndex + 1}

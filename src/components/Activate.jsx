@@ -145,15 +145,15 @@ export default function Activate() {
   return (
     <div
       className="min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 py-8"
-      style={{
-        background: "linear-gradient(180deg, #000000, rgb(13, 35, 13))",
-        position: "relative",
-        overflow: "hidden",
-        minHeight: "100vh",
-        backgroundAttachment: "fixed",
-      }}
+    // style={{
+    //   background: "linear-gradient(180deg, #000000, rgb(13, 35, 13))",
+    //   position: "relative",
+    //   overflow: "hidden",
+    //   minHeight: "100vh",
+    //   backgroundAttachment: "fixed",
+    // }}
     >
-      <div className="stars-container absolute inset-0 overflow-hidden">
+      {/* <div className="stars-container absolute inset-0 overflow-hidden">
         {[...Array(50)].map((_, i) => (
           <div
             key={i}
@@ -168,7 +168,7 @@ export default function Activate() {
             }}
           />
         ))}
-      </div>
+      </div> */}
       <div
         className="w-full max-w-xl rounded-2xl shadow-2xl p-8 sm:p-10 text-center backdrop-blur-lg border  bg-cyan-400/10
     flex

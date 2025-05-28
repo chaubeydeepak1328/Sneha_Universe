@@ -88,34 +88,31 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-6 mt-10">
             <Link
               to="/user-login"
-              className="h-14 w-64 flex justify-center items-center gap-2 bg-cyan-400/10
+              className="h-14 w-64  gap-2 bg-cyan-400/10
     flex
     items-center
     justify-center
     border-2
-    shadow-lg
     border-cyan-400
     overflow-hidden
     backdrop-blur-md
-    transition-all
-    duration-300   text-white text-lg font-semibold rounded-xl shadow-xl  hover:bg-[#00d3f3] hover:text-black hover:scale-105 transition-all duration-300 ease-in-out"
+    text-white text-lg font-semibold rounded-xl shadow-xl  hover:bg-[#00d3f3] hover:text-black hover:scale-105 transition-all duration-300 ease-in-out"
             >
               {" "}
               <FiLink className="text-2xl" />
               <div>Login</div>
             </Link>
             <div
-              className="flex justify-center items-center h-14 w-64  h-14 w-64 flex justify-center items-center gap-2 bg-cyan-400/10
+              className="h-14 w-64  gap-2 bg-cyan-400/10
     flex
     items-center
     justify-center
     border-2
-    shadow-lg
+   
     border-cyan-400
     overflow-hidden
     backdrop-blur-md
-    transition-all
-    duration-300   text-white text-lg font-semibold rounded-xl shadow-xl  hover:bg-[#00d3f3] hover:text-black hover:scale-105 transition-all duration-300 ease-in-out rounded-lg shadow-lg hover:scale-105 transition-all duration-300 ease-in-out"
+     text-white text-lg font-semibold   hover:bg-[#00d3f3] hover:text-black ease-in-out rounded-lg shadow-lg hover:scale-105 transition-all duration-300 ease-in-out"
             >
               <button
                 // to="/erv-token-home"
