@@ -9,6 +9,7 @@ import LeftUserPannel from "../../components/LeftUserPannel";
 import DashboardInfo from "../../components/DashboardInfo";
 import { useStore } from "../../Store/UserStore";
 import { formatWithCommas } from "../../util/helpers";
+import React from "react";
 
 export default function UserPanel() {
   const location = useLocation();
@@ -110,7 +111,7 @@ export default function UserPanel() {
 
   const handlePositionClick = (index) => {
     setSeletedPos(index);
-    console.log("Selected Position:", selectedPos);
+    // console.log("Selected Position:", selectedPos);
 
     // for table filter
     setCurrentPage(1);
@@ -125,12 +126,12 @@ export default function UserPanel() {
 
   useEffect(() => {
     const fetchtableDat = async () => {
-      console.log(
-        "++++++++++++++++++++++++++++++",
-        id,
-        slotIndex + 1,
-        selectedPos + 1
-      );
+      // console.log(
+      //   "++++++++++++++++++++++++++++++",
+      //   id,
+      //   slotIndex + 1,
+      //   selectedPos + 1
+      // );
       const data = await getU4table(id, slotIndex + 1, selectedPos + 1);
 
       setTableData(data);
@@ -204,7 +205,7 @@ export default function UserPanel() {
             .join(" ");
 
           return (
-            <>
+            <React.Fragment key={`star-${i}`}>
               <div
                 key={i}
                 className="star  bg-white rounded-full"
@@ -235,7 +236,7 @@ export default function UserPanel() {
                   ${keyframes}
                 }
               `}</style>
-            </>
+            </React.Fragment>
           );
         })}
       </div>

@@ -70,7 +70,7 @@ const Referral = () => {
 
   useEffect(() => {
     if (hash) {
-      console.log("Transaction hash:", hash);
+      // console.log("Transaction hash:", hash);
 
       // trxHashInfo
       setMessage("Registration successful!");
@@ -88,13 +88,13 @@ const Referral = () => {
           const response = await IsUserExist(address);
           setIsUserExist(response.isexist);
 
-          console.log("================response", response);
+          // console.log("================response", response);
 
           // Check if user exists
 
           const bal = await getBalance(address);
           setBalance(bal);
-          console.log("================response", bal);
+          // console.log("================response", bal);
         }
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -114,12 +114,12 @@ const Referral = () => {
       }
 
       if (isConnected && address && isVerified) {
-        console.log("Registering with address:", sponsorAddress);
+        // console.log("Registering with address:", sponsorAddress);
         const response = await registerUser(
           sponsorAddress.userAddress,
           address
         );
-        console.log("trx response", response);
+        // console.log("trx response", response);
 
         setTrxData(response);
 
@@ -152,13 +152,13 @@ const Referral = () => {
       }
 
       // Perform any action with the input data, like navigating to a user panel
-      console.log("sponsorId ID entered:", sponsorId);
+      // console.log("sponsorId ID entered:", sponsorId);
 
       let increaseSponser = sponsorId - 1;
 
       const SponserAdd = await getAllusers(increaseSponser);
       setSponserAddress(SponserAdd);
-      console.log("User Address:", SponserAdd); // Log the fetched users to the console
+      // console.log("User Address:", SponserAdd); // Log the fetched users to the console
 
       if (SponserAdd) {
         try {
@@ -315,12 +315,11 @@ const Referral = () => {
           {message && (
             <p
               className={`text-sm md:text-base p-3 text-center rounded-md shadow-md max-w-md mx-auto mt-4
-    ${
-      message.startsWith("✅ Valid ") ||
-      message.startsWith("Registration successful!")
-        ? "text-green-400 bg-black/80 border border-green-500"
-        : "text-red-500 bg-black/80 border border-red-500"
-    }`}
+    ${message.startsWith("✅ Valid ") ||
+                  message.startsWith("Registration successful!")
+                  ? "text-green-400 bg-black/80 border border-green-500"
+                  : "text-red-500 bg-black/80 border border-red-500"
+                }`}
             >
               {message}
             </p>
@@ -352,10 +351,9 @@ const Referral = () => {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             className={`mt-4 px-8 py-2 rounded-full font-bold text-lg transition-transform duration-300 ease-in-out cursor-pointer
-              ${
-                isHovered
-                  ? "bg-gradient-to-r from-cyan-400 to-cyan-400 shadow-lg scale-105"
-                  : "bg-gradient-to-r from-cyan-400 to-cyan-400"
+              ${isHovered
+                ? "bg-gradient-to-r from-cyan-400 to-cyan-400 shadow-lg scale-105"
+                : "bg-gradient-to-r from-cyan-400 to-cyan-400"
               } text-black`}
           >
             {loading ? (

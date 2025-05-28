@@ -26,10 +26,10 @@ const LeftUserPannel = () => {
     const fetchUserData = async () => {
       if (address) {
         const res = await LeftUserPanInfo(address);
-        console.log(
-          "*******************Fetched Matrix Earnings:",
-          res, res?.earnedDollar
-        );
+        // console.log(
+        //   "*******************Fetched Matrix Earnings:",
+        //   res, res?.earnedDollar
+        // );
 
         if (res) {
           setFetchData(res);
@@ -67,7 +67,7 @@ const LeftUserPannel = () => {
     }
   }, []);
 
-  console.log("User ID:", userId, userAddress, data);
+  // console.log("User ID:", userId, userAddress, data);
 
   const handleCopy = (address) => {
     if (address) {

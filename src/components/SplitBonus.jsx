@@ -20,7 +20,7 @@ export default function UplineBonus() {
   useEffect(() => {
     const fetchSplit = async () => {
       const data = await getSplitBonus(address);
-      console.log("&&&&&&&&&&&&&&&&&&&", data);
+      // console.log("&&&&&&&&&&&&&&&&&&&", data);
       setSplitData(data);
     };
     if (address) fetchSplit();
@@ -88,7 +88,7 @@ export default function UplineBonus() {
             .join(" ");
 
           return (
-            <>
+            <React.Fragment key={`star-${i}`}>
               <div
                 key={i}
                 className="star  bg-white rounded-full"
@@ -119,7 +119,7 @@ export default function UplineBonus() {
                   ${keyframes}
                 }
               `}</style>
-            </>
+            </React.Fragment>
           );
         })}
       </div>

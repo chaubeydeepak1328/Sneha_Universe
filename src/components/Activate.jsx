@@ -30,7 +30,6 @@ export default function Activate() {
 
   useEffect(() => {
     if (hash) {
-      console.log("Transaction hash:", hash);
 
       setLoading(false);
 
@@ -76,7 +75,7 @@ export default function Activate() {
       // ==================================================================
 
       const user = await IsUserExist(address);
-      console.log("this is User=========>", user?.userId?.toString(), user);
+      // console.log("this is User=========>", user?.userId?.toString(), user);
 
       if (user?.isexist) {
         setUserExist(true);
@@ -123,17 +122,17 @@ export default function Activate() {
   useEffect(() => {
     const fetchRequireRama = async () => {
 
-      console.log("Address:", wallAdd, ActivateSlot);
+      // console.log("Address:", wallAdd, ActivateSlot);
       if (!address && !ActivateSlot) return;
 
       const slotNumber = Number(ActivateSlot);
       if (isNaN(slotNumber) || slotNumber <= 0) {
-        console.warn("Invalid slot number passed:", ActivateSlot);
+        // console.warn("Invalid slot number passed:", ActivateSlot);
         return;
       }
 
       const res = await getSlotActivatRamaU3plus(wallAdd, slotNumber);
-      console.log("this is requireRama", res);
+      // console.log("this is requireRama", res);
       setActivationData(res);
     };
 

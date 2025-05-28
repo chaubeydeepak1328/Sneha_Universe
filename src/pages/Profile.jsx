@@ -35,7 +35,7 @@ export function Profile() {
 
       const profile = await UserProfileIncome(address);
 
-      console.log("=/////////////////////////", profile)
+      // console.log("=/////////////////////////", profile)
       const generated = await generatedId(address);
 
       if (profile) {

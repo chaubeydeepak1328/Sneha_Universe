@@ -58,7 +58,7 @@ const SlotActivationModal = ({ userWallet, isOpen, hash, closeModal }) => {
         try {
 
             const user = await IsUserExist(userWallet);
-            console.log("this is User=========>", user?.userId?.toString(), user)
+            // console.log("this is User=========>", user?.userId?.toString(), user)
 
             setUserData(user)
 

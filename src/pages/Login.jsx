@@ -36,7 +36,7 @@ export default function Login() {
       localStorage.getItem("userData")
     )?.userAddress;
 
-    console.log("step1 ==========", localAddress);
+    // console.log("step1 ==========", localAddress);
 
     if (address && isConnected && localAddress) {
       setAuthLoading(false);
@@ -45,7 +45,7 @@ export default function Login() {
       if (walletPrompted && isConnected && address) {
         try {
           const user = await IsUserExist(address);
-          console.log("this is User=========>", user?.userId?.toString(), user);
+          // console.log("this is User=========>", user?.userId?.toString(), user);
 
           const safeUser = {
             ...user,
@@ -96,7 +96,7 @@ export default function Login() {
       if (walletPrompted && isConnected && address) {
         try {
           const user = await IsUserExist(address);
-          console.log("this is User=========>", user?.userId?.toString(), user);
+          // console.log("this is User=========>", user?.userId?.toString(), user);
 
           const safeUser = {
             ...user,
@@ -141,11 +141,11 @@ export default function Login() {
 
     if (inputData) {
       // Perform any action with the input data, like navigating to a user panel
-      console.log("User ID entered:", inputData);
+      // console.log("User ID entered:", inputData);
 
       try {
         const UserInfo = await getAllusers(parseInt(inputData) - 1);
-        console.log("UserInfo:", UserInfo); // Log the fetched users to the console
+        // console.log("UserInfo:", UserInfo); // Log the fetched users to the console
 
         if (
           UserInfo &&
@@ -227,7 +227,7 @@ export default function Login() {
             .join(" ");
 
           return (
-            <>
+            <React.Fragment key={`star-${i}`}>
               <div
                 key={i}
                 className="star  bg-white rounded-full"
@@ -258,7 +258,7 @@ export default function Login() {
                   ${keyframes}
                 }
               `}</style>
-            </>
+            </React.Fragment>
           );
         })}
       </div>

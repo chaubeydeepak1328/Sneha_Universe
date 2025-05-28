@@ -23,7 +23,7 @@ const RightUserPannel = () => {
   const [MatrixInfo, setMatrixInfo] = useState();
 
   useEffect(() => {
-    console.log("Address:", address);
+    // console.log("Address:", address);
   }, [address]);
 
   const getU3Plus = useStore((state) => state.getU3Plus);
@@ -35,7 +35,7 @@ const RightUserPannel = () => {
     const fetchData = async () => {
       try {
         const response = await getU3Plus(address);
-        console.log("response: U3", response);
+        // console.log("response: U3", response);
 
         setU3Data(response);
 
@@ -47,7 +47,7 @@ const RightUserPannel = () => {
 
         const response1 = await generatedId(address);
         setMatrixInfo(response1);
-        console.log("generatedId:", response1);
+        // console.log("generatedId:", response1);
       } catch (error) {
         console.error("Error fetching U3Plus:", error);
       }

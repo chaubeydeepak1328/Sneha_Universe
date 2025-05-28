@@ -1,25 +1,16 @@
-
-// import Home from './pages/Home';
 import Login from './pages/Login';
 import UserPanel from './pages/UserPanel';
-import EVRToken from './pages/EVRToken';
 import { Route, Routes } from 'react-router-dom';
-import BuyToken from './pages/BuyToken';
-import SellToken from './pages/SellToken'
-import ExpressLogin from './pages/ExpressLogin'
-import DMatrix from './pages/DMatrix';
-import Team from './pages/Team';
+
 import Partners from './components/Partners';
 import UplineBonus from './components/UplineBonus';
 import Activate from './components/Activate';
 import Home from './pages/Home';
-// import LaunchingPage from './components/LanchingPage';
 import Dmatrix1 from './pages/userpaneldmatrix/Dmatrix1';
 import Umatrix1 from './pages/userpaneldmatrix/Umatrix1';
 import SplitBonus from './components/SplitBonus';
 import UmatrixUThreeplus from './pages/userpaneldmatrix/UmatrixUThreeplus';
 import UniverseU10 from "./pages/UniverseU5/UniverseU10";
-import profile from './pages/Profile'
 // =================================================
 // Wallet Connect Functionality
 // =================================================

@@ -1,15 +1,6 @@
 import React, { useEffect, useState } from "react";
-
-import universeCoin from "../assets/images/universeCoin.png";
-import { RxCopy } from "react-icons/rx";
-import { FaExternalLinkAlt } from "react-icons/fa";
-import { RiLogoutCircleRLine } from "react-icons/ri";
-
-import { Link, useLocation, useNavigate } from "react-router-dom";
-
 import RightUserPannel from "../components/RightUserPannel";
 import RightUserPannel1 from "../components/RightUserPannel1";
-import { useDisconnect } from "@reown/appkit/react";
 import Header from "../components/Header";
 import { ToastContainer, toast } from "react-toastify";
 import LeftUserPannel from "../components/LeftUserPannel";
@@ -29,9 +20,7 @@ export default function UserPanel() {
     }
   }, []);
 
-  console.log("User ID:", userId, userAddress, data);
 
-  const [RamaValueUsd, setRamaValueUsd] = useState("345");
 
   const handleCopy = (address) => {
     if (address) {
@@ -89,7 +78,7 @@ export default function UserPanel() {
             .join(" ");
 
           return (
-            <>
+            <React.Fragment key={`star-${i}`}>
               <div
                 key={i}
                 className="star bg-white rounded-full"
@@ -120,7 +109,7 @@ export default function UserPanel() {
                   ${keyframes}
                 }
               `}</style>
-            </>
+            </React.Fragment>
           );
         })}
       </div>

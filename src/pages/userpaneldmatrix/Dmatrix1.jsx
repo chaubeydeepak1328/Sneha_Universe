@@ -102,7 +102,7 @@ export default function UserPanel() {
     const fetchTableData = async () => {
       const res = await fetchU3MatrixLogs(address);
 
-      console.log("res--------------->", res);
+      // console.log("res--------------->", res);
 
       setTableData(res);
     };

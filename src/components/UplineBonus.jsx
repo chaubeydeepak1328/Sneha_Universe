@@ -74,7 +74,7 @@ export default function UplineBonus() {
               .join(" ");
 
             return (
-              <>
+              <React.Fragment key={`star-${i}`}>
                 <div
                   key={i}
                   className="star  bg-white rounded-full"
@@ -105,7 +105,7 @@ export default function UplineBonus() {
                   ${keyframes}
                 }
               `}</style>
-              </>
+              </React.Fragment>
             );
           })}
         </div>
@@ -120,21 +120,15 @@ export default function UplineBonus() {
 
             {/* Right Part */}
             <div className="">
-              <div className="hidden md:block   block sm:hidden">
+              <div className="hidden md:block  sm:hidden">
                 <DashboardInfo />
               </div>
 
               <div
-                className="flex flex-col mt-10  border-1 rounded-2xl p-6 text-center  bg-cyan-400/10
-    flex
-    items-center
-    justify-center
-    mx-auto
-    border-green-400
+                className=" mt-10  text-center  bg-cyan-400/10 mx-auto
     overflow-hidden
-    backdrop-blur-md
     transition-all
-    duration-300  border border-cyan-400 text-cyan-400 px-4 py-1 text-sm font-medium  items-center justify-center flex flex-col rounded-2xl w-full lg:w-[700px] p-10 py-4 text-center backdrop-blur-md shadow-xl "
+    duration-300  border border-cyan-400 text-cyan-400 px-4  text-sm font-medium  items-center justify-center flex flex-col rounded-2xl w-full lg:w-[700px] p-10 py-4  backdrop-blur-md shadow-xl "
               // style={{
               //   background:
               //     "linear-gradient(178deg, rgba(5, 53, 102, 1) 0%, rgba(96, 103, 55, 1) 100%)",

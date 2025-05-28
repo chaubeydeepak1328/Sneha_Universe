@@ -23,14 +23,14 @@ const DashboardInfo = () => {
   const [InvitedPartners, setInvitedPartners] = useState();
 
   useEffect(() => {
-    console.log("=========================================================");
+    // console.log("=========================================================");
     const DahPannelInfo = async () => {
       const data = await homePannelInfo(address);
 
-      console.log(
-        "=========================================================",
-        data
-      );
+      // console.log(
+      //   "=========================================================",
+      //   data
+      // );
       if (data) {
         setActivatedSlot(data.slotActivated);
         setInvitedPartners(data.InvitedPartner);

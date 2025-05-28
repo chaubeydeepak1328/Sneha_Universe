@@ -11,6 +11,8 @@ import LeftUserPannel from "../../components/LeftUserPannel";
 import DashboardInfo from "../../components/DashboardInfo";
 import { useStore } from "../../Store/UserStore";
 
+import React from "react";
+
 export default function UserPanel() {
   const navigate = useNavigate();
 
@@ -61,7 +63,7 @@ export default function UserPanel() {
     const fetchU4 = async () => {
       try {
         const response = await getU4info(address);
-        console.log("==========U4 response---->", response);
+        // console.log("==========U4 response---->", response);
         if (response) {
           setMatrixData(response.length == 0 ? dummyData : response); // Make sure this is an array
         }
@@ -108,7 +110,7 @@ export default function UserPanel() {
 
     const res = await getU4MartixInfo(address);
 
-    console.log("u4----------------------->", res)
+    // console.log("u4----------------------->", res)
     setMatrixDetails(res);
   };
 
@@ -157,7 +159,7 @@ export default function UserPanel() {
             .join(" ");
 
           return (
-            <>
+            <React.Fragment key={`star-${i}`}>
               <div
                 key={i}
                 className="star  bg-white rounded-full"
@@ -188,7 +190,7 @@ export default function UserPanel() {
                   ${keyframes}
                 }
               `}</style>
-            </>
+            </React.Fragment>
           );
         })}
       </div>
@@ -299,12 +301,12 @@ export default function UserPanel() {
                                 },
                               });
 
-                              console.log({
-                                id: id,
-                                slotVal: 0,
-                                matrixData: matrixData,
-                                plan: values[0].replace(/\$/g, "").trim(),
-                              });
+                              // console.log({
+                              //   id: id,
+                              //   slotVal: 0,
+                              //   matrixData: matrixData,
+                              //   plan: values[0].replace(/\$/g, "").trim(),
+                              // });
                             }
                           }}
                         >
@@ -359,15 +361,15 @@ export default function UserPanel() {
                                   },
                                 });
                               }
-                              console.log(
-                                "id==========================================",
-                                {
-                                  id: id,
-                                  slotVal: index + 2,
-                                  matrixData: matrixData,
-                                  plan: value.replace(/\$/g, "").trim(),
-                                }
-                              );
+                              // console.log(
+                              //   "id==========================================",
+                              //   {
+                              //     id: id,
+                              //     slotVal: index + 2,
+                              //     matrixData: matrixData,
+                              //     plan: value.replace(/\$/g, "").trim(),
+                              //   }
+                              // );
                             }}
                             className={`h-10 w-40 ${currentMatrix?.slotsPosition[index + 1][0] === "1"
                               ? "bg-green-500"

@@ -64,7 +64,7 @@ const fetchContractAbi = async (contractName) => {
     try {
         const response = await fetch(`https://latest-backendapi.ramascan.com/api/v2/smart-contracts/${Contract[contractName]}`);
         const data = await response.json();
-        console.log("proxy Address, contract Address", Contract[contractName], data?.implementations[0].address);
+        // console.log("proxy Address, contract Address", Contract[contractName], data?.implementations[0].address);
 
         const contractAdress = data?.implementations[0].address
 
@@ -92,7 +92,7 @@ export const trxHashInfo = async () => {
     const hashVal = "0x2456943f6eccd2c4e1e903c825cf02ceaaf6dcfdb8e7b76e9529b77b7332e8c8"
     const response = await fetch(`https://latest-backendapi.ramascan.com/api/v2/transactions/${hashVal}`);
     const data = await response.json();
-    console.log(data)
+    // console.log(data)
 
     return data.status;
 }
@@ -159,7 +159,7 @@ export const useStore = create((set, get) => ({
 
             const userAddress = await contract1.methods.usdToRama(20).call();
 
-            console.log("Users:", userAddress);
+            // console.log("Users:", userAddress);
             return userAddress.toString();
         } catch (error) {
 
@@ -254,7 +254,7 @@ export const useStore = create((set, get) => ({
 
             const endSlot = await contract.methods.getLastUpgradedSlot(address).call();
             const slotLevel = Number(endSlot);
-            console.log("slotlevel================", slotLevel)
+            // console.log("slotlevel================", slotLevel)
 
 
             if (slotLevel) {
@@ -266,7 +266,7 @@ export const useStore = create((set, get) => ({
                 }
             }
         } catch (error) {
-            console.error("Error:", error);
+            // console.error("Error:", error);
             alert(`Some Error Occured ${error.message}`);
             throw error;
         }
@@ -336,11 +336,11 @@ export const useStore = create((set, get) => ({
 
             const isExist = await contract.methods.isRegistered(walletAdd).call();
 
-            console.log("is Users exist:", isExist, walletAdd);
+            // console.log("is Users exist:", isExist, walletAdd);
             if (isExist) {
 
                 const user = await contract.methods.getUser(walletAdd).call();
-                console.log(user)
+                // console.log(user)
                 if (user) {
 
                     const sponserId = await contract.methods.getUserIDByAddress(user.sponsor).call();
@@ -483,7 +483,7 @@ export const useStore = create((set, get) => ({
 
 
 
-            console.log("sponsorAddress, userAddress", sponsorAddress, userAddress)
+            // console.log("sponsorAddress, userAddress", sponsorAddress, userAddress)
             const [UIncome, PriceConvs] = await Promise.all([
                 fetchContractAbi("UIncome"),
                 fetchContractAbi("PriceConv"),
@@ -492,22 +492,22 @@ export const useStore = create((set, get) => ({
             const contract = new web3.eth.Contract(UIncome.abi, UIncome.contractAddress);
             const priceContract = new web3.eth.Contract(PriceConvs.abi, PriceConvs.contractAddress);
 
-            console.log("====================", sponsorAddress, UIncome.contractAddress);
+            // console.log("====================", sponsorAddress, UIncome.contractAddress);
 
             // Check wallet balance (for debug/logging)
             const balanceWei = await web3.eth.getBalance(userAddress);
             const balanceEth = web3.utils.fromWei(balanceWei, 'ether');
-            console.log("Wallet Balance in ETH:", balanceEth);
+            // console.log("Wallet Balance in ETH:", balanceEth);
 
             // Get USD → RAMA value
             const valueInUSD = 20 * 1e6; // 20 USD in micro USD
             const ramaAmount = await priceContract.methods.usdToRama(valueInUSD).call();
 
-            console.log("value in RAMA is", parseFloat(ramaAmount) / parseFloat(1e18));
+            // console.log("value in RAMA is", parseFloat(ramaAmount) / parseFloat(1e18));
 
             // const maybeWei = "20000000000000000";
             const inEth = web3.utils.fromWei(ramaAmount, 'ether');
-            console.log("Converted to ETH:", inEth);
+            // console.log("Converted to ETH:", inEth);
 
 
             // Prepare transaction
@@ -725,7 +725,7 @@ export const useStore = create((set, get) => ({
                 };
             });
 
-            console.log("🔍 Transformed U3Plus Data:", transformed);
+            // console.log("🔍 Transformed U3Plus Data:", transformed);
             return transformed;
         } catch (err) {
             console.error("❌ Error in getU3Plus:", err.message);
@@ -872,7 +872,7 @@ export const useStore = create((set, get) => ({
                 })
             );
 
-            console.log("Slot Data Matrix (U5):", result);
+            // console.log("Slot Data Matrix (U5):", result);
             return result;
 
         } catch (error) {
@@ -936,7 +936,7 @@ export const useStore = create((set, get) => ({
                     return paramObj;
                 });
 
-            console.log("getFilteredLogs", res);
+            // console.log("getFilteredLogs", res);
             return res;
         } catch (error) {
             console.error("Error fetching or processing data:", error);
@@ -1004,7 +1004,7 @@ export const useStore = create((set, get) => ({
 
     getU5table: async (matrixId, slotIndex, selectedPos) => {
 
-        console.log("matrixId, slotIndex, selectedPos", matrixId, slotIndex, selectedPos)
+        // console.log("matrixId, slotIndex, selectedPos", matrixId, slotIndex, selectedPos)
         try {
             if (matrixId == null || slotIndex == null || selectedPos == null) {
                 let missingParam = !matrixId
@@ -1032,7 +1032,7 @@ export const useStore = create((set, get) => ({
                 receivedDate: tableData.receivedDate[i].toString(),
             }));
 
-            console.log("Fetched Transactions:", trx);
+            // console.log("Fetched Transactions:", trx);
             return trx;
         } catch (error) {
             console.error("Error in getU5table:", error.message || error);
@@ -1049,7 +1049,7 @@ export const useStore = create((set, get) => ({
             const genMatrices = await contract.methods.getGeneratedMatrices(address).call();
 
             if (!Array.isArray(genMatrices) || genMatrices.length === 0) {
-                console.log("No matrix found for this address");
+                // console.log("No matrix found for this address");
                 return [];
             }
 
@@ -1089,7 +1089,7 @@ export const useStore = create((set, get) => ({
             );
 
             const filtered = matrices.filter(Boolean);
-            console.log("Optimized U4 matrix data:", filtered);
+            // console.log("Optimized U4 matrix data:", filtered);
             return filtered;
         } catch (err) {
             console.error("getU4info error:", err.message);
@@ -1107,7 +1107,7 @@ export const useStore = create((set, get) => ({
 
             const genMatrices = await contract.methods.getGeneratedMatrices(address).call();
 
-            console.log("matrix U4 data--->", genMatrices)
+            // console.log("matrix U4 data--->", genMatrices)
 
 
             const slotIndex = 5;
@@ -1136,7 +1136,7 @@ export const useStore = create((set, get) => ({
                 })
             );
 
-            console.log("Slot Data Matrix ******************(U3Prem)***************:", result);
+            // console.log("Slot Data Matrix ******************(U3Prem)***************:", result);
             return result;
 
         } catch (error) {
@@ -1146,24 +1146,56 @@ export const useStore = create((set, get) => ({
     },
 
 
-    getU4table: async (matrixId, slotIndex, selectedPos) => {
+    // getU4table: async (matrixId, slotIndex, selectedPos) => {
 
-        console.log("matrixId, slotIndex, selectedPos", matrixId, slotIndex, selectedPos)
+    //     // console.log("matrixId, slotIndex, selectedPos", matrixId, slotIndex, selectedPos)
+    //     try {
+    //         if (matrixId == null || slotIndex == null || selectedPos == null) {
+    //             let missingParam = !matrixId
+    //                 ? "matrix id"
+    //                 : !slotIndex
+    //                     ? "slot index"
+    //                     : "position index";
+    //             throw new Error(`Please provide ${missingParam}`);
+    //         }
+
+    //         const { abi, contractAddress } = await fetchContractAbi("U4");
+    //         const contract = new web3.eth.Contract(abi, contractAddress);
+
+    //         const tableData = await contract.methods
+    //             .getAllChunksForPosition(matrixId, slotIndex, selectedPos).call();
+
+    //         const trx = (tableData?.initiatedFrom || []).map((_, i) => ({
+    //             initiatedFrom: tableData.initiatedFrom[i].toString(),
+    //             forwardedFrom: tableData.forwardedFrom[i].toString(),
+    //             forwardedTo: tableData.forwardedTo[i].toString(),
+    //             receivedAmountInRAMA: web3.utils.fromWei(tableData.receivedAmountInRAMA[i].toString(), 'ether'),
+    //             totalAmountAccountedForRegenerationInRAMA: web3.utils.fromWei(tableData.totalAmountAccountedForRegenerationInRAMA[i].toString(), "ether"),
+    //             totalAmountForwardedForSlotUpgradeInRAMA: web3.utils.fromWei(tableData.totalAmountForwardedForSlotUpgradeInRAMA[i].toString(), 'ether'),
+    //             totalProfitInRAMA: web3.utils.fromWei(tableData.totalProfitInRAMA[i].toString(), 'ether'),
+    //             receivedDate: tableData.receivedDate[i].toString(),
+    //         }));
+
+    //         // console.log("Fetched Transactions:", trx);
+    //         return trx;
+    //     } catch (error) {
+    //         console.error("Error in getU4table:", error.message || error);
+    //         return [];
+    //     }
+    // },
+
+    getU4table: async (matrixId, slotIndex, selectedPos) => {
         try {
-            if (matrixId == null || slotIndex == null || selectedPos == null) {
-                let missingParam = !matrixId
-                    ? "matrix id"
-                    : !slotIndex
-                        ? "slot index"
-                        : "position index";
-                throw new Error(`Please provide ${missingParam}`);
+            if ([matrixId, slotIndex, selectedPos].some(val => val === null || val === undefined)) {
+                throw new Error("Missing required parameters: matrixId, slotIndex, or selectedPos");
             }
 
             const { abi, contractAddress } = await fetchContractAbi("U4");
             const contract = new web3.eth.Contract(abi, contractAddress);
 
             const tableData = await contract.methods
-                .getAllChunksForPosition(matrixId, slotIndex, selectedPos).call();
+                .getAllChunksForPosition(matrixId, slotIndex, selectedPos)
+                .call();
 
             const trx = (tableData?.initiatedFrom || []).map((_, i) => ({
                 initiatedFrom: tableData.initiatedFrom[i].toString(),
@@ -1176,19 +1208,17 @@ export const useStore = create((set, get) => ({
                 receivedDate: tableData.receivedDate[i].toString(),
             }));
 
-            console.log("Fetched Transactions:", trx);
             return trx;
         } catch (error) {
-            console.error("Error in getU5table:", error.message || error);
+            console.error("Error in getU4table:", error.message || error);
             return [];
         }
     },
-
-
+      
 
     getU3Premtable: async (matrixId, slotIndex, selectedPos) => {
 
-        console.log("matrixId, slotIndex, selectedPos", matrixId, slotIndex, selectedPos)
+        // console.log("matrixId, slotIndex, selectedPos", matrixId, slotIndex, selectedPos)
         try {
             if (matrixId == null || slotIndex == null || selectedPos == null) {
                 let missingParam = !matrixId
@@ -1216,7 +1246,7 @@ export const useStore = create((set, get) => ({
                 receivedDate: tableData.receivedDate[i].toString(),
             }));
 
-            console.log("Fetched Transactions:", trx);
+            // console.log("Fetched Transactions:", trx);
             return trx;
         } catch (error) {
             console.error("Error in getU5table:", error.message || error);
@@ -1261,7 +1291,7 @@ export const useStore = create((set, get) => ({
 
 
 
-            console.log("🔍 Unfiltered logs:", logsByReceiver);
+            // console.log("🔍 Unfiltered logs:", logsByReceiver);
 
 
 
@@ -1319,7 +1349,7 @@ export const useStore = create((set, get) => ({
 
 
 
-            console.log("✅ Logs fetched:",);
+            // console.log("✅ Logs fetched:",);
 
             return decoded
         } catch (err) {
@@ -1333,7 +1363,7 @@ export const useStore = create((set, get) => ({
 
     activateSlotU3: async (Waladdress, SlotNo) => {
         try {
-            console.log("🟢 Activating U3 Slot:", { Waladdress, SlotNo });
+            // console.log("🟢 Activating U3 Slot:", { Waladdress, SlotNo });
 
             // Basic input validation
             if (!web3.utils.isAddress(Waladdress)) {
@@ -1355,7 +1385,7 @@ export const useStore = create((set, get) => ({
             // requiredAmount to Activate slot 
 
             const ramaAmount = await contract.methods.requiredRAMAForSlotUpgrade(SlotNo).call();
-            console.log(ramaAmount);
+            // console.log(ramaAmount);
             if (ramaAmount) {
                 // const formatedAmt = web3.utils.fromWei(ramarequired,"ether")
 
@@ -1387,14 +1417,14 @@ export const useStore = create((set, get) => ({
                     return null;
                 }
 
-                console.log("📦 Transaction Details:");
-                console.log("Gas Limit:", gasLimit);
-                console.log("Gas Price (wei):", gasPrice);
+                // console.log("📦 Transaction Details:");
+                // console.log("Gas Limit:", gasLimit);
+                // console.log("Gas Price (wei):", gasPrice);
                 const gasCostEth = web3.utils.fromWei(
                     (BigInt(gasLimit) * BigInt(gasPrice)).toString(),
                     'ether'
                 );
-                console.log("Estimated Gas Cost in ETH:", gasCostEth);
+                // console.log("Estimated Gas Cost in ETH:", gasCostEth);
 
                 // Build transaction object
                 const tx = {
@@ -1419,7 +1449,7 @@ export const useStore = create((set, get) => ({
 
     getU5MartixInfo: async (address) => {
         try {
-            console.log("---------------->", address);
+            // console.log("---------------->", address);
             const { abi, contractAddress } = await fetchContractAbi("U5");
             const contract = new web3.eth.Contract(abi, contractAddress);
 
@@ -1440,7 +1470,7 @@ export const useStore = create((set, get) => ({
                     }
 
 
-                    console.log("getU5MartixInfo", u5MatrixDetail)
+                    // console.log("getU5MartixInfo", u5MatrixDetail)
 
 
                     return {
@@ -1450,7 +1480,7 @@ export const useStore = create((set, get) => ({
                 })
             );
 
-            console.log("data", data);
+            // console.log("data", data);
             return data;
 
         } catch (error) {
@@ -1463,7 +1493,7 @@ export const useStore = create((set, get) => ({
 
     getPartnerTable: async (address) => {
         try {
-            console.log("---------------->", address);
+            // console.log("---------------->", address);
             const { abi, contractAddress } = await fetchContractAbi("UserMang");
             const contract = new web3.eth.Contract(abi, contractAddress);
 
@@ -1490,7 +1520,7 @@ export const useStore = create((set, get) => ({
             // Rama Price In Usd ((getting the static value form the method))
             const priceInUSD = await contract.methods.ramaPriceInUSD().call();
 
-            console.log("----------------> priceInUSD", priceInUSD);
+            // console.log("----------------> priceInUSD", priceInUSD);
 
             return priceInUSD;
 
@@ -1503,7 +1533,7 @@ export const useStore = create((set, get) => ({
 
     getU4MartixInfo: async (address) => {
         try {
-            console.log("---------------->", address);
+            // console.log("---------------->", address);
             const { abi, contractAddress } = await fetchContractAbi("U4");
             const contract = new web3.eth.Contract(abi, contractAddress);
 
@@ -1524,7 +1554,7 @@ export const useStore = create((set, get) => ({
                     }
 
 
-                    console.log("getU5MartixInfo", u5MatrixDetail)
+                    // console.log("getU5MartixInfo", u5MatrixDetail)
 
 
                     return {
@@ -1534,7 +1564,7 @@ export const useStore = create((set, get) => ({
                 })
             );
 
-            console.log("data", data);
+            // console.log("data", data);
             return data;
 
         } catch (error) {
@@ -1545,7 +1575,7 @@ export const useStore = create((set, get) => ({
 
     getU3PremMartixInfo: async (address) => {
         try {
-            console.log("---------------->", address);
+            // console.log("---------------->", address);
             const { abi, contractAddress } = await fetchContractAbi("U3prem");
             const contract = new web3.eth.Contract(abi, contractAddress);
 
@@ -1566,7 +1596,7 @@ export const useStore = create((set, get) => ({
                     }
 
 
-                    console.log("getU5MartixInfo", u5MatrixDetail)
+                    // console.log("getU5MartixInfo", u5MatrixDetail)
 
 
                     return {
@@ -1576,7 +1606,7 @@ export const useStore = create((set, get) => ({
                 })
             );
 
-            console.log("data", data);
+            // console.log("data", data);
             return data;
 
         } catch (error) {
@@ -1589,7 +1619,7 @@ export const useStore = create((set, get) => ({
 
     LeftUserPanInfo: async (address) => {
         try {
-            console.log("Fetching earnings for address:", address);
+            // console.log("Fetching earnings for address:", address);
 
             const [PriceConv, MatrixDataView] = await Promise.all([
                 fetchContractAbi("PriceConv"),
@@ -1616,7 +1646,7 @@ export const useStore = create((set, get) => ({
 
             const earnedDollar = parseFloat(grandEarningEther) * priceInUSDFloat;
 
-            console.log("Grand Total Earnings (ETH):", grandEarningEther, "≈ $", earnedDollar.toFixed(2));
+            // console.log("Grand Total Earnings (ETH):", grandEarningEther, "≈ $", earnedDollar.toFixed(2));
 
             return {
                 ...res,
@@ -1638,7 +1668,7 @@ export const useStore = create((set, get) => ({
 
     partnerTable: async (address) => {
         try {
-            console.log("🔍 Fetching earnings for:", address);
+            // console.log("🔍 Fetching earnings for:", address);
 
             const [PriceConv, MatrixDataView] = await Promise.all([
                 fetchContractAbi("UserMang"),
@@ -1651,7 +1681,7 @@ export const useStore = create((set, get) => ({
 
             const userDetails = await contract.methods.getUser(address).call();
 
-            console.log(userDetails?.directReferrals)
+            // console.log(userDetails?.directReferrals)
 
             if (!userDetails?.directReferrals) {
                 console.warn("No direct referrals found.");
@@ -1665,7 +1695,7 @@ export const useStore = create((set, get) => ({
                 const refUserDetails = await contract.methods.users(directReferrals[i]).call();
                 const income = await contract1.methods.getTotalMatrixEarnings(directReferrals[i]).call();
 
-                console.log("=====================income", income)
+                // console.log("=====================income", income)
                 partnerArr.push({
                     id: refUserDetails.id.toString(),
                     wallet: refUserDetails.wallet.toString(),
@@ -1676,7 +1706,7 @@ export const useStore = create((set, get) => ({
 
             }
 
-            console.log("|||||||||||||||||||||||||||||||||partnerArr", partnerArr)
+            // console.log("|||||||||||||||||||||||||||||||||partnerArr", partnerArr)
 
             return partnerArr;
 
@@ -1931,7 +1961,7 @@ export const useStore = create((set, get) => ({
             const balanceEth = web3.utils.fromWei(balanceWei, 'ether');
 
 
-            console.log("getSlotActivatRamaU3plus", walletAdd, SlotNo, parseFloat(balanceEth).toFixed(4));
+            // console.log("getSlotActivatRamaU3plus", walletAdd, SlotNo, parseFloat(balanceEth).toFixed(4));
 
             const UIncome = await fetchContractAbi("UIncome");
             if (!UIncome?.abi || !UIncome?.contractAddress) {

@@ -9,12 +9,13 @@ import LeftUserPannel from "../../components/LeftUserPannel";
 import DashboardInfo from "../../components/DashboardInfo";
 import { useStore } from "../../Store/UserStore";
 import { formatWithCommas } from "../../util/helpers";
+import React from "react";
 
 export default function UserPanel() {
   const location = useLocation();
   const { id, slotVal, matrixData } = location.state || {};
 
-  console.log("id, slotVal, matrixData", id, slotVal, matrixData);
+  // console.log("id, slotVal, matrixData", id, slotVal, matrixData);
 
   const dummyData = [
     ["$10", "$30", "$90", "$270", "$810"],
@@ -83,7 +84,7 @@ export default function UserPanel() {
     const u5logs = async () => {
       const res = getFilteredLogs();
 
-      console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&", res);
+      // console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&", res);
     };
 
     u5logs();
@@ -93,7 +94,7 @@ export default function UserPanel() {
 
   const handlePositionClick = (index) => {
     setSeletedPos(index);
-    console.log("Selected Position:", selectedPos);
+    // console.log("Selected Position:", selectedPos);
 
     // for table filter
     setCurrentPage(1);
@@ -108,7 +109,9 @@ export default function UserPanel() {
   useEffect(() => {
     const fetchtableDat = async () => {
       console.log("++++++++++++++++++++++++++++++", id, slotIndex, selectedPos);
-      const data = await getU5table(id, slotIndex, selectedPos);
+
+      const formatPost = selectedPos === -1 ? 0 : selectedPos; // Default to 0 if no position is selected
+      const data = await getU5table(id, slotIndex, formatPost);
 
       setTableData(data);
     };
@@ -170,7 +173,7 @@ export default function UserPanel() {
             .join(" ");
 
           return (
-            <>
+            <React.Fragment key={`star-${i}`}>
               <div
                 key={i}
                 className="star a bg-white rounded-full"
@@ -201,7 +204,7 @@ export default function UserPanel() {
                   ${keyframes}
                 }
               `}</style>
-            </>
+            </React.Fragment>
           );
         })}
       </div>
@@ -217,13 +220,13 @@ export default function UserPanel() {
 
           {/* Right Side Content */}
           <div className="">
-            <div className="hidden md:block   block sm:hidden">
+            <div className="hidden md:block  sm:hidden">
               <DashboardInfo />
             </div>
 
             {/* Universe U3 Plus Section */}
             <div
-              className="grid grid-cols-1 mt-10 rounded-2xl p-3 bg-cyan-400/10
+              className="grid grid-cols-1 mt-10  p-3 
     items-center
     justify-center
     mx-auto

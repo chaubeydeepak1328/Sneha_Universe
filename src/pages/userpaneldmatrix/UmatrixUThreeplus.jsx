@@ -8,6 +8,7 @@ import LeftUserPannel from "../../components/LeftUserPannel";
 import Header from "../../components/Header";
 import DashboardInfo from "../../components/DashboardInfo";
 import { useStore } from "../../Store/UserStore";
+import React from "react";
 
 export default function UserPanel() {
   const navigate = useNavigate();
@@ -40,7 +41,7 @@ export default function UserPanel() {
     const fetchU3prem = async () => {
       try {
         const response = await getU3premInfo(address);
-        console.log("==========U5 response---->", response);
+        // console.log("==========U5 response---->", response);
         if (response) {
           setMatrixData(response.length == 0 ? dummyData : response); // Make sure this is an array
         }
@@ -138,7 +139,7 @@ export default function UserPanel() {
             .join(" ");
 
           return (
-            <>
+            <React.Fragment key={`star-${i}`}>
               <div
                 key={i}
                 className="star  bg-white rounded-full"
@@ -169,7 +170,7 @@ export default function UserPanel() {
                   ${keyframes}
                 }
               `}</style>
-            </>
+            </React.Fragment>
           );
         })}
       </div>
@@ -282,12 +283,12 @@ export default function UserPanel() {
                                 }
                               );
 
-                              console.log({
-                                id: id,
-                                slotVal: 0,
-                                matrixData: matrixData,
-                                plan: values[0].replace(/\$/g, "").trim(),
-                              });
+                              // console.log({
+                              //   id: id,
+                              //   slotVal: 0,
+                              //   matrixData: matrixData,
+                              //   plan: values[0].replace(/\$/g, "").trim(),
+                              // });
                             }
                           }}
                           className={`h-10 w-30 ${currentMatrix?.slotsPosition[0][0] == "1"
@@ -356,15 +357,15 @@ export default function UserPanel() {
                                   }
                                 );
                               }
-                              console.log(
-                                "id==========================================",
-                                {
-                                  id: id,
-                                  slotVal: index + 1,
-                                  matrixData: matrixData,
-                                  plan: value.replace(/\$/g, "").trim(),
-                                }
-                              );
+                              // console.log(
+                              //   "id==========================================",
+                              //   {
+                              //     id: id,
+                              //     slotVal: index + 1,
+                              //     matrixData: matrixData,
+                              //     plan: value.replace(/\$/g, "").trim(),
+                              //   }
+                              // );
                             }}
                             className={`h-10 w-30 ${currentMatrix?.slotsPosition[index + 1][0] === "1"
                               ? "bg-green-500"

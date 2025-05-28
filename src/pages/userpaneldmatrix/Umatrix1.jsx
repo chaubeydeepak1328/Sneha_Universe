@@ -8,6 +8,8 @@ import LeftUserPannel from "../../components/LeftUserPannel";
 import Header from "../../components/Header";
 import { useStore } from "../../Store/UserStore";
 import DashboardInfo from "../../components/DashboardInfo";
+import React from "react";
+
 
 export default function UserPanel() {
   const navigate = useNavigate();
@@ -42,7 +44,7 @@ export default function UserPanel() {
     const fetchU5 = async () => {
       try {
         const response = await getU5info(address);
-        console.log("==========U5 response---->", response);
+        // console.log("==========U5 response---->", response);
         if (response) {
           setMatrixData(response); // Make sure this is an array
         }
@@ -137,7 +139,7 @@ export default function UserPanel() {
             .join(" ");
 
           return (
-            <>
+            <React.Fragment key={`star-fragment-${i}`}>
               <div
                 key={i}
                 className="star  bg-white rounded-full"
@@ -168,7 +170,7 @@ export default function UserPanel() {
                   ${keyframes}
                 }
               `}</style>
-            </>
+            </React.Fragment>
           );
         })}
       </div>
@@ -275,13 +277,13 @@ export default function UserPanel() {
                                 },
                               });
 
-                              console.log({
-                                id: id,
-                                slotVal: 0,
-                                matrixData: matrixData,
-                                plan:
-                                  values?.[0]?.replace(/\$/g, "").trim() || "",
-                              });
+                              // console.log({
+                              //   id: id,
+                              //   slotVal: 0,
+                              //   matrixData: matrixData,
+                              //   plan:
+                              //     values?.[0]?.replace(/\$/g, "").trim() || "",
+                              // });
                             }
                           }}
                           className={`h-10 w-30 ${currentMatrix?.slotsPosition[0][0] == "1"
@@ -340,15 +342,15 @@ export default function UserPanel() {
                                   },
                                 });
                               }
-                              console.log(
-                                "id==========================================",
-                                {
-                                  id: id,
-                                  slotVal: index + 1,
-                                  matrixData: matrixData,
-                                  plan: value.replace(/\$/g, "").trim(),
-                                }
-                              );
+                              // console.log(
+                              //   "id==========================================",
+                              //   {
+                              //     id: id,
+                              //     slotVal: index + 1,
+                              //     matrixData: matrixData,
+                              //     plan: value.replace(/\$/g, "").trim(),
+                              //   }
+                              // );
                             }}
                             // className="h-10 w-30 bg-[#DED8C8] rounded-xl flex justify-center items-center text-black text-lg cursor-pointer"
 

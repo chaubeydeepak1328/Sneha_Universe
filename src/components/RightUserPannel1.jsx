@@ -32,9 +32,9 @@ const RightUserPannel1 = () => {
   useEffect(() => {
     const fetchFirstId = async () => {
       const res = await GetFirstId();
-      console.log("==============================")
-      console.log(res)
-      console.log("==============================")
+      // console.log("==============================")
+      // console.log(res)
+      // console.log("==============================")
 
       SetReferal(res)
     }
@@ -46,7 +46,7 @@ const RightUserPannel1 = () => {
 
   useEffect(() => {
     if (hash) {
-      console.log("Transaction hash:", hash);
+      // console.log("Transaction hash:", hash);
 
 
       // trxHashInfo
@@ -85,8 +85,8 @@ const RightUserPannel1 = () => {
   const [UserData, setUserData] = useState();
 
   useEffect(() => {
-    console.log("Address:", address);
-    console.log("Is Connected:", isConnected);
+    // console.log("Address:", address);
+    // console.log("Is Connected:", isConnected);
 
   }, [isConnected])
 
@@ -99,14 +99,14 @@ const RightUserPannel1 = () => {
     setLoading(true)
 
     const udtoRama = await getCurrentRamaPrice();
-    console.log("=======!::::", udtoRama);
+    // console.log("=======!::::", udtoRama);
     if (sponsorAddress.length !== 0) {
 
       const sponserExist = await IsUserExist(sponsorAddress);
 
-      console.log(`this is sponser-->`, sponserExist.isexist)
+      // console.log(`this is sponser-->`, sponserExist.isexist)
 
-      console.log(sponserExist)
+      // console.log(sponserExist)
 
       if (sponserExist.isexist) {
 
@@ -162,9 +162,9 @@ const RightUserPannel1 = () => {
           return;
         }
 
-        console.log('Registering with address:', sponsorAddress);
+        // console.log('Registering with address:', sponsorAddress);
         const trxResponse = await registerUser(sponsorAddress, address);
-        console.log("trxResponse", trxResponse)
+        // console.log("trxResponse", trxResponse)
         setTrxData(trxResponse);
 
         setIsValidser(false);
@@ -174,7 +174,7 @@ const RightUserPannel1 = () => {
       }
     } else {
       setLoading(false)
-      console.log('Invalid address. Please enter a valid referral address.');
+      // console.log('Invalid address. Please enter a valid referral address.');
     }
   }
 
